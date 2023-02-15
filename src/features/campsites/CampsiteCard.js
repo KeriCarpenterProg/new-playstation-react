@@ -1,5 +1,4 @@
 import { Card, CardImg, CardImgOverlay, CardTitle } from "reactstrap";
-import CampsitesList from "./CampsitesLists";
 
 const CampsiteCard = ({ campsite }) => {
   const { image, name } = campsite;
