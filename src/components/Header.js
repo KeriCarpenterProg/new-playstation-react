@@ -7,13 +7,11 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar className="dark bg dark" color="dark" sticky="top" expand="md" >
-        {/* <NavbarBrand href="/" className="ms-5">
-          <h1 className="mt-1">Playstation Games</h1>
-        </NavbarBrand>  */}
+      <Navbar className="dark bg-dark" color="dark" sticky="top" expand="md" >
+        <NavbarBrand className="me-5" href="/">Playstation Games</NavbarBrand>
         <NavbarToggler onClick={() => setMenuOpen(!menuOpen)}/>
         <Collapse isOpen={menuOpen} navbar>
-          <Nav className="ms-0" navbar color="dark">
+          <Nav navbar className="ms-5">
             <NavItem>
               <NavLink className="nav-link" to="/">
                   <i className="fa fa-home fa-md" /> Home

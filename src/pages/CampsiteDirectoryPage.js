@@ -10,6 +10,9 @@ const CampsiteDirectoryPage = () => {
   return (
     <Container>
       <Row>
+                <h1>This is NOT the Home Page</h1>
+            </Row>
+      <Row>
         <Col sm="5" md="7">
           <CampsitesList setCampsiteId={setCampsiteId} />
         </Col>
