@@ -1,7 +1,3 @@
-# Getting Started with Create React App and Redux
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -14,11 +10,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -29,18 +20,24 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## How to deploy this site to the cloud
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Instructions on how to deploy a personal site on Google Cloud https://learn.nucamp.co/mod/book/view.php?id=6191&chapterid=6461
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Go to console.cloud.google.com Login in with kericarpenter@gmail.com account (or your own Google account) Choose Activate Cloud Shell
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Go to your project in VS Code. Go to the directory with your project on it. You have to have already set up your package.json so that it will build properly. Sharing that is outside the scope for this set of instructions, but package.json should have “Build” on it. Npm run build Will create a folder suitable for deploying -- like build/ or dist/ (in this case build/).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Open finder. Use finder to go to the build/ folder Compress dist folder into dist.zip Put that in the downloads folder (or any other clean directory)
 
-## Learn More
+Make sure you are in your home directory on cloud shell: /home/kericarpenter Type Pwd to see what directory you are in.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In Google Cloud shell, choose … Upload file. Upload build.zip to the shell.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Unzip the file unzip build.zip -d new-playstation-react
+
+Cd new-playstation-react (or whatever the name of the project is)
+
+> Firebase deploy
+
+URL it is deployed to is: https://new-playstation-react.web.app
