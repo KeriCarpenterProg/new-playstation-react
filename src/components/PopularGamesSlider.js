@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Row, Col } from "reactstrap";
 import games from "../utils/helpers";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
@@ -46,20 +47,28 @@ const PopularGamesSlider = () => {
 
   return (
     <div>
-      <h1>This will be the Slick Slider Carousel</h1>
-      <Slider {...settings}>
-        {games.map((i, index) => (
-          <React.Fragment key={index}>
-            <Link to={`/games/${i.id}`}>
-              <div className="card" key={i}>
-                <img src={i.cover} alt={i.name} />
-                <h5>{i.name}</h5>
-              </div>
-            </Link>
-          </React.Fragment>
-        ))}
-      </Slider>
-      <p>{games[0].name}</p>
+    <Container>
+      <Row>
+        <h1>Popular Games Right Now</h1>
+        <hr></hr>
+      </Row>
+      <Row>
+        <Col>
+        <Slider {...settings}>
+          {games.map((i, index) => (
+            <React.Fragment key={index}>
+              <Link to={`/games/${i.id}`}>
+                <div className="card" key={i}>
+                  <img src={i.cover} alt={i.name} />
+                  <h5>{i.name}</h5>
+                </div>
+              </Link>
+            </React.Fragment>
+          ))}
+        </Slider>
+        </Col>
+      </Row>
+      </Container>
     </div>
   );
 };

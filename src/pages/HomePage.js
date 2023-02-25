@@ -12,13 +12,10 @@ const HomePage = () => {
     <Container>
       <PopularGamesSlider />
       <Row>
-        <h1>This is the Home Page</h1>
-      </Row>
-      <Row>
-        <Col sm="5" md="7">
+        <Col>
           <CampsitesList setCampsiteId={setCampsiteId} />
         </Col>
-        <Col sm="7" md="5">
+        <Col>
           <CampsiteDetail campsite={selectedCampsite} />
         </Col>
       </Row>
