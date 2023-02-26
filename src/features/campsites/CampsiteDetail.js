@@ -2,7 +2,7 @@ import { Card, CardImg, CardText, CardBody, Col } from "reactstrap";
 const CampsiteDetail = ({ campsite }) => {
   const { image, name, description } = campsite;
   return (
-    <Col md="5" className="m-1">
+    <Col>
       <Card>
         <CardImg top src={image} alt={name}></CardImg>
         <CardBody>

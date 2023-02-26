@@ -2,7 +2,6 @@ import { Container, Row, Col } from "reactstrap";
 import { useState } from "react";
 import CampsitesList from "../features/campsites/CampsitesList";
 import CampsiteDetail from "../features/campsites/CampsiteDetail";
-import SubHeader from "../components/SubHeader";
 import { selectCampsiteById } from "../features/campsites/campsitesSlice";
 
 const CampsitesDirectoryPage = () => {
@@ -11,7 +10,7 @@ const CampsitesDirectoryPage = () => {
   return (
     <Container>
       <Row>
-        <h1>This is NOT the Home Page</h1>
+        <h1>Directory of Campsites</h1>
       </Row>
       <Row>
         <Col sm="5" md="7">
