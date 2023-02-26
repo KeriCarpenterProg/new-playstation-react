@@ -10,13 +10,13 @@ const CampsiteDetailPage = () => {
   const campsite = selectCampsiteById(campsiteId);
 
   return (
-    <Container>
+    <div>
       <SubHeader current={campsite.name} detail={true} />
       <Row>
         <CampsiteDetail campsite={campsite} />
         <CommentsList campsiteId={campsiteId} />
       </Row>
-    </Container>
+    </div>
   );
 };
 
