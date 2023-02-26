@@ -9,17 +9,22 @@ const HomePage = () => {
   const [campsiteId, setCampsiteId] = useState(0);
   const selectedCampsite = selectCampsiteById(campsiteId);
   return (
-    <Container>
-      <PopularGamesSlider />
-      <Row>
-        <Col>
-          <CampsitesList setCampsiteId={setCampsiteId} />
-        </Col>
-        <Col>
-          <CampsiteDetail campsite={selectedCampsite} />
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Container>
+        <PopularGamesSlider />
+      </Container>
+      <Container>
+        <h1>&nbsp;</h1>
+        <Row>
+          <Col>
+            <CampsitesList setCampsiteId={setCampsiteId} />
+          </Col>
+          <Col>
+            <CampsiteDetail campsite={selectedCampsite} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

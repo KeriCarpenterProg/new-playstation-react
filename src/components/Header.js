@@ -10,23 +10,29 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import games from "../utils/helpers";
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggle = () => setMenuOpen(!menuOpen);
   return (
     <div>
-      <Navbar className="dark bg-dark" sticky="top" expand="md">
-        <NavbarBrand className="me-5" href="/">
-          Playstation Games
-        </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
+      <Navbar className="" dark="true" color="dark" sticky="top" expand="xl">
+        <NavbarBrand href="/">Playstation Games</NavbarBrand>
+        <NavbarToggler onClick={toggle}></NavbarToggler>
         <Collapse isOpen={menuOpen} navbar>
-          <Nav navbar className="ms-5">
+          <Nav navbar>
             <NavItem>
               <NavLink className="nav-link" to="/">
                 <i className="fa fa-home fa-md" /> Home
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" to="/directory">
+                <i className="fa fa-folder fa-md" /> Directory
               </NavLink>
             </NavItem>
             <NavItem>
@@ -39,14 +45,13 @@ const Header = () => {
                 Playstation Games
               </DropdownToggle>
               <DropdownMenu end>
-                <DropdownItem>God of War: Ragnarok</DropdownItem>
-                <DropdownItem>Minecraft</DropdownItem>
-                <DropdownItem>Spider Man</DropdownItem>
-                <DropdownItem>God of War</DropdownItem>
-                <DropdownItem>Death Stranding</DropdownItem>
-                <DropdownItem>Call of Duty</DropdownItem>
-                <DropdownItem>Uncharted</DropdownItem>
-                <DropdownItem>The Last of Us Part II</DropdownItem>
+                {games.map((i, index) => (
+                  <React.Fragment key={index}>
+                    <DropdownItem>
+                      <Link to={`/games/${i.id}`}>{i.name}</Link>
+                    </DropdownItem>
+                  </React.Fragment>
+                ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
