@@ -47,27 +47,27 @@ const PopularGamesSlider = () => {
 
   return (
     <div>
-    <Container>
-      <Row>
-        <h1>Popular Games Right Now</h1>
-        <hr></hr>
-      </Row>
-      <Row>
-        <Col>
-        <Slider {...settings}>
-          {games.map((i, index) => (
-            <React.Fragment key={index}>
-              <Link to={`/games/${i.id}`}>
-                <div className="card" key={i}>
-                  <img src={i.cover} alt={i.name} />
-                  <h5>{i.name}</h5>
-                </div>
-              </Link>
-            </React.Fragment>
-          ))}
-        </Slider>
-        </Col>
-      </Row>
+      <Container>
+        <Row>
+          <h3 className="my-4 pb-2 px-1">Popular Games Right Now</h3>
+          <hr></hr>
+        </Row>
+        <Row>
+          <Col>
+            <Slider {...settings}>
+              {games.map((i, index) => (
+                <React.Fragment key={index}>
+                  <Link to={`/games/${i.id}`}>
+                    <div className="card" key={i}>
+                      <img src={i.cover} alt={i.name} />
+                      <h5>{i.name}</h5>
+                    </div>
+                  </Link>
+                </React.Fragment>
+              ))}
+            </Slider>
+          </Col>
+        </Row>
       </Container>
     </div>
   );
