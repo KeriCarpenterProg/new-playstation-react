@@ -1,0 +1,37 @@
+
+.review-panel {
+    position: relative;
+    display: block;
+    color: white;
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
+  }
+  
+  .review-panel-rating {
+    font-size: 25px;
+    z-index: 1;
+    position: absolute;
+    font-weight: 600;
+    right: 15px;
+    bottom: 15px;
+  }
+  
+  .review-panel-caption {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 5px 15px;
+    z-index: 1;
+    box-sizing: border-box;
+  }
+  
+  .review-panel-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    width: 80%;
+  }
+  
+  .review-panel-genres {
+    display: block;
+    font-size: 17px;
+  }

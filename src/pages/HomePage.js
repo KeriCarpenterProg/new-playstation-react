@@ -4,26 +4,15 @@ import CampsiteDetail from "../features/campsites/CampsiteDetail";
 import CampsitesList from "../features/campsites/CampsitesList";
 import { selectCampsiteById } from "../features/campsites/campsitesSlice";
 import PopularGamesSlider from "../components/PopularGamesSlider";
+import RecentlyReviewed from "../components/RecentlyReviewed";
 
 const HomePage = () => {
   const [campsiteId, setCampsiteId] = useState(0);
   const selectedCampsite = selectCampsiteById(campsiteId);
   return (
     <>
-      <Container>
-        <PopularGamesSlider />
-      </Container>
-      <Container>
-        <h1>&nbsp;</h1>
-        <Row>
-          <Col>
-            <CampsitesList setCampsiteId={setCampsiteId} />
-          </Col>
-          <Col>
-            <CampsiteDetail campsite={selectedCampsite} />
-          </Col>
-        </Row>
-      </Container>
+      <PopularGamesSlider />
+      <RecentlyReviewed />
     </>
   );
 };
