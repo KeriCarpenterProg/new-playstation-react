@@ -13,6 +13,7 @@ import {
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import "../css/header.css"
 import games from "../utils/helpers";
 
 const Header = () => {
