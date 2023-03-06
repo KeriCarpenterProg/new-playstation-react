@@ -1,11 +1,22 @@
 import React from "react";
-import { Container, Row, Col } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+} from "reactstrap";
 import games from "../utils/helpers";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
+import "../css/maxHeight.css";
+import "../css/styles.css";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -55,13 +66,30 @@ const PopularGamesSlider = () => {
         <Row>
           <Col>
             <Slider {...settings}>
-              {games.map((i, index) => (
+              {games.map((game, index) => (
                 <React.Fragment key={index}>
-                  <Link to={`/games/${i.id}`}>
-                    <div className="card" key={i}>
-                      <img src={i.cover} alt={i.name} />
-                      <h5>{i.name}</h5>
-                    </div>
+                  <Link to={`/games/${game.id}`}>
+                    <Card key={game}>
+                      <CardImg
+                        alt={game.name}
+                        src={game.cover}
+                        style={{
+                          width: "60%",
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          display: "block",
+                        }}
+                        top
+                        width="100%"
+                      />
+
+                      <CardBody>
+                        <CardTitle tag="h5">{game.name}</CardTitle>
+                        <CardSubtitle className="mb-2 text-muted" tag="h6">
+                          Action Adventure
+                        </CardSubtitle>
+                      </CardBody>
+                    </Card>
                   </Link>
                 </React.Fragment>
               ))}
