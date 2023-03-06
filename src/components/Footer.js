@@ -1,5 +1,6 @@
 import { Container, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
+import "../css/styles.css";
 
 const Footer = () => {
   return (
