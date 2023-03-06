@@ -9,10 +9,12 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button,
 } from "reactstrap";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import "../css/header.css"
 import games from "../utils/helpers";
 
 const Header = () => {
@@ -20,7 +22,7 @@ const Header = () => {
   const toggle = () => setMenuOpen(!menuOpen);
   return (
     <div>
-      <Navbar className="" dark="true" color="dark" sticky="top" expand="xl">
+      <Navbar dark="true" color="dark" sticky="top" expand="xl">
         <NavbarBrand href="/">Playstation Games</NavbarBrand>
         <NavbarToggler onClick={toggle}></NavbarToggler>
         <Collapse isOpen={menuOpen} navbar>
@@ -28,11 +30,6 @@ const Header = () => {
             <NavItem>
               <NavLink className="nav-link" to="/">
                 <i className="fa fa-home fa-md" /> Home
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="nav-link" to="/directory">
-                <i className="fa fa-folder fa-md" /> Directory
               </NavLink>
             </NavItem>
             <NavItem>
@@ -47,8 +44,11 @@ const Header = () => {
               <DropdownMenu end>
                 {games.map((i, index) => (
                   <React.Fragment key={index}>
-                    <DropdownItem>
-                      <Link to={`/games/${i.id}`}>{i.name}</Link>
+                    <DropdownItem role={navigator}>
+                      <Link 
+                        to={`/games/${i.id}`}
+                        className="dropLink"
+                      >{i.name}</Link>
                     </DropdownItem>
                   </React.Fragment>
                 ))}
