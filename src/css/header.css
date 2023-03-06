@@ -1,0 +1,17 @@
+.dropLink {
+    color: black;
+    text-decoration: none;
+    
+}
+
+.dropLink:link,
+.dropLink:hover,
+.dropLink:focus {
+    background-color: transparent;
+    color: black;
+}
+
+.dropLink:active {
+    color: white;
+}
+
