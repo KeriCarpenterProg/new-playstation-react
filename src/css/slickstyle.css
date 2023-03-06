@@ -31,3 +31,9 @@
 .slick-next::before, .slick-prev::before {
     color: rgb(54, 27, 18);
   }
+
+  .maxHeight {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+  }

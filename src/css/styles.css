@@ -1,5 +1,6 @@
 body {
     font-family: "Open Sans", sans-serif;
+    text-decoration: none;
   }
   
   a:link, a:visited, a:hover, a:active {
@@ -31,7 +32,5 @@ body {
     border: 1px solid green;
   }
   
-  .maxHeight {
-    max-height: 300px;
-  }
+
   
