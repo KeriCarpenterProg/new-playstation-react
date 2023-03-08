@@ -43,3 +43,4 @@ Cd new-playstation-react (or whatever the name of the project is)
 URL it is deployed to is: https://new-playstation-react.web.app
 
 Julia
+Hi, this is Eleanor!
