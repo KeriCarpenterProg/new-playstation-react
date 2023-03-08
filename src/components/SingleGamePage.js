@@ -1,7 +1,8 @@
-import { Col, Row, Container, Card, CardBody, CardHeader } from "reactstrap";
+import { Col, Row, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import React from "react";
 import "../css/singlegamepage.css";
+import ScreenShotSlider from "./ScreenShotSlider";
 
 const SingleGamePage = () => {
   return (
@@ -9,6 +10,7 @@ const SingleGamePage = () => {
       <Row>
         <Col md="4">
           <img
+            alt="God of War"
             class="w-100"
             src="https://images.igdb.com/igdb/image/upload/t_original/co5s5v.jpg%22%3E"
           />
@@ -38,49 +40,7 @@ const SingleGamePage = () => {
         </Col>
       </Row>
       <Row className="row-content">
-        <Col sm="6">
-          <h3>Migrate the Slick Slider Component here</h3>
-          <h5>
-            <a href="https://new-playstation.web.app/page3.html">
-              Here is what it looks on my bootstrap website. Go to page3.html
-            </a>
-          </h5>
-        </Col>
-        <Col sm="6">
-          <Card>
-            <CardHeader className="bg-primary text-white">Some Info</CardHeader>
-            <CardBody>
-              <dl className="row">
-                <dt className="col-6">Founded</dt>
-                <dd className="col-6">February 3, 2016</dd>
-                <dt className="col-6">No. of Campsites in 2019</dt>
-                <dd className="col-6">563</dd>
-                <dt className="col-6">No. of Reviews in 2019</dt>
-                <dd className="col-6">4388</dd>
-                <dt className="col-6">Employees</dt>
-                <dd className="col-6">42</dd>
-              </dl>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col>
-          <Card className="bg-light mt-3">
-            <CardBody>
-              <blockquote className="blockquote">
-                <p>
-                  I will not follow where the path may lead, but I will go where
-                  there is no path, and I will leave a trail.
-                </p>
-                <footer className="blockquote-footer">
-                  Muriel Strode,{" "}
-                  <cite title="Source Title">
-                    "Wind-Wafted Wild Flowers" - The Open Court, 1903
-                  </cite>
-                </footer>
-              </blockquote>
-            </CardBody>
-          </Card>
-        </Col>
+        <ScreenShotSlider />
       </Row>
     </Container>
   );
