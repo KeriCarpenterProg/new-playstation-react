@@ -40,7 +40,6 @@ const SingleGamePage = () => {
         </Col>
       </Row>
       <Row className="row-content">
-        <h1>Hi mom!</h1>
         <ScreenShotSlider />
       </Row>
     </Container>
