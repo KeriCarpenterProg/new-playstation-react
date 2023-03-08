@@ -1,7 +1,5 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import games from "../utils/helpers";
-import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ColumnOfGames from "./ColumnOfGames";

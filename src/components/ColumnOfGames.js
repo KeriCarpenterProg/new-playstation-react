@@ -4,10 +4,11 @@ import games from "../utils/helpers";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { convertToDate } from "../utils/convertToDate";
 
 const ColumnOfGames = () => {
   return (
-    <Container>
+    <Container className="my-4 pb-2 px-1">
       {games.map((i, index) => (
         <Row key={index} className="my-2">
           <Col sm="5">
@@ -18,7 +19,7 @@ const ColumnOfGames = () => {
               <a class="overflow-wrap" href="#">
                 {i.name}
               </a>
-              <div>{i.release}</div>
+              <div>{convertToDate(i.release)}</div>
             </Link>
           </Col>
         </Row>
