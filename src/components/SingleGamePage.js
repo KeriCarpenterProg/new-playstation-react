@@ -2,7 +2,8 @@ import { Col, Row, Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import React from "react";
 import "../css/singlegamepage.css";
-import ScreenShotSlider from "./ScreenShotSlider";
+import ScreenshotSlider from "./ScreenshotSlider";
+//import RecommendedGamesSlider from "./RecommendedGamesSlider";
 
 const SingleGamePage = () => {
   return (
@@ -40,7 +41,10 @@ const SingleGamePage = () => {
         </Col>
       </Row>
       <Row className="row-content">
-        <ScreenShotSlider />
+        <ScreenshotSlider />
+      </Row>
+      <Row className="row-content">
+        {/* <RecommendedGamesSlider /> */}
       </Row>
     </Container>
   );
