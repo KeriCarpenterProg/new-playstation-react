@@ -12,11 +12,11 @@ const ColumnOfGames = () => {
       {games.map((i, index) => (
         <Row key={index} className="my-2">
           <Col sm="5">
-            <img class="img-fluid maxHeight" src={i.cover} />
+            <img className="img-fluid maxHeight" src={i.cover} />
           </Col>
           <Col sm="5">
             <Link to={`/games/${i.id}`}>
-              <a class="overflow-wrap" href="#">
+              <a className="overflow-wrap" href="#">
                 {i.name}
               </a>
               <div>{convertToDate(i.release)}</div>

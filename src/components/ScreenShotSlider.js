@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import games from "../utils/helpers";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
@@ -24,7 +24,7 @@ const ScreenShotSlider = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 2,
     initialSlide: 3,
     responsive: [
@@ -55,42 +55,34 @@ const ScreenShotSlider = () => {
     ],
   };
   // Slick Slider Settings ----> End
-
+  const { activeGame } = useParams();
+  const screenshotUrls = games[activeGame].screenshots;
   return (
     <div>
       <Container>
         <Row>
-          <h3 className="my-4 pb-2 px-1">Popular Games Right Now</h3>
+          <h3 className="my-4 pb-2 px-1">
+            Artwork from Games: Videos, Screenshots, Covers
+          </h3>
           <hr></hr>
         </Row>
         <Row>
           <Col>
             <Slider {...settings}>
-              {games.map((game, index) => (
+              {screenshotUrls.map((screenshot, index) => (
                 <React.Fragment key={index}>
-                  <Link to={`/games/${game.id}`}>
-                    <Card key={game}>
-                      <CardImg
-                        alt={game.name}
-                        src={game.cover}
-                        style={{
-                          width: "60%",
-                          marginRight: "auto",
-                          marginLeft: "auto",
-                          display: "block",
-                        }}
-                        top
-                        width="100%"
-                      />
+                  <Card key={games[activeGame]}>
+                    <CardImg
+                      alt={games[activeGame].name}
+                      src={screenshot}
+                      top
+                      width="100%"
+                    />
 
-                      <CardBody>
-                        <CardTitle tag="h5">{game.name}</CardTitle>
-                        <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          Action Adventure
-                        </CardSubtitle>
-                      </CardBody>
-                    </Card>
-                  </Link>
+                    <CardBody>
+                      <CardTitle tag="h5">{games[activeGame].name}</CardTitle>
+                    </CardBody>
+                  </Card>
                 </React.Fragment>
               ))}
             </Slider>
