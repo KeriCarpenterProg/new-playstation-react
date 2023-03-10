@@ -18,9 +18,7 @@ import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
 
-const ScreenshotSlider = () => {
-const { screenshots } = games[0];
-
+const RecommendedGamesSlider = () => {
   // Slick Slider Settings ----> Begin
   const settings = {
     dots: false,
@@ -69,13 +67,13 @@ const { screenshots } = games[0];
         <Row>
           <Col>
             <Slider {...settings}>
-              {screenshots.map((screenshot, index) => (
+              {games.map((game, index) => (
                 <React.Fragment key={index}>
-                  <Link to={`/games/${games.id}`}>
+                  <Link to={`/games/${game.id}`}>
                     <Card key={index}>
                       <CardImg
-                        alt={screenshot}
-                        src={screenshot}
+                        alt={game.name}
+                        src={game.cover}
                         style={{
                           width: "60%",
                           marginRight: "auto",
@@ -87,7 +85,7 @@ const { screenshots } = games[0];
                       />
 
                       <CardBody>
-                        <CardTitle tag="h5">{screenshot}</CardTitle>
+                        <CardTitle tag="h5">{game}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
                           Action Adventure
                         </CardSubtitle>
@@ -104,4 +102,4 @@ const { screenshots } = games[0];
   );
 };
 
-export default ScreenshotSlider;
+export default RecommendedGamesSlider;
