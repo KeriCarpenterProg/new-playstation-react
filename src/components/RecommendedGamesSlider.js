@@ -60,8 +60,7 @@ const RecommendedGamesSlider = () => {
     <div>
       <Container>
         <Row>
-          <hr/>
-          <h3 className="my-4 pb-2 px-1">Game Artwork: Videos, Screenshots, Covers</h3>
+          <h3 className="my-4 pb-2 px-1">Popular Games Right Now</h3>
           <hr></hr>
         </Row>
         <Row>
@@ -70,7 +69,7 @@ const RecommendedGamesSlider = () => {
               {games.map((game, index) => (
                 <React.Fragment key={index}>
                   <Link to={`/games/${game.id}`}>
-                    <Card key={index}>
+                    <Card key={game}>
                       <CardImg
                         alt={game.name}
                         src={game.cover}
@@ -85,7 +84,7 @@ const RecommendedGamesSlider = () => {
                       />
 
                       <CardBody>
-                        <CardTitle tag="h5">{game}</CardTitle>
+                        <CardTitle tag="h5">{game.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
                           Action Adventure
                         </CardSubtitle>

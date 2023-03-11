@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import "../css/singlegamepage.css";
 import ScreenshotSlider from "./ScreenshotSlider";
-//import RecommendedGamesSlider from "./RecommendedGamesSlider";
+import RecommendedGamesSlider from "./RecommendedGamesSlider";
 
 const SingleGamePage = () => {
   return (
@@ -12,7 +12,7 @@ const SingleGamePage = () => {
         <Col md="4">
           <img
             alt="God of War"
-            class="w-100"
+            className="w-100"
             src="https://images.igdb.com/igdb/image/upload/t_original/co5s5v.jpg%22%3E"
           />
         </Col>
@@ -41,10 +41,10 @@ const SingleGamePage = () => {
         </Col>
       </Row>
       <Row className="row-content">
-        <ScreenshotSlider />
+        <ScreenshotSlider />  
       </Row>
       <Row className="row-content">
-        {/* <RecommendedGamesSlider /> */}
+          <RecommendedGamesSlider />  
       </Row>
     </Container>
   );

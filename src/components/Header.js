@@ -22,7 +22,7 @@ const Header = () => {
   const toggle = () => setMenuOpen(!menuOpen);
   return (
     <div>
-      <Navbar dark="true" color="dark" sticky="top" expand="xl">
+      <Navbar dark={true} color="dark" sticky="top" expand="xl">
         <NavbarBrand href="/">Playstation Games</NavbarBrand>
         <NavbarToggler onClick={toggle}></NavbarToggler>
         <Collapse isOpen={menuOpen} navbar>
