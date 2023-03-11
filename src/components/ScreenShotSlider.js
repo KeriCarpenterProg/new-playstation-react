@@ -17,7 +17,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
-import { useParams } from "react-router-dom";
 
 const ScreenshotSlider = () => {
   // the params set in Route component dictate how we can refer to them using useParams()
@@ -64,12 +63,8 @@ const ScreenshotSlider = () => {
     <div>
       <Container>
         <Row>
-          <h3 className="my-4 pb-2 px-1">
-            Artwork from Games: Videos, Screenshots, Covers
-          </h3>
-          <hr/>
           <h3 className="my-4 pb-2 px-1">Game Artwork: Videos, Screenshots, Covers</h3>
-          <hr></hr>
+          <hr />
         </Row>
         <Row>
           <Col>
