@@ -17,6 +17,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
+import { returnFirstGameGenre } from "../utils/gameGenre";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -86,7 +87,7 @@ const PopularGamesSlider = () => {
                       <CardBody>
                         <CardTitle tag="h5">{game.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          Action Adventure
+                          <div>{returnFirstGameGenre(game.genre)}</div>
                         </CardSubtitle>
                       </CardBody>
                     </Card>
