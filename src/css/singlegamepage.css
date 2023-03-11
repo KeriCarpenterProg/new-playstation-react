@@ -1,7 +1,7 @@
   
   .move-up {
     position: relative;
-    top: -550px;
+    top: -500px;
   }
 
    
@@ -9,7 +9,7 @@
     background: lightyellow;
     width: 100%;
     height: 550px;
-    filter: blur(15px);
+    filter: blur(8px);
     background-size: cover;
   }
 
