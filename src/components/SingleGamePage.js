@@ -5,6 +5,7 @@ import games from "../utils/helpers";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
+import { returnFirstGameGenre } from "../utils/gameGenre";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
@@ -29,9 +30,11 @@ const SingleGamePage = () => {
             <h1 className="overflow-wrap">{games[activeGame].name}</h1>
             <h6>Released: {convertToDate(games[activeGame].release)}</h6>
             <hr />
-            <h6>Genre: Adventure, Hack and slash/Beat 'em up</h6>
+
+            <h6>Genre: {returnFirstGameGenre(games[activeGame].genre)}</h6>
 
             <h6>Platforms: PlayStation 4, PlayStation 5</h6>
+
             <br />
 
             <p>{games[activeGame].summary}</p>
