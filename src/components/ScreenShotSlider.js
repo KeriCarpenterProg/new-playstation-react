@@ -17,9 +17,12 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
+import { useParams } from "react-router-dom";
 
 const ScreenshotSlider = () => {
-const { screenshots } = games[0];
+  // the params set in Route component dictate how we can refer to them using useParams()
+  const { activeGame } = useParams();
+  const { screenshots } = games[activeGame];
 
   // Slick Slider Settings ----> Begin
   const settings = {
@@ -69,15 +72,15 @@ const { screenshots } = games[0];
         <Row>
           <Col>
             <Slider {...settings}>
-              {screenshots.map((screenshot, index) => (
+              {screenshots?.map((screenshot, index) => (
                 <React.Fragment key={index}>
-                  <Link to={`/games/${games.id}`}>
+                  <Link to={`/games/${activeGame}`}>
                     <Card key={index}>
                       <CardImg
                         alt={screenshot}
                         src={screenshot}
                         style={{
-                          width: "60%",
+                          width: "100%",
                           marginRight: "auto",
                           marginLeft: "auto",
                           display: "block",
@@ -87,7 +90,7 @@ const { screenshots } = games[0];
                       />
 
                       <CardBody>
-                        <CardTitle tag="h5">{screenshot}</CardTitle>
+                        <CardTitle tag="h6">{screenshot}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
                           Action Adventure
                         </CardSubtitle>
