@@ -42,5 +42,24 @@ Cd new-playstation-react (or whatever the name of the project is)
 
 URL it is deployed to is: https://new-playstation-react.web.app
 
-Julia
-Hi, this is Eleanor!
+Here is a larger set of instructions I wrote later that is more comprehensive. written in March 2023.
+
+Log in to https://console.cloud.google.com/
+Create a new project.
+Add a new web app.
+upload a zipped version of your project usually the result of npm run build (or npm build). Zip up that build folder and upload it to google cloud here.
+Log into Firebase from the console here.
+That's sort of involved with authentication.
+Once done with that and back at the console.
+firebase init
+Choose "Hosting"
+Choose "Use an existing project"
+Select the firebase project you just created.
+If you unzipped a build folder type in "build" as the default folder instead of "public"
+Configure as a Single Page App? Yes (default is no)
+accept all other defaults.
+once done with that
+firebase deploy
+that should deploy your website
+one of the last lines should show you the address of your deployed website.
+URL will probably be http://<project name>.web.app
