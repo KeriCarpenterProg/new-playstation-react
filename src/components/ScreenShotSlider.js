@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import games from "../utils/helpers";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
@@ -29,7 +29,7 @@ const ScreenshotSlider = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 2,
     initialSlide: 3,
     responsive: [
@@ -60,11 +60,13 @@ const ScreenshotSlider = () => {
     ],
   };
   // Slick Slider Settings ----> End
-
   return (
     <div>
       <Container>
         <Row>
+          <h3 className="my-4 pb-2 px-1">
+            Artwork from Games: Videos, Screenshots, Covers
+          </h3>
           <hr/>
           <h3 className="my-4 pb-2 px-1">Game Artwork: Videos, Screenshots, Covers</h3>
           <hr></hr>

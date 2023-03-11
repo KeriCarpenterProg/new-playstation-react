@@ -9,17 +9,17 @@ import { convertToDate } from "../utils/convertToDate";
 const ColumnOfGames = () => {
   return (
     <Container className="my-4 pb-2 px-1">
-      {games.map((i, index) => (
+      {games.map((game, index) => (
         <Row key={index} className="my-2">
           <Col sm="5">
-            <img class="img-fluid maxHeight" src={i.cover} />
+            <img className="img-fluid maxHeight" src={game.cover} />
           </Col>
           <Col sm="5">
-            <Link to={`/games/${i.id}`}>
-              <a class="overflow-wrap" href="#">
-                {i.name}
+            <Link to={`/games/${game.id}`}>
+              <a className="overflow-wrap" href="#">
+                {game.name}
               </a>
-              <div>{convertToDate(i.release)}</div>
+              <div>{convertToDate(game.release)}</div>
             </Link>
           </Col>
         </Row>

@@ -17,98 +17,101 @@ const RecentlyReviewed = () => {
         </Row>
         <Row className="py-3">
           <Col>
-            <a href="page3.html" class="review-panel embed-responsive-16by9">
-              <div class="review-panel-caption">
-                <p class="review-panel-title overflow-wrap">
+            <a
+              href="page3.html"
+              className="review-panel embed-responsive-16by9"
+            >
+              <div className="review-panel-caption">
+                <p className="review-panel-title overflow-wrap">
                   The Last Of Us: Part 2 is great
                 </p>
-                <p class="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">Adventure/Shooter</p>
               </div>
-              <div class="review-panel-rating">80%</div>
+              <div className="review-panel-rating">80%</div>
               <img
                 src="https://images.igdb.com/igdb/image/upload/t_original/rqr5dxxw97zikyhdn2tq.jpg"
                 alt=""
-                class="w-100"
+                className="w-100"
               ></img>
             </a>
           </Col>
           <Col>
-            <a href="page3.html" class="review-panel embed-responsive-16by9">
-              <div class="review-panel-caption">
-                <p class="review-panel-title overflow-wrap">
+            <a href="page3.html" className="review-panel embed-responsive-16by9">
+              <div className="review-panel-caption">
+                <p className="review-panel-title overflow-wrap">
                   Collossal Cave Adventure
                 </p>
-                <p class="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">Adventure/Shooter</p>
               </div>
-              <div class="review-panel-rating">80%</div>
+              <div className="review-panel-rating">80%</div>
               <img
                 src="https://images.igdb.com/igdb/image/upload/t_original/kazgjykzu18dhqjpspko.jpg"
                 alt=""
-                class="w-100"
+                className="w-100"
               ></img>
             </a>
           </Col>
           <Col>
-            <a href="page3.html" class="review-panel embed-responsive-16by9">
-              <div class="review-panel-caption">
-                <p class="review-panel-title overflow-wrap">
+            <a href="page3.html" className="review-panel embed-responsive-16by9">
+              <div className="review-panel-caption">
+                <p className="review-panel-title overflow-wrap">
                   Witch on a Holy Night
                 </p>
-                <p class="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">Adventure/Shooter</p>
               </div>
-              <div class="review-panel-rating">80%</div>
+              <div className="review-panel-rating">80%</div>
               <img
                 src="https://images.igdb.com/igdb/image/upload/t_original/sc8i94.jpg"
                 alt=""
-                class="w-100"
+                className="w-100"
               ></img>
             </a>
           </Col>
         </Row>
         <Row>
           <Col xs="8">
-            <a href="page3.html" class="review-panel embed-responsive-16by9">
-              <div class="review-panel-caption">
-                <p class="review-panel-title overflow-wrap">
+            <a href="page3.html" className="review-panel embed-responsive-16by9">
+              <div className="review-panel-caption">
+                <p className="review-panel-title overflow-wrap">
                   God of War Kratos and his Kid
                 </p>
-                <p class="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">Adventure/Shooter</p>
               </div>
-              <div class="review-panel-rating">80%</div>
+              <div className="review-panel-rating">80%</div>
               <img
                 src="https://images.igdb.com/igdb/image/upload/t_original/s2zdtxopibrfjbxvpj5h.jpg"
                 alt=""
-                class="w-100"
+                className="w-100"
               ></img>
             </a>
           </Col>
           <Col>
-            <a href="page3.html" class="review-panel embed-responsive-16by9">
-              <div class="review-panel-caption">
-                <p class="review-panel-title overflow-wrap">
+            <a href="page3.html" className="review-panel embed-responsive-16by9">
+              <div className="review-panel-caption">
+                <p className="review-panel-title overflow-wrap">
                   God of War Kratos and his Kid
                 </p>
-                <p class="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">Adventure/Shooter</p>
               </div>
-              <div class="review-panel-rating">80%</div>
+              <div className="review-panel-rating">80%</div>
               <img
                 src="https://images.igdb.com/igdb/image/upload/t_original/kazgjykzu18dhqjpspko.jpg"
                 alt=""
-                class="w-100"
+                className="w-100"
               ></img>
             </a>
-            <a href="#" class="review-panel embed-responsive-16by9 mt-3">
-              <div class="review-panel-caption">
-                <p class="review-panel-title overflow-wrap">
+            <a href="#" className="review-panel embed-responsive-16by9 mt-3">
+              <div className="review-panel-caption">
+                <p className="review-panel-title overflow-wrap">
                   The third card that I want to stack
                 </p>
-                <p class="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">Adventure/Shooter</p>
               </div>
-              <div class="review-panel-rating">80%</div>
+              <div className="review-panel-rating">80%</div>
               <img
                 src="https://images.igdb.com/igdb/image/upload/t_original/sc8i94.jpg"
                 alt=""
-                class="w-100"
+                className="w-100"
               ></img>
             </a>
           </Col>

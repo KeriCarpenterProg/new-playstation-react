@@ -14,7 +14,7 @@ import {
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
-import "../css/header.css"
+import "../css/header.css";
 import games from "../utils/helpers";
 
 const Header = () => {
@@ -45,10 +45,9 @@ const Header = () => {
                 {games.map((i, index) => (
                   <React.Fragment key={index}>
                     <DropdownItem role={navigator}>
-                      <Link 
-                        to={`/games/${i.id}`}
-                        className="dropLink"
-                      >{i.name}</Link>
+                      <Link to={`/games/${i.id}`} className="dropLink">
+                        {i.name}
+                      </Link>
                     </DropdownItem>
                   </React.Fragment>
                 ))}
