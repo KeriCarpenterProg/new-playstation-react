@@ -7,7 +7,6 @@ import {
   CardImg,
   CardBody,
   CardTitle,
-  CardSubtitle,
 } from "reactstrap";
 import games from "../utils/helpers";
 import Slider from "react-slick";
