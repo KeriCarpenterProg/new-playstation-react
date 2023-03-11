@@ -63,7 +63,9 @@ const ScreenshotSlider = () => {
     <div>
       <Container>
         <Row>
-          <h3 className="my-4 pb-2 px-1">Game Artwork: Videos, Screenshots, Covers</h3>
+          <h3 className="my-4 pb-2 px-1">
+            Game Artwork: Videos, Screenshots, Covers
+          </h3>
           <hr />
         </Row>
         <Row>
@@ -87,10 +89,7 @@ const ScreenshotSlider = () => {
                       />
 
                       <CardBody>
-                        <CardTitle tag="h6">{screenshot}</CardTitle>
-                        <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          Action Adventure
-                        </CardSubtitle>
+                        <CardTitle tag="h5">{games[activeGame].name}</CardTitle>
                       </CardBody>
                     </Card>
                   </Link>
