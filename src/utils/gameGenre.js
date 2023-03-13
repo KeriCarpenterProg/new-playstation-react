@@ -1,9 +1,14 @@
+import games from "./helpers";
+
 const genreMap = {
-  31: "Adventure",
-  5: "Shooter",
+  31: "Action & Adventure",
+  32: "Simulator",
+  5: "First Person Shooter",
   12: "Role-playing (RPG)",
   25: "Hack and slash/Beat 'em up",
 };
+
+export const randomGame = Math.floor(Math.random() * 9);
 
 export const returnFirstGameGenre = (numbersArray) => {
   const sortedGenres = numbersArray
