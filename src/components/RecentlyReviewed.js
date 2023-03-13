@@ -6,8 +6,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/recentlyreviewed.css";
+import { returnFirstGameGenre } from "../utils/gameGenre";
+import { randomGame } from "../utils/gameGenre";
 
 const RecentlyReviewed = () => {
+  let gamesList = [];
+  for (let i = 0; i < 6; i++) {
+    gamesList.push(Math.floor(Math.random() * games.length));
+  }
   return (
     <div>
       <Container>
@@ -17,103 +23,130 @@ const RecentlyReviewed = () => {
         </Row>
         <Row className="py-3">
           <Col>
-            <a
-              href="page3.html"
+            <Link
+              to={`/games/${gamesList[0]}`}
               className="review-panel embed-responsive-16by9"
             >
               <div className="review-panel-caption">
                 <p className="review-panel-title overflow-wrap">
-                  The Last Of Us: Part 2 is great
+                  {games[gamesList[0]].name}
                 </p>
-                <p className="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">
+                  {returnFirstGameGenre(games[gamesList[0]].genre)}
+                </p>
               </div>
-              <div className="review-panel-rating">80%</div>
+              <div className="review-panel-rating">68%</div>
               <img
-                src="https://images.igdb.com/igdb/image/upload/t_original/rqr5dxxw97zikyhdn2tq.jpg"
+                src={games[gamesList[0]].screenshots[0]}
                 alt=""
                 className="w-100"
               ></img>
-            </a>
+            </Link>
           </Col>
           <Col>
-            <a href="page3.html" className="review-panel embed-responsive-16by9">
+            <Link
+              to={`/games/${gamesList[1]}`}
+              className="review-panel embed-responsive-16by9"
+            >
               <div className="review-panel-caption">
                 <p className="review-panel-title overflow-wrap">
-                  Collossal Cave Adventure
+                  {games[gamesList[1]].name}
                 </p>
-                <p className="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">
+                  {returnFirstGameGenre(games[gamesList[1]].genre)}
+                </p>
               </div>
-              <div className="review-panel-rating">80%</div>
+              <div className="review-panel-rating">70%</div>
               <img
-                src="https://images.igdb.com/igdb/image/upload/t_original/kazgjykzu18dhqjpspko.jpg"
+                src={games[gamesList[1]].screenshots[0]}
                 alt=""
                 className="w-100"
               ></img>
-            </a>
+            </Link>
           </Col>
           <Col>
-            <a href="page3.html" className="review-panel embed-responsive-16by9">
+            <Link
+              to={`/games/${gamesList[2]}`}
+              className="review-panel embed-responsive-16by9"
+            >
               <div className="review-panel-caption">
                 <p className="review-panel-title overflow-wrap">
-                  Witch on a Holy Night
+                  {games[gamesList[2]].name}
                 </p>
-                <p className="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">
+                  {returnFirstGameGenre(games[gamesList[2]].genre)}
+                </p>
               </div>
               <div className="review-panel-rating">80%</div>
               <img
-                src="https://images.igdb.com/igdb/image/upload/t_original/sc8i94.jpg"
+                src={games[gamesList[2]].screenshots[0]}
                 alt=""
                 className="w-100"
               ></img>
-            </a>
+            </Link>
           </Col>
         </Row>
         <Row>
           <Col xs="8">
-            <a href="page3.html" className="review-panel embed-responsive-16by9">
+            <Link
+              to={`/games/${gamesList[3]}`}
+              className="review-panel embed-responsive-16by9"
+            >
               <div className="review-panel-caption">
                 <p className="review-panel-title overflow-wrap">
-                  God of War Kratos and his Kid
+                  {games[gamesList[3]].name}
                 </p>
-                <p className="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">
+                  {returnFirstGameGenre(games[gamesList[3]].genre)}
+                </p>
               </div>
-              <div className="review-panel-rating">80%</div>
+              <div className="review-panel-rating">83%</div>
               <img
-                src="https://images.igdb.com/igdb/image/upload/t_original/s2zdtxopibrfjbxvpj5h.jpg"
+                src={games[gamesList[3]].screenshots[0]}
                 alt=""
                 className="w-100"
               ></img>
-            </a>
+            </Link>
           </Col>
           <Col>
-            <a href="page3.html" className="review-panel embed-responsive-16by9">
+            <Link
+              to={`/games/${gamesList[4]}`}
+              className="review-panel embed-responsive-16by9"
+            >
               <div className="review-panel-caption">
                 <p className="review-panel-title overflow-wrap">
-                  God of War Kratos and his Kid
+                  {games[gamesList[4]].name}
                 </p>
-                <p className="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">
+                  {returnFirstGameGenre(games[gamesList[4]].genre)}
+                </p>
               </div>
               <div className="review-panel-rating">80%</div>
               <img
-                src="https://images.igdb.com/igdb/image/upload/t_original/kazgjykzu18dhqjpspko.jpg"
+                src={games[gamesList[4]].screenshots[0]}
                 alt=""
                 className="w-100"
               ></img>
-            </a>
-            <a href="#" className="review-panel embed-responsive-16by9 mt-3">
+            </Link>
+            <Link
+              to={`/games/${gamesList[5]}`}
+              className="review-panel embed-responsive-16by9 mt-3"
+            >
               <div className="review-panel-caption">
                 <p className="review-panel-title overflow-wrap">
-                  The third card that I want to stack
+                  {games[gamesList[5]].name}
                 </p>
-                <p className="review-panel-genres">Adventure/Shooter</p>
+                <p className="review-panel-genres">
+                  {returnFirstGameGenre(games[gamesList[5]].genre)}
+                </p>
               </div>
               <div className="review-panel-rating">80%</div>
               <img
-                src="https://images.igdb.com/igdb/image/upload/t_original/sc8i94.jpg"
+                src={games[gamesList[5]].screenshots[0]}
                 alt=""
                 className="w-100"
               ></img>
-            </a>
+            </Link>
           </Col>
         </Row>
       </Container>
