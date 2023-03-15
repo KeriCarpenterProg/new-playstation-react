@@ -9,8 +9,8 @@
     border: 1px solid rgb(7, 0, 0);
     border-radius: 8px;
     overflow: hidden;
-
-    height: 400px;
+    /* height: 400px;   */
+    /* was causing subtitle to be cut off */
     color: rgb(17, 4, 4);
     cursor: pointer;
 }
@@ -23,7 +23,7 @@
 }
 
 .slick-slider-wrapper {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -32,8 +32,8 @@
     color: rgb(54, 27, 18);
   }
 
-  .maxHeight {
+.maxHeight {
     max-height: 100%;
     max-width: 100%;
-    height: auto;
-  }
+    height: auto; 
+}
