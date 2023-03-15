@@ -1,4 +1,8 @@
-  
+html, body {
+  height: 100vh;
+  width: 100vw;
+}
+
   .move-up {
     position: relative;
     top: -500px;
