@@ -24,7 +24,7 @@ let games = [
     name: "Minecraft: Playstation 4 Edition",
     game_id: "93620",
     release: 1409788800,
-    genre: [32,31],
+    genre: [32, 31],
     platforms: [48],
     summary:
       "The critically acclaimed Minecraft comes to PlayStation 4. Create your very own game world and explore, build and conquer.",
