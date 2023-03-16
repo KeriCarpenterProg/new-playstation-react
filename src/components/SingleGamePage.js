@@ -14,7 +14,7 @@ const SingleGamePage = () => {
       <div
         className="blurred-background"
         style={{
-          backgroundImage: `url(${games[activeGame].screenshots[1]})`,
+          backgroundImage: `url(${games[activeGame].screenshots[2]})`,
         }}
       ></div>
       <Container className="move-up">

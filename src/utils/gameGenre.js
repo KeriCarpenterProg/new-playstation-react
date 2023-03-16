@@ -1,4 +1,4 @@
-import games from "./helpers";
+
 
 const genreMap = {
   31: "Action & Adventure",
@@ -7,8 +7,6 @@ const genreMap = {
   12: "Role-playing (RPG)",
   25: "Hack and slash/Beat 'em up",
 };
-
-export const randomGame = Math.floor(Math.random() * 9);
 
 export const returnFirstGameGenre = (numbersArray) => {
   const sortedGenres = numbersArray
