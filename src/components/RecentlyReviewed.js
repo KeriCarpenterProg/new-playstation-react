@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/recentlyreviewed.css";
 import { returnFirstGameGenre } from "../utils/gameGenre";
-import { randomGame } from "../utils/gameGenre";
 
 const RecentlyReviewed = () => {
   let gamesList = [];

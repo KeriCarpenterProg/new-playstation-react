@@ -4,7 +4,6 @@ import {
   Row,
   Col,
   Card,
-  CardImgOverlay,
   CardImg,
   CardBody,
   CardTitle,
@@ -17,7 +16,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/styles.css";
-import "../css/homeslider.css"
+import "../css/homeslider.css";
 import { returnFirstGameGenre } from "../utils/gameGenre";
 
 const PopularGamesSlider = () => {
@@ -26,21 +25,21 @@ const PopularGamesSlider = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 2,
-    initialSlide: 3,
+    initialSlide: 4,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 2,
           infinite: true,
           dots: false,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 800,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -72,7 +71,9 @@ const PopularGamesSlider = () => {
                 <React.Fragment className="fragment" key={index}>
                   <Link to={`/games/${game.id}`}>
                     <Card className="card" key={game}>
-                      <CardImg id="cardImage" className="cardImage"
+                      <CardImg
+                        id="cardImage"
+                        className="cardImage"
                         alt={game.name}
                         src={game.cover}
                         style={{

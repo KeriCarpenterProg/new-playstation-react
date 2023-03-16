@@ -5,14 +5,14 @@ html, body {
 
   .move-up {
     position: relative;
-    top: -500px;
+    top: -350px;
   }
 
    
   .blurred-background {
     background: lightyellow;
     width: 100%;
-    height: 550px;
+    height: 400px;
     filter: blur(8px);
     background-size: cover;
   }
