@@ -72,16 +72,9 @@ const PopularGamesSlider = () => {
                   <Link to={`/games/${game.id}`}>
                     <Card className="card" key={game}>
                       <CardImg
-                        id="cardImage"
                         className="cardImage"
                         alt={game.name}
                         src={game.cover}
-                        style={{
-                          width: "100%",
-                          // width: "263px",
-                          margin: "0 auto",
-                          display: "block",
-                        }}
                         top
                       />
 
