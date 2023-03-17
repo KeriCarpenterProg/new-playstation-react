@@ -18,7 +18,6 @@ import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
 import { returnAllGameGenres } from "../utils/gameGenre";
-import { returnAllGamePlatforms } from "../utils/gamePlatform";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -92,11 +91,6 @@ const PopularGamesSlider = () => {
                           <div>
                             <b>Genre: </b>
                             {returnAllGameGenres(games.genre)}
-                          </div>
-                          <br />
-                          <div>
-                            <b>Platforms: </b>
-                            {returnAllGamePlatforms(games.platforms)}
                           </div>
                         </CardSubtitle>
                       </CardBody>
