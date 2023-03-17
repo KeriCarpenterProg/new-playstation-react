@@ -1,5 +1,3 @@
-
-
 const genreMap = {
   31: "Action & Adventure",
   32: "Simulator",

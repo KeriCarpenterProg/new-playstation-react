@@ -1,11 +1,12 @@
 import { Col, Row, Container } from "reactstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React from "react";
 import games from "../utils/helpers";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
-import { returnFirstGameGenre } from "../utils/gameGenre";
+import { returnAllGameGenres } from "../utils/gameGenre";
+import { returnAllGamePlatforms } from "../utils/gamePlatform";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
@@ -28,17 +29,20 @@ const SingleGamePage = () => {
           </Col>
           <Col sm="8" className="transparent-box">
             <h1 className="overflow-wrap">{games[activeGame].name}</h1>
-            <h6>Released: {convertToDate(games[activeGame].release)}</h6>
+            <h6>
+              <b>Released: </b>
+              {convertToDate(games[activeGame].release)}
+            </h6>
+            <h6>
+              <b>Genre: </b>
+              {returnAllGameGenres(games[activeGame].genre)}
+            </h6>
+            <h6>
+              <b>Platforms: </b>
+              {returnAllGamePlatforms(games[activeGame].platforms)}
+            </h6>
             <hr />
-
-            <h6>Genre: {returnFirstGameGenre(games[activeGame].genre)}</h6>
-
-            <h6>Platforms: PlayStation 4, PlayStation 5</h6>
-
-            <br />
-
             <p>{games[activeGame].summary}</p>
-            <hr />
           </Col>
         </Row>
         <Row className="row-content">

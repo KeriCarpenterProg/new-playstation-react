@@ -24,7 +24,7 @@ let games = [
     name: "Minecraft: Playstation 4 Edition",
     game_id: "93620",
     release: 1409788800,
-    genre: [32,31],
+    genre: [32, 31],
     platforms: [48],
     summary:
       "The critically acclaimed Minecraft comes to PlayStation 4. Create your very own game world and explore, build and conquer.",
@@ -74,12 +74,12 @@ let games = [
       "God of War is the sequel to God of War III as well as a continuation of the canon God of War chronology. Unlike previous installments, this game focuses on Norse mythology and follows an older and more seasoned Kratos and his son Atreus in the years since the third game. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.",
     cover: "https://images.igdb.com/igdb/image/upload/t_original/co1tmu.jpg",
     screenshots: [
-      "https://images.igdb.com/igdb/image/upload/t_original/mknszfnaifmhssbrmkpl.jpg",
       "https://images.igdb.com/igdb/image/upload/t_original/r7hpzsqic1bjwyzn1bnq.jpg",
       "https://images.igdb.com/igdb/image/upload/t_original/wunlbofh23trw0u67gms.jpg",
       "https://images.igdb.com/igdb/image/upload/t_original/s2zdtxopibrfjbxvpj5h.jpg",
       "https://images.igdb.com/igdb/image/upload/t_original/o4mg2wvhlcikaogvvzqe.jpg",
       "https://images.igdb.com/igdb/image/upload/t_original/gpt3d0gpue5mat4kkso6.jpg",
+      "https://images.igdb.com/igdb/image/upload/t_original/mknszfnaifmhssbrmkpl.jpg",
     ],
     videos: ["https://www.youtube.com/embed/rClXqZD2Xrs"],
   },
