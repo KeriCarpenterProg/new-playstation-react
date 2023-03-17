@@ -1,5 +1,5 @@
 import { Col, Row, Container } from "reactstrap";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import React from "react";
 import games from "../utils/helpers";
 import "../css/singlegamepage.css";
