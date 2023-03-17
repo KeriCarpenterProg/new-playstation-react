@@ -27,7 +27,7 @@ const PopularGamesSlider = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
-    initialSlide: 4,
+    initialSlide: 2,
     responsive: [
       {
         breakpoint: 1024,
