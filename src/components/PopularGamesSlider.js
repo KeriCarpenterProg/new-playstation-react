@@ -77,15 +77,16 @@ const PopularGamesSlider = () => {
                         alt={games.name}
                         src={games.cover}
                         style={{
+                          // width: "100%",
                           width: "100%",
-                          // width: "263px",
+                          height: "400px",
                           margin: "0 auto",
                           display: "block",
                         }}
                         top
                       />
 
-                      <CardBody>
+                      <CardBody style={{ height: "6rem" }}>
                         <CardTitle tag="h5">{games.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
                           <div>
