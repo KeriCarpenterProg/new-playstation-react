@@ -77,7 +77,6 @@ const PopularGamesSlider = () => {
                         alt={games.name}
                         src={games.cover}
                         style={{
-                          // width: "100%",
                           width: "100%",
                           height: "400px",
                           margin: "0 auto",
