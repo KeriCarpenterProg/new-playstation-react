@@ -88,10 +88,7 @@ const PopularGamesSlider = () => {
                       <CardBody style={{ height: "6rem" }}>
                         <CardTitle tag="h5">{games.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          <div>
-                            <b>Genre: </b>
-                            {returnAllGameGenres(games.genre)}
-                          </div>
+                          <div>{returnAllGameGenres(games.genre)}</div>
                         </CardSubtitle>
                       </CardBody>
                     </Card>
