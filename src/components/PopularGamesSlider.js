@@ -17,7 +17,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
-import { returnFirstGameGenre } from "../utils/gameGenre";
+import { returnAllGameGenres } from "../utils/gameGenre";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -27,7 +27,7 @@ const PopularGamesSlider = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
-    initialSlide: 4,
+    initialSlide: 2,
     responsive: [
       {
         breakpoint: 1024,
@@ -67,21 +67,27 @@ const PopularGamesSlider = () => {
         <Row>
           <Col>
             <Slider {...settings}>
-              {games.map((game, index) => (
+              {games.map((games, index) => (
                 <React.Fragment className="fragment" key={index}>
-                  <Link to={`/games/${game.id}`}>
-                    <Card className="card" key={game}>
+                  <Link to={`/games/${games.id}`}>
+                    <Card className="card" key={games}>
                       <CardImg
                         className="cardImage"
-                        alt={game.name}
-                        src={game.cover}
+                        alt={games.name}
+                        src={games.cover}
+                        style={{
+                          width: "100%",
+                          height: "400px",
+                          margin: "0 auto",
+                          display: "block",
+                        }}
                         top
                       />
 
-                      <CardBody>
-                        <CardTitle tag="h5">{game.name}</CardTitle>
+                      <CardBody style={{ height: "6rem" }}>
+                        <CardTitle tag="h5">{games.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          <div>{returnFirstGameGenre(game.genre)}</div>
+                          <div>{returnAllGameGenres(games.genre)}</div>
                         </CardSubtitle>
                       </CardBody>
                     </Card>

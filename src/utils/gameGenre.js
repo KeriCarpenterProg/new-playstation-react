@@ -1,7 +1,5 @@
-
-
 const genreMap = {
-  31: "Action & Adventure",
+  31: "Action Adventure",
   32: "Simulator",
   5: "First Person Shooter",
   12: "Role-playing (RPG)",
@@ -19,7 +17,7 @@ export const returnAllGameGenres = (numbersArray) => {
   return numbersArray
     .map((item) => genreMap[item] || "Unknown")
     .sort()
-    .join(",");
+    .join(", ");
 };
 
 /**
