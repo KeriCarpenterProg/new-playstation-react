@@ -1,14 +1,14 @@
-.cardImage {
-    width: "100%";
-    display: "block";
-    margin: 0 auto;
+.cardImage,
+#cardImage {
+  width: "100%";
+  display: "block";
+  margin: 0 auto;
 }
 
 .card {
-    width: fit-content;
-
-} 
+  width: fit-content;
+}
 
 .fragment {
-    margin: 0 auto;
+  margin: 0 auto;
 }

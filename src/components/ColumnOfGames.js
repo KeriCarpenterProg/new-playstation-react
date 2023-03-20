@@ -7,9 +7,12 @@ import "slick-carousel/slick/slick-theme.css";
 import { convertToDate } from "../utils/convertToDate";
 
 const ColumnOfGames = () => {
+  // Create a shuffled copy of the games array
+  const shuffledGames = [...games].sort(() => Math.random() - 0.5);
+
   return (
     <Container className="my-4 pb-2 px-1">
-      {games.map((game, index) => (
+      {shuffledGames.map((game, index) => (
         <Row key={index} className="my-2">
           <Col sm="5">
             <img className="img-fluid maxHeight" src={game.cover} />
