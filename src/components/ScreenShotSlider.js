@@ -7,6 +7,7 @@ import {
   CardImg,
   CardBody,
   CardTitle,
+  CardSubtitle,
 } from "reactstrap";
 import games from "../utils/helpers";
 import Slider from "react-slick";
@@ -17,11 +18,7 @@ import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
 
-const ScreenshotSlider = () => {
-  // the params set in Route component dictate how we can refer to them using useParams()
-  const { activeGame } = useParams();
-  const { screenshots } = games[activeGame];
-
+const ScreenShotSlider = () => {
   // Slick Slider Settings ----> Begin
   const settings = {
     dots: false,
@@ -58,40 +55,33 @@ const ScreenshotSlider = () => {
     ],
   };
   // Slick Slider Settings ----> End
+  const { activeGame } = useParams();
+  const screenshotUrls = games[activeGame].screenshots;
   return (
     <div>
       <Container>
         <Row>
           <h3 className="my-4 pb-2 px-1">
-            Game Artwork: Videos, Screenshots, Covers
+            Artwork from Games: Videos, Screenshots, Covers
           </h3>
-          <hr />
+          <hr></hr>
         </Row>
         <Row>
           <Col>
             <Slider {...settings}>
-              {screenshots?.map((screenshot, index) => (
+              {screenshotUrls.map((screenshot, index) => (
                 <React.Fragment key={index}>
-                  <Link to={`/games/${activeGame}`}>
-                    <Card key={index}>
-                      <CardImg
-                        alt={screenshot}
-                        src={screenshot}
-                        style={{
-                          width: "100%",
-                          marginRight: "auto",
-                          marginLeft: "auto",
-                          display: "block",
-                        }}
-                        top
-                        width="100%"
-                      />
-
-                      <CardBody>
-                        <CardTitle tag="h5">{games[activeGame].name}</CardTitle>
-                      </CardBody>
-                    </Card>
-                  </Link>
+                  <Card key={games[activeGame]}>
+                    <CardImg
+                      alt={games[activeGame].name}
+                      src={screenshot}
+                      top
+                      width="100%"
+                    />
+                    <CardBody>
+                      <CardTitle tag="h5">{games[activeGame].name}</CardTitle>
+                    </CardBody>
+                  </Card>
                 </React.Fragment>
               ))}
             </Slider>
@@ -102,4 +92,4 @@ const ScreenshotSlider = () => {
   );
 };
 
-export default ScreenshotSlider;
+export default ScreenShotSlider;
