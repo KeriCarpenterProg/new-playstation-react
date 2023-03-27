@@ -50,12 +50,12 @@ const SingleGamePage = () => {
           <ScreenShotSlider />
         </Row>
         <Row>
-          {/* <CommentsList campsiteId={activeGame} /> */}
           <h1>Comments List</h1>
           <p>
-            This Comments List component is not working but I think it should.
-            We just have to figure out what is going wrong.
+            Got the Comments List component to work. Haven't started on the
+            Comment Form. It's not working right now.
           </p>
+          <CommentsList campsiteId={activeGame} />
         </Row>
       </Container>
     </>

@@ -1,22 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { COMMENTS } from '../../app/shared/COMMENTS';
+import { createSlice } from "@reduxjs/toolkit";
+import { COMMENTS } from "../../app/shared/COMMENTS";
 
 const initialState = {
-    commentsArray: COMMENTS
+  commentsArray: COMMENTS,
 };
 
 const commentsSlice = createSlice({
-    name: 'comments',
-    initialState,
-    reducers: {
-        addComment: (state, action) => {
-            const newComment = {
-                id: state.commentsArray.length + 1,
-                ...action.payload
-            };
-            state.commentsArray.push(newComment);
-        }
-    }
+  name: "comments",
+  initialState,
+  reducers: {
+    addComment: (state, action) => {
+      const newComment = {
+        id: state.commentsArray.length + 1,
+        ...action.payload,
+      };
+      state.commentsArray.push(newComment);
+    },
+  },
 });
 
 export const commentsReducer = commentsSlice.reducer;
@@ -24,7 +24,12 @@ export const commentsReducer = commentsSlice.reducer;
 export const { addComment } = commentsSlice.actions;
 
 export const selectCommentsByCampsiteId = (campsiteId) => (state) => {
-    return state.comments.commentsArray.filter(
-        (comment) => comment.campsiteId === parseInt(campsiteId)
-    );
+  return state.comments.commentsArray.filter(
+    (comment) => comment.campsiteId === parseInt(campsiteId)
+  );
 };
+
+// export const selectCommentsByCampsiteId = (campsiteId) => (state) => {
+//   console.log(state.comments.commentsArray);
+//   return "Hello Mom!";
+// };
