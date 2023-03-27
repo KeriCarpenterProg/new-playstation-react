@@ -7,6 +7,7 @@ import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
 import { returnAllGameGenres } from "../utils/gameGenre";
 import { returnAllGamePlatforms } from "../utils/gamePlatform";
+import CommentsList from "../features/comments/CommentsList";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
@@ -47,6 +48,14 @@ const SingleGamePage = () => {
         </Row>
         <Row className="row-content">
           <ScreenShotSlider />
+        </Row>
+        <Row>
+          {/* <CommentsList campsiteId={activeGame} /> */}
+          <h1>Comments List</h1>
+          <p>
+            This Comments List component is not working but I think it should.
+            We just have to figure out what is going wrong.
+          </p>
         </Row>
       </Container>
     </>
