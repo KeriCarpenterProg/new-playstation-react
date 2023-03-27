@@ -8,7 +8,7 @@ const AboutPage = () => {
           <h3>Contributors</h3>
           <ul>
             <li>Julia Yerman</li>
-            <li>Eleanor Hahn</li>
+            <li>Eleanor Kahn</li>
             <li>Keri Carpenter</li>
           </ul>
         </Col>
