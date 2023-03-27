@@ -7,6 +7,7 @@ import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
 import { returnAllGameGenres } from "../utils/gameGenre";
 import { returnAllGamePlatforms } from "../utils/gamePlatform";
+import CommentsList from "../features/comments/CommentsList";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
@@ -47,6 +48,14 @@ const SingleGamePage = () => {
         </Row>
         <Row className="row-content">
           <ScreenShotSlider />
+        </Row>
+        <Row>
+          <h1>Comments List</h1>
+          <p>
+            Got the Comments List component to work. Haven't started on the
+            Comment Form. It's not working right now.
+          </p>
+          <CommentsList campsiteId={activeGame} />
         </Row>
       </Container>
     </>
