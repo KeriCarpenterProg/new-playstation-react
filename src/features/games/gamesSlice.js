@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import GAMES from "../../app/shared/GAMES";
 
 const initialState = {
-    games: GAMES,
+    gamesArray: GAMES,
 };
 
 const gamesSlice = createSlice({
@@ -13,10 +13,10 @@ const gamesSlice = createSlice({
     }
 });
 
-export const selectGamesById = (gameId) => {
-    return GAMES.find((game) => game.id === parseInt(gameId));
+export const selectGamesById = (state) => (gameId) => {
+    return state.games.gamesArray.find((game) => game.id === parseInt(gameId));
 };
 
 export const gamesReducer = gamesSlice.reducer;
 
-export const selectAllGames = (state) => state.games;
+export const selectAllGames = (state) => state.games.gamesArray;

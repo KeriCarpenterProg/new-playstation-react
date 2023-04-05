@@ -1,49 +1,52 @@
 import { Col, Row, Container } from "reactstrap";
 import { useParams } from "react-router-dom";
 import React from "react";
-import games from "../utils/helpers";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
 import { returnAllGameGenres } from "../utils/gameGenre";
 import { returnAllGamePlatforms } from "../utils/gamePlatform";
 import CommentsList from "../features/comments/CommentsList";
+import { useSelector } from "react-redux";
+import { selectAllGames } from "../features/games/gamesSlice";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
+  const game = useSelector(selectAllGames)[activeGame];
+
   return (
     <>
       <div
         className="blurred-background"
         style={{
-          backgroundImage: `url(${games[activeGame].screenshots[2]})`,
+          backgroundImage: `url(${game.screenshots[2]})`,
         }}
       ></div>
       <Container className="move-up">
         <Row>
           <Col md="4">
             <img
-              alt={games[activeGame].name}
+              alt={game.name}
               className="w-100"
-              src={games[activeGame].cover}
+              src={game.cover}
             />
           </Col>
           <Col sm="8" className="transparent-box">
-            <h1 className="overflow-wrap">{games[activeGame].name}</h1>
+            <h1 className="overflow-wrap">{game.name}</h1>
             <h6>
               <b>Released: </b>
-              {convertToDate(games[activeGame].release)}
+              {convertToDate(game.release)}
             </h6>
             <h6>
               <b>Genre: </b>
-              {returnAllGameGenres(games[activeGame].genre)}
+              {returnAllGameGenres(game.genre)}
             </h6>
             <h6>
               <b>Platforms: </b>
-              {returnAllGamePlatforms(games[activeGame].platforms)}
+              {returnAllGamePlatforms(game.platforms)}
             </h6>
             <hr />
-            <p>{games[activeGame].summary}</p>
+            <p>{game.summary}</p>
           </Col>
         </Row>
         <Row className="row-content">
