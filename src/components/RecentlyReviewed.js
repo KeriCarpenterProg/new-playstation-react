@@ -13,6 +13,7 @@ const RecentlyReviewed = () => {
   for (let i = 0; i < 6; i++) {
     gamesList.push(Math.floor(Math.random() * games.length));
   }
+  
   return (
     <div>
       <Container>

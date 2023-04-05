@@ -9,7 +9,6 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
-import games from "../utils/helpers";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
@@ -17,6 +16,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
+import { selectAllGames } from "../features/games/gamesSlice";
+import { useSelector } from "react-redux";
 
 const RecommendedGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -55,6 +56,8 @@ const RecommendedGamesSlider = () => {
     ],
   };
   // Slick Slider Settings ----> End
+
+  const games = useSelector(selectAllGames);
 
   return (
     <div>

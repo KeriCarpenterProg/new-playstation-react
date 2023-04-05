@@ -9,7 +9,6 @@ import {
   CardTitle,
   CardSubtitle,
 } from "reactstrap";
-import games from "../utils/helpers";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
@@ -18,6 +17,8 @@ import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
 import { returnAllGameGenres } from "../utils/gameGenre";
+import { useSelector } from "react-redux";
+import { selectAllGames } from "../features/games/gamesSlice";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -57,6 +58,7 @@ const PopularGamesSlider = () => {
   };
   // Slick Slider Settings ----> End
 
+  const games = useSelector(selectAllGames);
   return (
     <div>
       <Container>
@@ -67,14 +69,14 @@ const PopularGamesSlider = () => {
         <Row>
           <Col>
             <Slider {...settings}>
-              {games.map((games, index) => (
+              {games.map((game, index) => (
                 <React.Fragment className="fragment" key={index}>
-                  <Link to={`/games/${games.id}`}>
-                    <Card className="card" key={games}>
+                  <Link to={`/games/${game.id}`}>
+                    <Card className="card" key={game}>
                       <CardImg
                         className="cardImage"
-                        alt={games.name}
-                        src={games.cover}
+                        alt={game.name}
+                        src={game.cover}
                         style={{
                           width: "100%",
                           height: "400px",
@@ -85,9 +87,9 @@ const PopularGamesSlider = () => {
                       />
 
                       <CardBody style={{ height: "6rem" }}>
-                        <CardTitle tag="h5">{games.name}</CardTitle>
+                        <CardTitle tag="h5">{game.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          <div>{returnAllGameGenres(games.genre)}</div>
+                          <div>{returnAllGameGenres(game.genre)}</div>
                         </CardSubtitle>
                       </CardBody>
                     </Card>
