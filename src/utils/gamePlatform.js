@@ -5,7 +5,7 @@ const platformMap = {
   49: "Xbox Series X|S",
 };
 
-export const returnAllGamePlatforms = (numbersArray) => {
+export const selectAllGamePlatforms = (numbersArray) => {
   return numbersArray
     .map((item) => platformMap[item] || "Unknown")
     .sort()
