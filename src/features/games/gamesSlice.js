@@ -17,6 +17,9 @@ export const selectGamesById = (state) => (gameId) => {
     return state.games.gamesArray.find((game) => game.id === parseInt(gameId));
 };
 
+
+
 export const gamesReducer = gamesSlice.reducer;
 
 export const selectAllGames = (state) => state.games.gamesArray;
+

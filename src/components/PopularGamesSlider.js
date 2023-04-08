@@ -16,9 +16,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
-import { returnAllGameGenres } from "../utils/gameGenre";
 import { useSelector } from "react-redux";
 import { selectAllGames } from "../features/games/gamesSlice";
+import { selectAllGameGenres } from "../utils/gameGenre";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -59,6 +59,7 @@ const PopularGamesSlider = () => {
   // Slick Slider Settings ----> End
 
   const games = useSelector(selectAllGames);
+
   return (
     <div>
       <Container>
@@ -89,7 +90,7 @@ const PopularGamesSlider = () => {
                       <CardBody style={{ height: "6rem" }}>
                         <CardTitle tag="h5">{game.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          <div>{returnAllGameGenres(game.genre)}</div>
+                          <div>{selectAllGameGenres(game.genre)}</div>
                         </CardSubtitle>
                       </CardBody>
                     </Card>

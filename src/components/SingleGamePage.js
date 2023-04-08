@@ -4,8 +4,8 @@ import React from "react";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
-import { returnAllGameGenres } from "../utils/gameGenre";
-import { returnAllGamePlatforms } from "../utils/gamePlatform";
+import { selectAllGameGenres } from "../utils/gameGenre";
+import { selectAllGamePlatforms } from "../utils/gamePlatform";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
 import { selectAllGames } from "../features/games/gamesSlice";
@@ -39,11 +39,11 @@ const SingleGamePage = () => {
             </h6>
             <h6>
               <b>Genre: </b>
-              {returnAllGameGenres(game.genre)}
+              {selectAllGameGenres(game.genre)}
             </h6>
             <h6>
               <b>Platforms: </b>
-              {returnAllGamePlatforms(game.platforms)}
+              {selectAllGamePlatforms(game.platforms)}
             </h6>
             <hr />
             <p>{game.summary}</p>
