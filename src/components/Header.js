@@ -14,11 +14,16 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "../css/header.css";
-import games from "../utils/helpers";
+import { useSelector } from "react-redux";
+import { selectAllGames } from "../features/games/gamesSlice";
 
 const Header = () => {
+
   const [menuOpen, setMenuOpen] = useState(false);
   const toggle = () => setMenuOpen(!menuOpen);
+
+  const games = useSelector(selectAllGames);
+
   return (
     <div>
       <Navbar dark={true} color="dark" sticky="top" expand="xl">
