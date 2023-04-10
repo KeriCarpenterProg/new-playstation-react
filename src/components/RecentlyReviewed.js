@@ -1,18 +1,23 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import games from "../utils/helpers";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/recentlyreviewed.css";
-import { returnFirstGameGenre } from "../utils/gameGenre";
+import { selectFirstGameGenre, selectAllGames } from "../features/games/gamesSlice";
 
 const RecentlyReviewed = () => {
+  const games = useSelector(selectAllGames);
+
   let gamesList = [];
   for (let i = 0; i < 6; i++) {
     gamesList.push(Math.floor(Math.random() * games.length));
   }
+  
+
+
   return (
     <div>
       <Container>
@@ -31,7 +36,7 @@ const RecentlyReviewed = () => {
                   {games[gamesList[0]].name}
                 </p>
                 <p className="review-panel-genres">
-                  {returnFirstGameGenre(games[gamesList[0]].genre)}
+                  {selectFirstGameGenre(games[gamesList[0]].genre)}
                 </p>
               </div>
               <div className="review-panel-rating">68%</div>
@@ -52,7 +57,7 @@ const RecentlyReviewed = () => {
                   {games[gamesList[1]].name}
                 </p>
                 <p className="review-panel-genres">
-                  {returnFirstGameGenre(games[gamesList[1]].genre)}
+                  {selectFirstGameGenre(games[gamesList[1]].genre)}
                 </p>
               </div>
               <div className="review-panel-rating">70%</div>
@@ -73,7 +78,7 @@ const RecentlyReviewed = () => {
                   {games[gamesList[2]].name}
                 </p>
                 <p className="review-panel-genres">
-                  {returnFirstGameGenre(games[gamesList[2]].genre)}
+                  {selectFirstGameGenre(games[gamesList[2]].genre)}
                 </p>
               </div>
               <div className="review-panel-rating">80%</div>
@@ -96,7 +101,7 @@ const RecentlyReviewed = () => {
                   {games[gamesList[3]].name}
                 </p>
                 <p className="review-panel-genres">
-                  {returnFirstGameGenre(games[gamesList[3]].genre)}
+                  {selectFirstGameGenre(games[gamesList[3]].genre)}
                 </p>
               </div>
               <div className="review-panel-rating">83%</div>
@@ -117,7 +122,7 @@ const RecentlyReviewed = () => {
                   {games[gamesList[4]].name}
                 </p>
                 <p className="review-panel-genres">
-                  {returnFirstGameGenre(games[gamesList[4]].genre)}
+                  {selectFirstGameGenre(games[gamesList[4]].genre)}
                 </p>
               </div>
               <div className="review-panel-rating">80%</div>
@@ -136,7 +141,7 @@ const RecentlyReviewed = () => {
                   {games[gamesList[5]].name}
                 </p>
                 <p className="review-panel-genres">
-                  {returnFirstGameGenre(games[gamesList[5]].genre)}
+                  {selectFirstGameGenre(games[gamesList[5]].genre)}
                 </p>
               </div>
               <div className="review-panel-rating">80%</div>

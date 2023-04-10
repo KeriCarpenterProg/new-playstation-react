@@ -7,16 +7,16 @@ import {
   CardImg,
   CardBody,
   CardTitle,
-  CardSubtitle,
 } from "reactstrap";
-import games from "../utils/helpers";
 import Slider from "react-slick";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
+import { useSelector } from "react-redux";
+import { selectAllGames } from "../features/games/gamesSlice";
 
 const ScreenShotSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -56,7 +56,9 @@ const ScreenShotSlider = () => {
   };
   // Slick Slider Settings ----> End
   const { activeGame } = useParams();
-  const screenshotUrls = games[activeGame].screenshots;
+  const game = useSelector(selectAllGames)[activeGame];
+  const screenshotUrls = game.screenshots;
+
   return (
     <div>
       <Container>
@@ -71,15 +73,15 @@ const ScreenShotSlider = () => {
             <Slider {...settings}>
               {screenshotUrls.map((screenshot, index) => (
                 <React.Fragment key={index}>
-                  <Card key={games[activeGame]}>
+                  <Card key={game}>
                     <CardImg
-                      alt={games[activeGame].name}
+                      alt={game.name}
                       src={screenshot}
                       top
                       width="100%"
                     />
                     <CardBody>
-                      <CardTitle tag="h5">{games[activeGame].name}</CardTitle>
+                      <CardTitle tag="h5">{game.name}</CardTitle>
                     </CardBody>
                   </Card>
                 </React.Fragment>

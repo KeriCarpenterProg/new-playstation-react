@@ -2,8 +2,13 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
+import { selectAllGames } from "../features/games/gamesSlice";
 
 const BestGameImgs = () => {
+
+  const games = useSelector(selectAllGames);
+
   return (
     <Container>
       <Row></Row>{" "}
