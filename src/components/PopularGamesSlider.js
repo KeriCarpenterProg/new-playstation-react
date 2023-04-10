@@ -17,8 +17,7 @@ import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
 import { useSelector } from "react-redux";
-import { selectAllGames } from "../features/games/gamesSlice";
-import { selectAllGameGenres } from "../utils/gameGenre";
+import { selectAllGames, selectAllGameGenres } from "../features/games/gamesSlice";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin

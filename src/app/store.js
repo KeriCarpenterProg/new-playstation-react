@@ -8,5 +8,5 @@ export const store = configureStore({
     counter: counterReducer,
     comments: commentsReducer,
     games: gamesReducer
-  },
+  }
 });

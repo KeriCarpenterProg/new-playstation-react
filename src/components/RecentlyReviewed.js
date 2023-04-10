@@ -1,13 +1,12 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import { selectAllGames } from "../features/games/gamesSlice";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/recentlyreviewed.css";
-import { selectFirstGameGenre } from "../utils/gameGenre";
+import { selectFirstGameGenre, selectAllGames } from "../features/games/gamesSlice";
 
 const RecentlyReviewed = () => {
   const games = useSelector(selectAllGames);

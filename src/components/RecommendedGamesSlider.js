@@ -16,9 +16,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
-import { selectAllGames } from "../features/games/gamesSlice";
+import { selectAllGames, selectAllGameGenres } from "../features/games/gamesSlice";
 import { useSelector } from "react-redux";
-import { returnAllGameGenres } from "../utils/gameGenre";
 
 const RecommendedGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -90,7 +89,7 @@ const RecommendedGamesSlider = () => {
                       <CardBody>
                         <CardTitle tag="h5">{game.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
-                          {returnAllGameGenres(game.genre)}
+                          {selectAllGameGenres(game.genre)}
                         </CardSubtitle>
                       </CardBody>
                     </Card>
