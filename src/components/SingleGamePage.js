@@ -4,11 +4,9 @@ import React from "react";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "./ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
-import { selectAllGameGenres } from "../utils/gameGenre";
-import { selectAllGamePlatforms } from "../utils/gamePlatform";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
-import { selectAllGames } from "../features/games/gamesSlice";
+import { selectAllGames, selectAllGameGenres, selectAllGamePlatforms } from "../features/games/gamesSlice";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
