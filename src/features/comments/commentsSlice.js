@@ -1,8 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { COMMENTS } from "../../app/shared/COMMENTS";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl } from "../../app/shared/baseUrl";
+
+export const fetchComments = createAsyncThunk(
+  "comments/fetchComments",
+  async () => {
+    const response = await fetch(baseUrl + "comments");
+    if (!response.ok) {
+      return Promise.reject("Unable to fetch, status: " + response.status);
+    }
+    const data = await response.json();
+    return data
+  }
+);
 
 const initialState = {
-  commentsArray: COMMENTS,
+  commentsArray: [],
+  errMsg: "",
+  isLoading: true,
 };
 
 const commentsSlice = createSlice({
@@ -15,17 +29,31 @@ const commentsSlice = createSlice({
         ...action.payload,
       };
       state.commentsArray.push(newComment);
-    },
+    }
   },
+  extraReducers: {
+    [fetchComments.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchComments.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.errMsg = "";
+      state.commentsArray = action.payload;
+    },
+    [fetchComments.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.errMsg = action.error ? action.error.message : "Fetch failed";
+    }
+  }
 });
 
 export const commentsReducer = commentsSlice.reducer;
 
 export const { addComment } = commentsSlice.actions;
 
-export const selectCommentsByCampsiteId = (campsiteId) => (state) => {
+export const selectCommentsByGameId = (gameId) => (state) => {
   return state.comments.commentsArray.filter(
-    (comment) => comment.campsiteId === parseInt(campsiteId)
+    (comment) => comment.gameId === parseInt(gameId)
   );
 };
 
