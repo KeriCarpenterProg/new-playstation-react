@@ -17,7 +17,10 @@ import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
 import { useSelector } from "react-redux";
-import { selectAllGames, selectAllGameGenres } from "../features/games/gamesSlice";
+import {
+  selectAllGames,
+  selectAllGameGenres,
+} from "../features/games/gamesSlice";
 
 const PopularGamesSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -70,9 +73,9 @@ const PopularGamesSlider = () => {
           <Col>
             <Slider {...settings}>
               {games.map((game, index) => (
-                <React.Fragment className="fragment" key={index}>
+                <React.Fragment key={index}>
                   <Link to={`/games/${game.id}`}>
-                    <Card className="card" key={game}>
+                    <Card className="card fragment" key={game}>
                       <CardImg
                         className="cardImage"
                         alt={game.name}
