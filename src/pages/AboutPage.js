@@ -34,6 +34,31 @@ const AboutPage = () => {
               </li>
             </ol>
           </p>
+          <br />
+          <h3>Our Manifesto</h3>
+          <br />
+          <h5>Unbiased</h5>
+          <p class="font-size-14 text-muted">
+            We offer uncensored, unmanipulated information about games. We will
+            never elevate our opinions, reviews or ratings over our users.
+          </p>
+          <h5>Video game professionals</h5>
+          <p class="font-size-14 text-muted">
+            The games you love are made by real people. We wish to elevate the
+            status of game developers by showing them to you.
+          </p>
+          <h5>User focused</h5>
+          <p class="font-size-14 text-muted">
+            User focused We cannot build the best game page in the world just by
+            ourselves. We need our users to achieve that.
+          </p>
+          <h5>Indie games</h5>
+          <p class="font-size-14 text-muted">
+            Indie developers do not have the same means of exposing their games
+            with the world compared to A game studios.
+          </p>
+
+          <br />
           <h3>Contributors</h3>
           <ul class="font-size-14 text-muted">
             <li>Julia Yerman</li>
@@ -44,7 +69,7 @@ const AboutPage = () => {
         <Row className="row-content">
           <Col sm="6">
             <Card>
-              <CardHeader className="bg-primary text-white">
+              <CardHeader className="bg-858585 text-black">
                 PlayStation Team
               </CardHeader>
               <CardBody>
