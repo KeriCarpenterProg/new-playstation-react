@@ -17,13 +17,15 @@ const ColumnOfGames = () => {
       {shuffledGames.map((game, index) => (
         <Row key={index} className="my-2">
           <Col sm="5">
-            <img className="img-fluid maxHeight" src={game.cover} />
+            <img
+              className="img-fluid maxHeight"
+              alt={game.name}
+              src={game.cover}
+            />
           </Col>
           <Col sm="5">
             <Link to={`/games/${game.id}`}>
-              <a className="overflow-wrap" href="#">
-                {game.name}
-              </a>
+              <div className="overflow-wrap">{game.name}</div>
               <div>{convertToDate(game.release)}</div>
             </Link>
           </Col>
