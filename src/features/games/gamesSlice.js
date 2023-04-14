@@ -13,6 +13,8 @@ export const fetchGames = createAsyncThunk(
     }
 );
 
+export const postGames = createAsyncThunk()
+
 const initialState = {
     gamesArray: [],
     isLoading: true,
