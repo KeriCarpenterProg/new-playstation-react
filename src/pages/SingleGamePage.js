@@ -6,12 +6,17 @@ import ScreenShotSlider from "../components/ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
-import { selectAllGames, selectAllGameGenres, selectAllGamePlatforms, hasErrMsg, isLoading } from "../features/games/gamesSlice";
+import {
+  selectAllGames,
+  selectAllGameGenres,
+  selectAllGamePlatforms,
+  hasErrMsg,
+  isLoading,
+} from "../features/games/gamesSlice";
 import Error from "../components/Error";
 import Loading from "../components/Loading";
 
 const SingleGamePage = () => {
-
   const { activeGame } = useParams();
   const game = useSelector(selectAllGames)[activeGame];
   const loading = useSelector(isLoading);
@@ -20,7 +25,7 @@ const SingleGamePage = () => {
   if (loading) {
     return (
       <Row>
-          <Loading />
+        <Loading />
       </Row>
     );
   }
@@ -38,17 +43,13 @@ const SingleGamePage = () => {
       <div
         className="blurred-background"
         style={{
-          backgroundImage: `url(${game.screenshots[2]})`,
+          backgroundImage: `url(${game.screenshots[3]})`,
         }}
       ></div>
       <Container className="move-up">
         <Row>
           <Col md="4">
-            <img
-              alt={game.name}
-              className="w-100"
-              src={game.cover}
-            />
+            <img alt={game.name} className="w-100" src={game.cover} />
           </Col>
           <Col sm="8" className="transparent-box">
             <h1 className="overflow-wrap">{game.name}</h1>
