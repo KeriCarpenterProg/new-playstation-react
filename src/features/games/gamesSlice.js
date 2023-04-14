@@ -1,15 +1,45 @@
-import { createSlice } from "@reduxjs/toolkit";
-import GAMES from "../../app/shared/GAMES";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { baseUrl } from "../../app/shared/baseUrl";
+
+export const fetchGames = createAsyncThunk(
+    "games/fetchGames",
+    async () => {
+        const response = await fetch(baseUrl + "games");
+        if (!response.ok) {
+            return Promise.reject("Unable to fetch, status: " + response.status);
+        }
+        const data = await response.json();
+        return data;
+    }
+);
+
+export const postGames = createAsyncThunk()
 
 const initialState = {
-    gamesArray: GAMES,
+    gamesArray: [],
+    isLoading: true,
+    errMsg: "",
 };
 
 const gamesSlice = createSlice({
     name: "games",
     initialState,
-    reducers: {
-
+    //reducers would automatically create action creators, but asyncthunk does that for us
+    reducers: {},
+    //do not automatically create action creators
+    extraReducers: {
+        [fetchGames.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [fetchGames.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = "";
+            state.gamesArray = action.payload;
+        },
+        [fetchGames.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = action.error ? action.error.message : "Fetch failed";
+        }
     }
 });
 
@@ -18,6 +48,10 @@ export const selectGamesById = (state) => (gameId) => {
 };
 
 export const selectAllGames = (state) => state.games.gamesArray;
+
+export const isLoading = (state) => state.games.isLoading;
+
+export const hasErrMsg = (state) => state.games.errMsg;
 
 export const genreMap = {
     31: "Action Adventure",

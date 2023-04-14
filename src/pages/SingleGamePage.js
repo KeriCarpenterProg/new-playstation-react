@@ -2,15 +2,36 @@ import { Col, Row, Container } from "reactstrap";
 import { useParams } from "react-router-dom";
 import React from "react";
 import "../css/singlegamepage.css";
-import ScreenShotSlider from "./ScreenShotSlider";
+import ScreenShotSlider from "../components/ScreenShotSlider";
 import { convertToDate } from "../utils/convertToDate";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
-import { selectAllGames, selectAllGameGenres, selectAllGamePlatforms } from "../features/games/gamesSlice";
+import { selectAllGames, selectAllGameGenres, selectAllGamePlatforms, hasErrMsg, isLoading } from "../features/games/gamesSlice";
+import Error from "../components/Error";
+import Loading from "../components/Loading";
 
 const SingleGamePage = () => {
+
   const { activeGame } = useParams();
   const game = useSelector(selectAllGames)[activeGame];
+  const loading = useSelector(isLoading);
+  const errMsg = useSelector(hasErrMsg);
+
+  if (loading) {
+    return (
+      <Row>
+          <Loading />
+      </Row>
+    );
+  }
+
+  if (errMsg) {
+    return (
+      <Row>
+        <Error errMsg={errMsg} />
+      </Row>
+    );
+  }
 
   return (
     <>
@@ -56,7 +77,7 @@ const SingleGamePage = () => {
             Got the Comments List component to work. Haven't started on the
             Comment Form. It's not working right now.
           </p>
-          <CommentsList campsiteId={activeGame} />
+          <CommentsList gameId={activeGame} />
         </Row>
       </Container>
     </>
