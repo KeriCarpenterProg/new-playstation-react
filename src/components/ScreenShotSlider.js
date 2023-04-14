@@ -5,7 +5,7 @@ import {
   Col,
   Card,
   CardImg,
-  CardBody,
+  CardImgOverlay,
   CardTitle,
 } from "reactstrap";
 import Slider from "react-slick";
@@ -80,9 +80,17 @@ const ScreenShotSlider = () => {
                       top
                       width="100%"
                     />
-                    <CardBody>
-                      <CardTitle tag="h5">{game.name}</CardTitle>
-                    </CardBody>
+                    <CardImgOverlay>
+                      <CardTitle
+                        tag="h5"
+                        style={{
+                          color: "white",
+                          backgroundColor: "transparent",
+                        }}
+                      >
+                        {game.name}
+                      </CardTitle>
+                    </CardImgOverlay>
                   </Card>
                 </React.Fragment>
               ))}
