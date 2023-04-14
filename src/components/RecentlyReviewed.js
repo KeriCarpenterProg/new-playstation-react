@@ -6,14 +6,19 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/recentlyreviewed.css";
-import { selectFirstGameGenre, selectAllGames } from "../features/games/gamesSlice";
+import {
+  selectFirstGameGenre,
+  selectAllGames,
+} from "../features/games/gamesSlice";
 
 const RecentlyReviewed = () => {
   const games = useSelector(selectAllGames);
+  // Create a shuffled copy of the games array
+  const shuffledGames = [...games].sort(() => Math.random() - 0.5);
 
   let gamesList = [];
   for (let i = 0; i < 6; i++) {
-    gamesList.push(Math.floor(Math.random() * games.length));
+    gamesList.push(shuffledGames[i].id);
   }
 
   return (
