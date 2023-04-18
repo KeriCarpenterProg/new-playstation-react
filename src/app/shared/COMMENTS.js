@@ -1,4 +1,4 @@
-export const COMMENTS = [
+const COMMENTS = [
   {
     id: 0,
     campsiteId: 0,
@@ -160,3 +160,5 @@ export const COMMENTS = [
     date: "2019-02-18T18:12Z",
   },
 ];
+
+export default COMMENTS;

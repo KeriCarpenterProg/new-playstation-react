@@ -21,11 +21,7 @@ const HomePage = () => {
   }
 
   if (errMsg) {
-    return (
-      <Row>
-        <Error errMsg={errMsg} />
-      </Row>
-    );
+     console.log(`Error: ${errMsg}. That's okay, we'll serve you the same data locally instead.`);
   }
 
   return (

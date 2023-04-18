@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../app/shared/baseUrl";
+import COMMENTS  from "../../app/shared/COMMENTS";
+
+const localComments = [...COMMENTS];
 
 export const fetchComments = createAsyncThunk(
   "comments/fetchComments",
@@ -43,6 +46,7 @@ const commentsSlice = createSlice({
     [fetchComments.rejected]: (state, action) => {
       state.isLoading = false;
       state.errMsg = action.error ? action.error.message : "Fetch failed";
+      state.commentsArray = localComments;
     }
   }
 });

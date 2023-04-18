@@ -1,1 +1,1 @@
-export const baseUrl = "https://json-server2.herokuapp.com/";
+export const baseUrl = "http://locahost:3001/";
