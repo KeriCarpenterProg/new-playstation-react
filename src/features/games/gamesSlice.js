@@ -10,7 +10,6 @@ export const fetchGames = createAsyncThunk(
         const response = await fetch(baseUrl + "games");
         if (!response.ok) {
             return Promise.reject("Unable to fetch, status: " + response.status);
-
         }
         const data = await response.json();
         return data;
@@ -31,20 +30,22 @@ const gamesSlice = createSlice({
     //reducers would automatically create action creators, but asyncthunk does that for us
     reducers: {},
     //do not automatically create action creators
-    extraReducers: {
-        [fetchGames.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [fetchGames.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.errMsg = "";
-            state.gamesArray = action.payload;
-        },
-        [fetchGames.rejected]: (state, action) => {
-            state.isLoading = false;
-            state.errMsg = action.error ? action.error.message : "Fetch failed";
-            state.gamesArray = localGames;
-        }
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchGames.pending, (state) => {
+                state.isLoading = true;
+                state.errMsg = "";
+            })
+            .addCase(fetchGames.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.errMsg = "";
+                state.gamesArray = action.payload;
+            })
+            .addCase(fetchGames.rejected, (state, action) => {
+                state.isLoading = false;
+                state.errMsg = action.error ? action.error.message : "Fetch failed";
+                state.gamesArray = localGames;
+            })
     }
 });
 

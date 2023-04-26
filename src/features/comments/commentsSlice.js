@@ -34,23 +34,23 @@ const commentsSlice = createSlice({
       state.commentsArray.push(newComment);
     },
   },
-  extraReducers: {
-    [fetchComments.pending]: (state) => {
+  extraReducers: builder => {
+    builder
+    .addCase(fetchComments.pending, (state) => {
       state.isLoading = true;
-    },
-    [fetchComments.fulfilled]: (state, action) => {
+      state.errMsg = "";
+    })
+    .addCase(fetchComments.fulfilled, (state, action) => {
       state.isLoading = false;
       state.errMsg = "";
       state.commentsArray = action.payload;
-    },
-    [fetchComments.rejected]: (state, action) => {
+    })
+    .addCase(fetchComments.rejected, (state, action) => {
       state.isLoading = false;
       state.errMsg = action.error ? action.error.message : "Fetch failed";
       state.commentsArray = localComments;
-      console.log("This is the state.commentsArray. This is keri's work!!!");
-      console.log(state.commentsArray);
-    },
-  },
+    })
+  }
 });
 
 export const commentsReducer = commentsSlice.reducer;
