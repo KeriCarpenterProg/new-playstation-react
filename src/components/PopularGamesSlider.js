@@ -16,6 +16,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "../css/slickstyle.css";
 import "../css/styles.css";
 import "../css/homeslider.css";
+import "../css/singlegamepage.css";
 import { useSelector } from "react-redux";
 import {
   selectAllGames,
@@ -30,7 +31,7 @@ const PopularGamesSlider = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 2,
-    initialSlide: 2,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
@@ -90,7 +91,16 @@ const PopularGamesSlider = () => {
                       />
 
                       <CardBody style={{ height: "6rem" }}>
-                        <CardTitle tag="h5">{game.name}</CardTitle>
+                        <CardTitle
+                          tag="h5"
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {game.name}
+                        </CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">
                           <div>{selectAllGameGenres(game.genre)}</div>
                         </CardSubtitle>
