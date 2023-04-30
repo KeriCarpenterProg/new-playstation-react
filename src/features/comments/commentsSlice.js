@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../../app/shared/baseUrl";
-import COMMENTS  from "../../app/shared/COMMENTS";
+import COMMENTS from "../../app/shared/COMMENTS";
 
 const localComments = [...COMMENTS];
 
@@ -12,7 +12,7 @@ export const fetchComments = createAsyncThunk(
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
     const data = await response.json();
-    return data
+    return data;
   }
 );
 
@@ -32,22 +32,24 @@ const commentsSlice = createSlice({
         ...action.payload,
       };
       state.commentsArray.push(newComment);
-    }
-  },
-  extraReducers: {
-    [fetchComments.pending]: (state) => {
-      state.isLoading = true;
     },
-    [fetchComments.fulfilled]: (state, action) => {
+  },
+  extraReducers: builder => {
+    builder
+    .addCase(fetchComments.pending, (state) => {
+      state.isLoading = true;
+      state.errMsg = "";
+    })
+    .addCase(fetchComments.fulfilled, (state, action) => {
       state.isLoading = false;
       state.errMsg = "";
       state.commentsArray = action.payload;
-    },
-    [fetchComments.rejected]: (state, action) => {
+    })
+    .addCase(fetchComments.rejected, (state, action) => {
       state.isLoading = false;
       state.errMsg = action.error ? action.error.message : "Fetch failed";
       state.commentsArray = localComments;
-    }
+    })
   }
 });
 
