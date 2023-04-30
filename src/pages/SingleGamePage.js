@@ -13,7 +13,6 @@ import {
   hasErrMsg,
   isLoading,
 } from "../features/games/gamesSlice";
-import Error from "../components/Error";
 import Loading from "../components/Loading";
 
 const SingleGamePage = () => {
@@ -31,8 +30,10 @@ const SingleGamePage = () => {
   }
 
   if (errMsg) {
-    console.log(`Error: ${errMsg}. That's okay, we'll serve you the same data locally instead.`);
- }
+    console.log(
+      `Error: ${errMsg}. That's okay, we'll serve you the same data locally instead.`
+    );
+  }
 
   return (
     <>
@@ -70,10 +71,6 @@ const SingleGamePage = () => {
         </Row>
         <Row>
           <h1>Comments List</h1>
-          <p>
-            Got the Comments List component to work. Haven't started on the
-            Comment Form. It's not working right now.
-          </p>
           <CommentsList gameId={activeGame} />
         </Row>
       </Container>
