@@ -1,11 +1,17 @@
-import { Col, Row, Container, Card, CardBody, CardHeader } from "reactstrap";
+import { Col, Row, Container, Card, CardBody } from "reactstrap";
 import "../css/about.css";
 
 const AboutPage = () => {
   return (
     <Container>
       <Row className="row-content">
-        <Col sm="6">
+        <Col sm="12">
+          <h1>Who we are</h1>
+          <ul class="font-size-24 text-muted">
+            <li>Julia Yerman</li>
+            <li>Eleanor Kahn</li>
+            <li>Keri Carpenter</li>
+          </ul>
           <h1>About Us</h1>
           <br />
           <p class="font-size-14 text-muted">
@@ -59,34 +65,7 @@ const AboutPage = () => {
           </p>
 
           <br />
-          <h3>Contributors</h3>
-          <ul class="font-size-14 text-muted">
-            <li>Julia Yerman</li>
-            <li>Eleanor Kahn</li>
-            <li>Keri Carpenter</li>
-          </ul>
         </Col>
-        <Row className="row-content">
-          <Col sm="6">
-            <Card>
-              <CardHeader className="bg-858585 text-black">
-                PlayStation Team
-              </CardHeader>
-              <CardBody>
-                <dl className="row">
-                  <dt className="col-6">Founded</dt>
-                  <dd className="col-6">February 3, 2016</dd>
-                  <dt className="col-6">No. of Campsites in 2019</dt>
-                  <dd className="col-6">563</dd>
-                  <dt className="col-6">No. of Reviews in 2019</dt>
-                  <dd className="col-6">4388</dd>
-                  <dt className="col-6">Employees</dt>
-                  <dd className="col-6">42</dd>
-                </dl>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
 
         <Col>
           <Card className="bg-light mt-3">
