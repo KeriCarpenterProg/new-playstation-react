@@ -7,7 +7,6 @@ a:link,
 a:visited,
 a:hover,
 a:active {
-  background-color: transparent;
   text-decoration: none;
 }
 
@@ -17,7 +16,7 @@ a:active {
 }
 
 .site-footer {
-  background-image: linear-gradient(#cec8ff, white);
+  background-image: linear-gradient(#c7c7cd, white);
   padding: 20px 0px;
 }
 
