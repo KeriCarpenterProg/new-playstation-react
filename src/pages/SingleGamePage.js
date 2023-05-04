@@ -10,7 +10,6 @@ import {
   selectAllGames,
   selectAllGameGenres,
   selectAllGamePlatforms,
-  hasErrMsg,
   isLoading,
 } from "../features/games/gamesSlice";
 import Loading from "../components/Loading";
@@ -19,7 +18,7 @@ const SingleGamePage = () => {
   const { activeGame } = useParams();
   const game = useSelector(selectAllGames)[activeGame];
   const loading = useSelector(isLoading);
-  const errMsg = useSelector(hasErrMsg);
+  // const errMsg = useSelector(hasErrMsg);
 
   if (loading) {
     return (
@@ -29,11 +28,13 @@ const SingleGamePage = () => {
     );
   }
 
-  if (errMsg) {
-    console.log(
-      `Error: ${errMsg}. That's okay, we'll serve you the same data locally instead.`
-    );
-  }
+  // Keri 5/3/23 I disabled the server -- heroku app because it was costing me money
+  // Keri 5/3/23 so this will always be an error
+  // if (errMsg) {
+  //   console.log(
+  //     `Error: ${errMsg}. That's okay, we'll serve you the same data locally instead.`
+  //   );
+  // }
 
   return (
     <>

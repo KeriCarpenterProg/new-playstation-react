@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { baseUrl } from "../../app/shared/baseUrl";
+// import { baseUrl } from "../../app/shared/baseUrl";
 import COMMENTS from "../../app/shared/COMMENTS";
 
 const localComments = [...COMMENTS];
@@ -7,7 +7,10 @@ const localComments = [...COMMENTS];
 export const fetchComments = createAsyncThunk(
   "comments/fetchComments",
   async () => {
-    const response = await fetch(baseUrl + "comments");
+    // Keri 5/4/23 I had deployed a heroku server but took it down because I got charged.
+    // Thus as of now, we don't have an endpoint that will serve up this data.
+    // const response = await fetch(baseUrl + "comments");
+    const response = "";
     if (!response.ok) {
       return Promise.reject("Unable to fetch, status: " + response.status);
     }
@@ -34,23 +37,23 @@ const commentsSlice = createSlice({
       state.commentsArray.push(newComment);
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-    .addCase(fetchComments.pending, (state) => {
-      state.isLoading = true;
-      state.errMsg = "";
-    })
-    .addCase(fetchComments.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.errMsg = "";
-      state.commentsArray = action.payload;
-    })
-    .addCase(fetchComments.rejected, (state, action) => {
-      state.isLoading = false;
-      state.errMsg = action.error ? action.error.message : "Fetch failed";
-      state.commentsArray = localComments;
-    })
-  }
+      .addCase(fetchComments.pending, (state) => {
+        state.isLoading = true;
+        state.errMsg = "";
+      })
+      .addCase(fetchComments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.errMsg = "";
+        state.commentsArray = action.payload;
+      })
+      .addCase(fetchComments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.errMsg = action.error ? action.error.message : "Fetch failed";
+        state.commentsArray = localComments;
+      });
+  },
 });
 
 export const commentsReducer = commentsSlice.reducer;
