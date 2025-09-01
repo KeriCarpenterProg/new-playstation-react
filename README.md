@@ -63,3 +63,5 @@ firebase deploy
 that should deploy your website
 one of the last lines should show you the address of your deployed website.
 URL will probably be http://<project name>.web.app
+
+This all should work. Keri Carpenter 2025.
