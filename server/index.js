@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 // Import routes
 const gamesRoutes = require('./routes/games');
 const commentsRoutes = require('./routes/comments');
+const igdbRoutes = require('./routes/igdb');
 console.log('Routes imported successfully');
 
 // Middleware
@@ -25,7 +26,8 @@ app.get('/', (req, res) => {
 // Use routes
 app.use('/games', gamesRoutes);
 app.use('/comments', commentsRoutes);
-console.log('Routes mounted: /games and /comments');
+app.use('/igdb', igdbRoutes);
+console.log('Routes mounted: /games, /comments, and /igdb');
 
 // Start server
 app.listen(PORT, () => {

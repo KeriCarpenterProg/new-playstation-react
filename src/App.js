@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import SingleGamePage from "./pages/SingleGamePage";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
+import ImportGamesPage from "./pages/ImportGamesPage";
 import { fetchGames } from "./features/games/gamesSlice";
 import { fetchComments } from "./features/comments/commentsSlice";
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/import" element={<ImportGamesPage />} />
         <Route path="/games/:activeGame" element={<SingleGamePage />}></Route>
       </Routes>
       <Footer />
