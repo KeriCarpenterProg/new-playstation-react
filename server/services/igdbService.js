@@ -65,15 +65,46 @@ class IGDBService {
     }
   }
 
-  // Search for games by name
-  async searchGames(searchTerm, limit = 10) {
-    const query = `
-      search "${searchTerm}";
-      fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id;
-      limit ${limit};
-    `;
+  // Search for games by name with optional filters
+  async searchGames(searchTerm, limit = 10, filters = {}) {
+    let query = `search "${searchTerm}";\nfields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id;\n`;
 
-    return await this.makeRequest('games', query);
+    // Build where clause if we have filters
+    const conditions = [];
+
+    // Year filter - search for games released after a certain year
+    if (filters.yearFrom) {
+      const timestamp = Math.floor(new Date(`${filters.yearFrom}-01-01`).getTime() / 1000);
+      conditions.push(`first_release_date >= ${timestamp}`);
+    }
+
+    // Platform filter - filter by specific platforms
+    if (filters.platforms && filters.platforms.length > 0) {
+      // For multiple platforms, check if game is on ANY of them
+      const platformConditions = filters.platforms.map(p => `platforms = ${p}`).join(' | ');
+      conditions.push(`(${platformConditions})`);
+    }
+
+    // Add where clause if we have conditions
+    if (conditions.length > 0) {
+      query += `where ${conditions.join(' & ')};\n`;
+    }
+
+    query += `limit ${limit};`;
+
+    console.log('=== IGDB SERVICE ===');
+    console.log('Search Term:', searchTerm);
+    console.log('Filters:', JSON.stringify(filters, null, 2));
+    console.log('Query:', query);
+
+    const results = await this.makeRequest('games', query);
+
+    console.log('Results count:', results.length);
+    if (results.length > 0) {
+      console.log('First result:', results[0].name, results[0].first_release_date);
+    }
+
+    return results;
   }
 
   // Get detailed game information by IGDB game ID
