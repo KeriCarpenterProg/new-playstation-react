@@ -1,6 +1,16 @@
 import { useState } from 'react';
-import { Container, Row, Col, Button, Input, Card, CardBody, CardTitle, CardText, CardImg, Alert } from 'reactstrap';
+import { Container, Row, Col, Button, Input, Card, CardBody, CardTitle, CardText, CardImg, Alert, Label, FormGroup } from 'reactstrap';
 import { baseUrl } from '../app/shared/baseUrl';
+
+// Platform IDs from IGDB API
+const PLATFORMS = [
+  { id: 6, name: 'PC' },
+  { id: 48, name: 'PlayStation 4' },
+  { id: 167, name: 'PlayStation 5' },
+  { id: 49, name: 'Xbox One' },
+  { id: 169, name: 'Xbox Series X|S' },
+  { id: 130, name: 'Nintendo Switch' }
+];
 
 const ImportGamesPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -9,6 +19,20 @@ const ImportGamesPage = () => {
   const [importing, setImporting] = useState({});
   const [message, setMessage] = useState(null);
 
+  // Filter states
+  const [yearFrom, setYearFrom] = useState('');
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+
+  const handlePlatformToggle = (platformId) => {
+    setSelectedPlatforms(prev => {
+      if (prev.includes(platformId)) {
+        return prev.filter(id => id !== platformId);
+      } else {
+        return [...prev, platformId];
+      }
+    });
+  };
+
   const handleSearch = async () => {
     if (!searchQuery.trim()) return;
 
@@ -16,7 +40,22 @@ const ImportGamesPage = () => {
     setMessage(null);
 
     try {
-      const response = await fetch(`${baseUrl}/igdb/search?query=${encodeURIComponent(searchQuery)}&limit=10`);
+      // Build query string with filters
+      let url = `${baseUrl}/igdb/search?query=${encodeURIComponent(searchQuery)}&limit=10`;
+
+      if (yearFrom) {
+        url += `&yearFrom=${yearFrom}`;
+      }
+
+      if (selectedPlatforms.length > 0) {
+        url += `&platforms=${selectedPlatforms.join(',')}`;
+      }
+
+      console.log('Search URL:', url);
+      console.log('Year From:', yearFrom);
+      console.log('Selected Platforms:', selectedPlatforms);
+
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Failed to search games');
       }
@@ -73,7 +112,7 @@ const ImportGamesPage = () => {
       </Row>
 
       <Row className='mt-3'>
-        <Col md={8}>
+        <Col md={12}>
           <Input
             type='text'
             placeholder='Search for a game...'
@@ -82,8 +121,49 @@ const ImportGamesPage = () => {
             onKeyPress={handleKeyPress}
           />
         </Col>
-        <Col md={4}>
-          <Button color='primary' onClick={handleSearch} disabled={loading || !searchQuery.trim()}>
+      </Row>
+
+      <Row className='mt-3'>
+        <Col md={6}>
+          <FormGroup>
+            <Label for='yearFilter'>Release Year (from):</Label>
+            <Input
+              type='select'
+              id='yearFilter'
+              value={yearFrom}
+              onChange={(e) => setYearFrom(e.target.value)}
+            >
+              <option value=''>Any Year</option>
+              <option value='2024'>2024+</option>
+              <option value='2023'>2023+</option>
+              <option value='2022'>2022+</option>
+              <option value='2021'>2021+</option>
+              <option value='2020'>2020+</option>
+              <option value='2019'>2019+</option>
+              <option value='2018'>2018+</option>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col md={6}>
+          <Label>Platforms:</Label>
+          <div className='d-flex flex-wrap gap-2'>
+            {PLATFORMS.map(platform => (
+              <Button
+                key={platform.id}
+                color={selectedPlatforms.includes(platform.id) ? 'primary' : 'outline-secondary'}
+                size='sm'
+                onClick={() => handlePlatformToggle(platform.id)}
+              >
+                {platform.name}
+              </Button>
+            ))}
+          </div>
+        </Col>
+      </Row>
+
+      <Row className='mt-3'>
+        <Col md={12}>
+          <Button color='primary' onClick={handleSearch} disabled={loading || !searchQuery.trim()} block>
             {loading ? 'Searching...' : 'Search'}
           </Button>
         </Col>
