@@ -3,16 +3,32 @@ const router = express.Router();
 const igdbService = require('../services/igdbService');
 const pool = require('../config/database');
 
-// Search for games on IGDB
+// Search for games on IGDB with optional filters
 router.get('/search', async (req, res) => {
   try {
-    const { query, limit } = req.query;
+    const { query, limit, yearFrom, platforms } = req.query;
+    console.log('=== IGDB Search Request Received ===');
+    console.log('Query:', query);
+    console.log('Year From:', yearFrom);
+    console.log('Platforms:', platforms);
 
     if (!query) {
       return res.status(400).json({ error: 'Search query is required' });
     }
 
-    const games = await igdbService.searchGames(query, limit ? parseInt(limit) : 10);
+    // Build filters object
+    const filters = {};
+    if (yearFrom) {
+      filters.yearFrom = yearFrom;
+    }
+    if (platforms) {
+      // platforms can be comma-separated string like "48,167"
+      filters.platforms = platforms.split(',').map(p => p.trim());
+    }
+
+    console.log('Filters object:', filters);
+
+    const games = await igdbService.searchGames(query, limit ? parseInt(limit) : 10, filters);
 
     // Transform the data to match our frontend needs
     const transformedGames = games.map(game => igdbService.transformGameData(game));
