@@ -34,14 +34,21 @@ const ImportGamesPage = () => {
   };
 
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    // Allow search with just filters, no text required
+    const hasFilters = yearFrom || selectedPlatforms.length > 0;
+    if (!searchQuery.trim() && !hasFilters) return;
 
     setLoading(true);
     setMessage(null);
 
     try {
       // Build query string with filters
-      let url = `${baseUrl}/igdb/search?query=${encodeURIComponent(searchQuery)}&limit=10`;
+      let url = `${baseUrl}/igdb/search?limit=10`;
+      
+      // Only add query parameter if there's a search term
+      if (searchQuery.trim()) {
+        url += `&query=${encodeURIComponent(searchQuery)}`;
+      }
 
       if (yearFrom) {
         url += `&yearFrom=${yearFrom}`;
@@ -113,13 +120,17 @@ const ImportGamesPage = () => {
 
       <Row className='mt-3'>
         <Col md={12}>
-          <Input
-            type='text'
-            placeholder='Search for a game...'
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
+          <FormGroup>
+            <Label for='importSearch'>Search:</Label>
+            <Input
+              id='importSearch'
+              type='text'
+              placeholder='Search for a game to import...'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+          </FormGroup>
         </Col>
       </Row>
 
@@ -163,7 +174,12 @@ const ImportGamesPage = () => {
 
       <Row className='mt-3'>
         <Col md={12}>
-          <Button color='primary' onClick={handleSearch} disabled={loading || !searchQuery.trim()} block>
+          <Button 
+            color='primary' 
+            onClick={handleSearch} 
+            disabled={loading || (!searchQuery.trim() && !yearFrom && selectedPlatforms.length === 0)} 
+            block
+          >
             {loading ? 'Searching...' : 'Search'}
           </Button>
         </Col>
@@ -178,9 +194,9 @@ const ImportGamesPage = () => {
       )}
 
       <Row className='mt-4'>
-        {searchResults.length === 0 && !loading && searchQuery && (
+        {searchResults.length === 0 && !loading && (searchQuery || yearFrom || selectedPlatforms.length > 0) && (
           <Col>
-            <p className='text-muted'>No results found. Try a different search term.</p>
+            <p className='text-muted'>No results found. Try adjusting your search or filters.</p>
           </Col>
         )}
 
