@@ -8,12 +8,14 @@ router.get('/search', async (req, res) => {
   try {
     const { query, limit, yearFrom, platforms } = req.query;
     console.log('=== IGDB Search Request Received ===');
-    console.log('Query:', query);
+    console.log('Query:', query || '(no query - filter only)');
     console.log('Year From:', yearFrom);
     console.log('Platforms:', platforms);
 
-    if (!query) {
-      return res.status(400).json({ error: 'Search query is required' });
+    // Allow search with just filters, no query required
+    const hasFilters = yearFrom || platforms;
+    if (!query && !hasFilters) {
+      return res.status(400).json({ error: 'Either a search query or filters are required' });
     }
 
     // Build filters object
@@ -28,7 +30,9 @@ router.get('/search', async (req, res) => {
 
     console.log('Filters object:', filters);
 
-    const games = await igdbService.searchGames(query, limit ? parseInt(limit) : 10, filters);
+    // Pass undefined (not empty string) if there's no query, so service can properly detect it
+    const searchTerm = query && query.trim() ? query.trim() : undefined;
+    const games = await igdbService.searchGames(searchTerm, limit ? parseInt(limit) : 10, filters);
 
     // Transform the data to match our frontend needs
     const transformedGames = games.map(game => igdbService.transformGameData(game));

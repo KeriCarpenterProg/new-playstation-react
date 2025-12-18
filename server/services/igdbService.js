@@ -55,22 +55,36 @@ class IGDBService {
       });
 
       if (!response.ok) {
-        throw new Error(`IGDB API error: ${response.statusText}`);
+        // Try to get error details from response
+        const errorText = await response.text();
+        console.error(`IGDB API error response:`, errorText);
+        throw new Error(`IGDB API error: ${response.status} ${response.statusText} - ${errorText}`);
       }
 
       return await response.json();
     } catch (error) {
       console.error(`Error making IGDB request to ${endpoint}:`, error);
+      console.error(`Request body was:`, body);
       throw error;
     }
   }
 
   // Search for games by name with optional filters
   async searchGames(searchTerm, limit = 10, filters = {}) {
-    let query = `search "${searchTerm}";\nfields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id;\n`;
-
-    // Build where clause if we have filters
+    let query = '';
+    
+    // Build where clause conditions
     const conditions = [];
+
+    // Use search ONLY if we have a non-empty search term
+    // Check for null, undefined, empty string, or whitespace-only strings
+    const hasSearchTerm = searchTerm != null && typeof searchTerm === 'string' && searchTerm.trim().length > 0;
+    
+    if (hasSearchTerm) {
+      query = `search "${searchTerm.trim()}";\n`;
+    }
+    
+    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id;\n`;
 
     // Year filter - search for games released after a certain year
     if (filters.yearFrom) {
@@ -86,6 +100,7 @@ class IGDBService {
     }
 
     // Add where clause if we have conditions
+    // Note: If no search term and no filters, this will return all games (limited by limit)
     if (conditions.length > 0) {
       query += `where ${conditions.join(' & ')};\n`;
     }
