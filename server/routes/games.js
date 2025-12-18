@@ -8,8 +8,9 @@ router.get('/', async (req, res) => {
     const result = await pool.query('SELECT * FROM games ORDER BY id ASC');
     res.status(200).json(result.rows);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error('Database error:', err.message);
+    // Return empty array - frontend will use its local fallback data
+    res.status(200).json([]);
   }
 });
 
@@ -23,8 +24,9 @@ router.get('/:id', async (req, res) => {
     }
     res.status(200).json(result.rows[0]);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
+    console.error('Database error:', err.message);
+    // Return 404 - frontend will use its local fallback data
+    res.status(404).send('Game not found');
   }
 });
 
