@@ -53,7 +53,7 @@ const Header = () => {
               <DropdownMenu end>
                 {games.map((i, index) => (
                   <React.Fragment key={i.id}>
-                    <DropdownItem role={navigator}>
+                    <DropdownItem>
                       <Link to={`/games/${i.id}`} className="dropLink">
                         {i.name}
                       </Link>
