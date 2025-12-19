@@ -84,7 +84,7 @@ class IGDBService {
       query = `search "${searchTerm.trim()}";\n`;
     }
     
-    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id;\n`;
+    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating;\n`;
 
     // Year filter - search for games released after a certain year
     if (filters.yearFrom) {
@@ -97,6 +97,20 @@ class IGDBService {
       // For multiple platforms, check if game is on ANY of them
       const platformConditions = filters.platforms.map(p => `platforms = ${p}`).join(' | ');
       conditions.push(`(${platformConditions})`);
+    }
+
+    // Genre filter - filter by specific genres
+    if (filters.genres && filters.genres.length > 0) {
+      // For multiple genres, check if game has ANY of them
+      const genreConditions = filters.genres.map(g => `genres = ${g}`).join(' | ');
+      conditions.push(`(${genreConditions})`);
+    }
+
+    // Rating filter - minimum rating
+    if (filters.minRating != null) {
+      // Use aggregated_rating if available, otherwise fall back to rating
+      // aggregated_rating is typically more reliable (0-100 scale)
+      conditions.push(`aggregated_rating >= ${filters.minRating}`);
     }
 
     // Add where clause if we have conditions
