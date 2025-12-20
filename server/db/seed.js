@@ -38,7 +38,7 @@ for (const game of GAMES) {
       game.platforms,
       game.release,  // GAMES.js uses 'release', not 'release_date'
       game.screenshots,
-      game.videos && game.videos[0] ? game.videos[0].replace('https://www.youtube.com/embed/', '') : null  // Extract YouTube ID
+      game.videos ? game.videos.map(v => v.replace('https://www.youtube.com/embed/', '')) : []  // Extract all YouTube IDs
     ]
   );
   console.log(`  ✓ Inserted: ${game.name} (ID: ${game.id})`);
