@@ -46,6 +46,11 @@ const Header = () => {
                 <i className="fa fa-download fa-md" /> Import Games
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" to="/database">
+                <i className="fa fa-database fa-md" /> Database
+              </NavLink>
+            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Playstation Games
