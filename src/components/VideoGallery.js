@@ -4,6 +4,9 @@ import { Row, Col, Card, CardBody, Nav, NavItem, NavLink } from 'reactstrap';
 const VideoGallery = ({ videos, youtube_id }) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
+  // Debug logging
+  console.log('VideoGallery props:', { videos, youtube_id });
+
   // Helper function to extract video ID from URL or use raw ID
   const getVideoId = (video) => {
     if (!video) return null;
@@ -33,8 +36,12 @@ const VideoGallery = ({ videos, youtube_id }) => {
     if (id) videoIds = [id];
   }
 
+  // Debug logging
+  console.log('VideoGallery videoIds:', videoIds);
+
   // Don't render if no videos
   if (videoIds.length === 0) {
+    console.log('VideoGallery: No videos to display');
     return null;
   }
 
