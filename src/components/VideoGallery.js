@@ -4,9 +4,6 @@ import { Row, Col, Card, CardBody, Nav, NavItem, NavLink } from 'reactstrap';
 const VideoGallery = ({ videos, youtube_id }) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 
-  // Debug logging
-  console.log('VideoGallery props:', { videos, youtube_id });
-
   // Helper function to extract video ID from URL or use raw ID
   const getVideoId = (video) => {
     if (!video) return null;
@@ -36,12 +33,8 @@ const VideoGallery = ({ videos, youtube_id }) => {
     if (id) videoIds = [id];
   }
 
-  // Debug logging
-  console.log('VideoGallery videoIds:', videoIds);
-
   // Don't render if no videos
   if (videoIds.length === 0) {
-    console.log('VideoGallery: No videos to display');
     return null;
   }
 
@@ -54,26 +47,22 @@ const VideoGallery = ({ videos, youtube_id }) => {
       {/* Main Video Player */}
       <Row className="mb-3">
         <Col>
-          <Card className="bg-dark">
-            <CardBody className="p-0">
-              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
-                <iframe
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    border: 'none'
-                  }}
-                  src={`https://www.youtube.com/embed/${videoIds[activeVideoIndex]}`}
-                  title={`Video ${activeVideoIndex + 1}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </CardBody>
-          </Card>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', backgroundColor: '#000' }}>
+            <iframe
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                border: 'none'
+              }}
+              src={`https://www.youtube.com/embed/${videoIds[activeVideoIndex]}`}
+              title={`Video ${activeVideoIndex + 1}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </Col>
       </Row>
 
