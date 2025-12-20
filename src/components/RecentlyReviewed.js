@@ -17,8 +17,19 @@ const RecentlyReviewed = () => {
   const shuffledGames = [...games].sort(() => Math.random() - 0.5);
 
   let gamesList = [];
-  for (let i = 0; i < 6; i++) {
-    gamesList.push(shuffledGames[i].id);
+  for (let i = 0; i < Math.min(6, shuffledGames.length); i++) {
+    if (shuffledGames[i]) {
+      gamesList.push(shuffledGames[i].id);
+    }
+  }
+
+// Need at least 6 games to display this section
+  if (games.length < 6) {
+    return (
+      <Container>
+        <p className="text-center my-5">Loading games...</p>
+      </Container>
+    );
   }
 
   return (

@@ -7,7 +7,7 @@ const localGames = [...GAMES];
 export const fetchGames = createAsyncThunk(
     "games/fetchGames",
     async () => {
-        const response = await fetch(baseUrl + "games");
+        const response = await fetch(baseUrl + "/games");
         if (!response.ok) {
             return Promise.reject("Unable to fetch, status: " + response.status);
         }
