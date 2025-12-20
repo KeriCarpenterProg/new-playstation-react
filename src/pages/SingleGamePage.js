@@ -84,13 +84,16 @@ const SingleGamePage = () => {
             <p>{game.summary}</p>
           </Col>
         </Row>
+        {/* Only show videos if they exist */}
+        {((game.youtube_id && game.youtube_id.length > 0) || (game.videos && game.videos.length > 0)) && (
+          <Row className="row-content">
+            <Col>
+              <VideoGallery videos={game.videos} youtube_id={game.youtube_id} />
+            </Col>
+          </Row>
+        )}
         <Row className="row-content">
           <ScreenShotSlider />
-        </Row>
-        <Row className="row-content">
-          <Col>
-            <VideoGallery videos={game.videos} youtube_id={game.youtube_id} />
-          </Col>
         </Row>
         <Row>
           <h1>Comments List</h1>
