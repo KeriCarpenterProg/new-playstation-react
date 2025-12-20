@@ -8,7 +8,7 @@ import { convertToDate } from "../utils/convertToDate";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
 import {
-  selectAllGames,
+  selectGamesById,
   selectAllGameGenres,
   selectAllGamePlatforms,
   hasErrMsg,
@@ -18,7 +18,8 @@ import Loading from "../components/Loading";
 
 const SingleGamePage = () => {
   const { activeGame } = useParams();
-  const game = useSelector(selectAllGames)[activeGame];
+  const selectGameById = useSelector(selectGamesById);
+  const game = selectGameById(activeGame);
   const loading = useSelector(isLoading);
   const errMsg = useSelector(hasErrMsg);
 
@@ -33,6 +34,19 @@ const SingleGamePage = () => {
   if (errMsg) {
     console.log(
       `Error: ${errMsg}. That's okay, we'll serve you the same data locally instead.`
+    );
+  }
+
+  if (!game) {
+    return (
+      <Container className="mt-4">
+        <Row>
+          <Col>
+            <h2>Game Not Found</h2>
+            <p>Sorry, we couldn't find the game you're looking for.</p>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
