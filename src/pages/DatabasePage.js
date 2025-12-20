@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Table, Card, CardBody, CardTitle, Button, Nav, NavItem, NavLink, TabContent, TabPane, Badge } from 'reactstrap';
 import { baseUrl } from '../app/shared/baseUrl';
+import Loading from '../components/Loading';
 
 const DatabasePage = () => {
   const [activeTab, setActiveTab] = useState('games');
@@ -50,7 +51,9 @@ const DatabasePage = () => {
   if (loading) {
     return (
       <Container className='mt-4'>
-        <h2>Loading database contents...</h2>
+        <Row>
+          <Loading message="Loading database contents..." />
+        </Row>
       </Container>
     );
   }
@@ -251,8 +254,18 @@ const DatabasePage = () => {
       {/* Refresh Button */}
       <Row className='mt-4'>
         <Col>
-          <Button color='primary' onClick={fetchDatabaseData}>
-            Refresh Data
+          <Button color='primary' onClick={fetchDatabaseData} disabled={loading}>
+            {loading ? (
+              <>
+                <i className="fa fa-spinner fa-pulse mr-2" />
+                Refreshing...
+              </>
+            ) : (
+              <>
+                <i className="fa fa-refresh mr-2" />
+                Refresh Data
+              </>
+            )}
           </Button>
         </Col>
       </Row>

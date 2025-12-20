@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Input, Card, CardBody, CardTitle, CardText, CardImg, Alert, Label, FormGroup } from 'reactstrap';
 import { baseUrl } from '../app/shared/baseUrl';
 
@@ -42,6 +42,16 @@ const ImportGamesPage = () => {
   const [loading, setLoading] = useState(false);
   const [importing, setImporting] = useState({});
   const [message, setMessage] = useState(null);
+
+  // Auto-dismiss success messages after 5 seconds
+  useEffect(() => {
+    if (message && message.type === 'success') {
+      const timer = setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   // Filter states
   const [yearFrom, setYearFrom] = useState('');
@@ -282,8 +292,19 @@ const ImportGamesPage = () => {
             onClick={handleSearch} 
             disabled={loading || (!searchQuery.trim() && !yearFrom && selectedPlatforms.length === 0 && selectedGenres.length === 0 && !minRating && !minRatingCount)} 
             block
+            size='lg'
           >
-            {loading ? 'Searching...' : 'Search'}
+            {loading ? (
+              <>
+                <i className="fa fa-spinner fa-pulse mr-2" />
+                Searching IGDB...
+              </>
+            ) : (
+              <>
+                <i className="fa fa-search mr-2" />
+                Search
+              </>
+            )}
           </Button>
         </Col>
       </Row>
@@ -291,19 +312,31 @@ const ImportGamesPage = () => {
       {message && (
         <Row className='mt-3'>
           <Col>
-            <Alert color={message.type}>{message.text}</Alert>
+            <Alert color={message.type} toggle={() => setMessage(null)}>
+              {message.text}
+            </Alert>
           </Col>
         </Row>
       )}
 
-      <Row className='mt-4'>
-        {searchResults.length === 0 && !loading && (searchQuery || yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating || minRatingCount) && (
-          <Col>
-            <p className='text-muted'>No results found. Try adjusting your search or filters.</p>
+      {loading && (
+        <Row className='mt-4'>
+          <Col className='text-center py-5'>
+            <i className="fa fa-spinner fa-pulse fa-3x fa-fw text-primary mb-3" />
+            <h5 className="text-muted">Searching for games...</h5>
           </Col>
-        )}
+        </Row>
+      )}
 
-        {Array.isArray(searchResults) && searchResults.map((game, index) => (
+      {!loading && (
+        <Row className='mt-4'>
+          {searchResults.length === 0 && (searchQuery || yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating || minRatingCount) && (
+            <Col>
+              <p className='text-muted'>No results found. Try adjusting your search or filters.</p>
+            </Col>
+          )}
+
+          {Array.isArray(searchResults) && searchResults.map((game, index) => (
           <Col md={6} lg={4} key={game?.game_id || index} className='mb-4'>
             <Card>
               {game.cover && (
@@ -343,13 +376,21 @@ const ImportGamesPage = () => {
                   onClick={() => handleImport(game?.game_id)}
                   disabled={importing[game?.game_id]}
                 >
-                  {importing[game?.game_id] ? 'Importing...' : 'Import to Database'}
+                  {importing[game?.game_id] ? (
+                    <>
+                      <i className="fa fa-spinner fa-pulse mr-2" />
+                      Importing...
+                    </>
+                  ) : (
+                    'Import to Database'
+                  )}
                 </Button>
               </CardBody>
             </Card>
           </Col>
-        ))}
-      </Row>
+          ))}
+        </Row>
+      )}
     </Container>
   );
 };
