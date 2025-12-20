@@ -6,14 +6,17 @@ const pool = require('../config/database');
 // Search for games on IGDB with optional filters
 router.get('/search', async (req, res) => {
   try {
-    const { query, limit, yearFrom, platforms } = req.query;
+    const { query, limit, yearFrom, platforms, genres, minRating, minRatingCount } = req.query;
     console.log('=== IGDB Search Request Received ===');
     console.log('Query:', query || '(no query - filter only)');
     console.log('Year From:', yearFrom);
     console.log('Platforms:', platforms);
+    console.log('Genres:', genres);
+    console.log('Min Rating:', minRating);
+    console.log('Min Rating Count:', minRatingCount);
 
     // Allow search with just filters, no query required
-    const hasFilters = yearFrom || platforms;
+    const hasFilters = yearFrom || platforms || genres || minRating || minRatingCount;
     if (!query && !hasFilters) {
       return res.status(400).json({ error: 'Either a search query or filters are required' });
     }
@@ -26,6 +29,16 @@ router.get('/search', async (req, res) => {
     if (platforms) {
       // platforms can be comma-separated string like "48,167"
       filters.platforms = platforms.split(',').map(p => p.trim());
+    }
+    if (genres) {
+      // genres can be comma-separated string like "5,12,31"
+      filters.genres = genres.split(',').map(g => g.trim());
+    }
+    if (minRating) {
+      filters.minRating = parseFloat(minRating);
+    }
+    if (minRatingCount) {
+      filters.minRatingCount = parseInt(minRatingCount);
     }
 
     console.log('Filters object:', filters);

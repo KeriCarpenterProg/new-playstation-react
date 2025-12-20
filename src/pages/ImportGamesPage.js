@@ -12,6 +12,30 @@ const PLATFORMS = [
   { id: 130, name: 'Nintendo Switch' }
 ];
 
+// Genre IDs from IGDB API (common genres)
+const GENRES = [
+  { id: 5, name: 'Shooter' },
+  { id: 12, name: 'Role-playing (RPG)' },
+  { id: 25, name: 'Hack and slash/Beat \'em up' },
+  { id: 31, name: 'Adventure' },
+  { id: 32, name: 'Indie' },
+  { id: 33, name: 'Arcade' },
+  { id: 4, name: 'Fighting' },
+  { id: 10, name: 'Racing' },
+  { id: 11, name: 'Real Time Strategy (RTS)' },
+  { id: 14, name: 'Sport' },
+  { id: 15, name: 'Strategy' },
+  { id: 16, name: 'Turn-based strategy (TBS)' },
+  { id: 24, name: 'Tactical' },
+  { id: 26, name: 'Pinball' },
+  { id: 30, name: 'Puzzle' },
+  { id: 2, name: 'Point-and-click' },
+  { id: 9, name: 'Platform' },
+  { id: 7, name: 'Music' },
+  { id: 8, name: 'Party' },
+  { id: 13, name: 'Simulator' },
+];
+
 const ImportGamesPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -21,7 +45,10 @@ const ImportGamesPage = () => {
 
   // Filter states
   const [yearFrom, setYearFrom] = useState('');
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState([167]); // Default to PS5
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [minRating, setMinRating] = useState('');
+  const [minRatingCount, setMinRatingCount] = useState('');
 
   const handlePlatformToggle = (platformId) => {
     setSelectedPlatforms(prev => {
@@ -33,9 +60,19 @@ const ImportGamesPage = () => {
     });
   };
 
+  const handleGenreToggle = (genreId) => {
+    setSelectedGenres(prev => {
+      if (prev.includes(genreId)) {
+        return prev.filter(id => id !== genreId);
+      } else {
+        return [...prev, genreId];
+      }
+    });
+  };
+
   const handleSearch = async () => {
     // Allow search with just filters, no text required
-    const hasFilters = yearFrom || selectedPlatforms.length > 0;
+    const hasFilters = yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating || minRatingCount;
     if (!searchQuery.trim() && !hasFilters) return;
 
     setLoading(true);
@@ -56,6 +93,18 @@ const ImportGamesPage = () => {
 
       if (selectedPlatforms.length > 0) {
         url += `&platforms=${selectedPlatforms.join(',')}`;
+      }
+
+      if (selectedGenres.length > 0) {
+        url += `&genres=${selectedGenres.join(',')}`;
+      }
+
+      if (minRating) {
+        url += `&minRating=${minRating}`;
+      }
+
+      if (minRatingCount) {
+        url += `&minRatingCount=${minRatingCount}`;
       }
 
       console.log('Search URL:', url);
@@ -135,7 +184,7 @@ const ImportGamesPage = () => {
       </Row>
 
       <Row className='mt-3'>
-        <Col md={6}>
+        <Col md={3}>
           <FormGroup>
             <Label for='yearFilter'>Release Year (from):</Label>
             <Input
@@ -155,7 +204,43 @@ const ImportGamesPage = () => {
             </Input>
           </FormGroup>
         </Col>
-        <Col md={6}>
+        <Col md={3}>
+          <FormGroup>
+            <Label for='ratingFilter'>Minimum Rating:</Label>
+            <Input
+              type='select'
+              id='ratingFilter'
+              value={minRating}
+              onChange={(e) => setMinRating(e.target.value)}
+            >
+              <option value=''>Any Rating</option>
+              <option value='90'>90+ (Excellent)</option>
+              <option value='80'>80+ (Great)</option>
+              <option value='70'>70+ (Good)</option>
+              <option value='60'>60+ (Fair)</option>
+              <option value='50'>50+ (Average)</option>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col md={3}>
+          <FormGroup>
+            <Label for='ratingCountFilter'>Popularity (min # ratings):</Label>
+            <Input
+              type='select'
+              id='ratingCountFilter'
+              value={minRatingCount}
+              onChange={(e) => setMinRatingCount(e.target.value)}
+            >
+              <option value=''>Any Popularity</option>
+              <option value='5000'>Very Popular (5000+)</option>
+              <option value='2000'>Popular (2000+)</option>
+              <option value='1000'>Well-Known (1000+)</option>
+              <option value='500'>Moderate (500+)</option>
+              <option value='100'>Some Reviews (100+)</option>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col md={3}>
           <Label>Platforms:</Label>
           <div className='d-flex flex-wrap gap-2'>
             {PLATFORMS.map(platform => (
@@ -174,10 +259,28 @@ const ImportGamesPage = () => {
 
       <Row className='mt-3'>
         <Col md={12}>
+          <Label>Genres:</Label>
+          <div className='d-flex flex-wrap gap-2'>
+            {GENRES.map(genre => (
+              <Button
+                key={genre.id}
+                color={selectedGenres.includes(genre.id) ? 'primary' : 'outline-secondary'}
+                size='sm'
+                onClick={() => handleGenreToggle(genre.id)}
+              >
+                {genre.name}
+              </Button>
+            ))}
+          </div>
+        </Col>
+      </Row>
+
+      <Row className='mt-3'>
+        <Col md={12}>
           <Button 
             color='primary' 
             onClick={handleSearch} 
-            disabled={loading || (!searchQuery.trim() && !yearFrom && selectedPlatforms.length === 0)} 
+            disabled={loading || (!searchQuery.trim() && !yearFrom && selectedPlatforms.length === 0 && selectedGenres.length === 0 && !minRating && !minRatingCount)} 
             block
           >
             {loading ? 'Searching...' : 'Search'}
@@ -194,7 +297,7 @@ const ImportGamesPage = () => {
       )}
 
       <Row className='mt-4'>
-        {searchResults.length === 0 && !loading && (searchQuery || yearFrom || selectedPlatforms.length > 0) && (
+        {searchResults.length === 0 && !loading && (searchQuery || yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating || minRatingCount) && (
           <Col>
             <p className='text-muted'>No results found. Try adjusting your search or filters.</p>
           </Col>
