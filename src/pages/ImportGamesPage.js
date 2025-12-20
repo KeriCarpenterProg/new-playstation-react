@@ -45,9 +45,10 @@ const ImportGamesPage = () => {
 
   // Filter states
   const [yearFrom, setYearFrom] = useState('');
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState([167]); // Default to PS5
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [minRating, setMinRating] = useState('');
+  const [minRatingCount, setMinRatingCount] = useState('');
 
   const handlePlatformToggle = (platformId) => {
     setSelectedPlatforms(prev => {
@@ -71,7 +72,7 @@ const ImportGamesPage = () => {
 
   const handleSearch = async () => {
     // Allow search with just filters, no text required
-    const hasFilters = yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating;
+    const hasFilters = yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating || minRatingCount;
     if (!searchQuery.trim() && !hasFilters) return;
 
     setLoading(true);
@@ -100,6 +101,10 @@ const ImportGamesPage = () => {
 
       if (minRating) {
         url += `&minRating=${minRating}`;
+      }
+
+      if (minRatingCount) {
+        url += `&minRatingCount=${minRatingCount}`;
       }
 
       console.log('Search URL:', url);
@@ -179,7 +184,7 @@ const ImportGamesPage = () => {
       </Row>
 
       <Row className='mt-3'>
-        <Col md={4}>
+        <Col md={3}>
           <FormGroup>
             <Label for='yearFilter'>Release Year (from):</Label>
             <Input
@@ -199,7 +204,7 @@ const ImportGamesPage = () => {
             </Input>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <FormGroup>
             <Label for='ratingFilter'>Minimum Rating:</Label>
             <Input
@@ -217,7 +222,25 @@ const ImportGamesPage = () => {
             </Input>
           </FormGroup>
         </Col>
-        <Col md={4}>
+        <Col md={3}>
+          <FormGroup>
+            <Label for='ratingCountFilter'>Popularity (min # ratings):</Label>
+            <Input
+              type='select'
+              id='ratingCountFilter'
+              value={minRatingCount}
+              onChange={(e) => setMinRatingCount(e.target.value)}
+            >
+              <option value=''>Any Popularity</option>
+              <option value='5000'>Very Popular (5000+)</option>
+              <option value='2000'>Popular (2000+)</option>
+              <option value='1000'>Well-Known (1000+)</option>
+              <option value='500'>Moderate (500+)</option>
+              <option value='100'>Some Reviews (100+)</option>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col md={3}>
           <Label>Platforms:</Label>
           <div className='d-flex flex-wrap gap-2'>
             {PLATFORMS.map(platform => (
@@ -257,7 +280,7 @@ const ImportGamesPage = () => {
           <Button 
             color='primary' 
             onClick={handleSearch} 
-            disabled={loading || (!searchQuery.trim() && !yearFrom && selectedPlatforms.length === 0 && selectedGenres.length === 0 && !minRating)} 
+            disabled={loading || (!searchQuery.trim() && !yearFrom && selectedPlatforms.length === 0 && selectedGenres.length === 0 && !minRating && !minRatingCount)} 
             block
           >
             {loading ? 'Searching...' : 'Search'}
@@ -274,7 +297,7 @@ const ImportGamesPage = () => {
       )}
 
       <Row className='mt-4'>
-        {searchResults.length === 0 && !loading && (searchQuery || yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating) && (
+        {searchResults.length === 0 && !loading && (searchQuery || yearFrom || selectedPlatforms.length > 0 || selectedGenres.length > 0 || minRating || minRatingCount) && (
           <Col>
             <p className='text-muted'>No results found. Try adjusting your search or filters.</p>
           </Col>
