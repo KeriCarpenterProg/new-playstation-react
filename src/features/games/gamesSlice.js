@@ -66,15 +66,39 @@ export const genreMap = {
 };
   
 export const selectFirstGameGenre = (arrOfGenres) => {
+    if (!arrOfGenres || arrOfGenres.length === 0) return "Unknown";
     const sortedGenres = arrOfGenres
-        .map((item) => genreMap[item] || "Unknown")
+        .map((item) => {
+            // If it's a string number like "31", convert to number and use map
+            if (typeof item === 'string' && !isNaN(item)) {
+                return genreMap[parseInt(item)] || item;
+            }
+            // If it's already a number, use map
+            if (typeof item === 'number') {
+                return genreMap[item] || "Unknown";
+            }
+            // If it's a string (genre name from IGDB), use it directly
+            return item;
+        })
         .sort();
     return sortedGenres.length > 0 ? sortedGenres[0] : "Unknown";
 };
   
 export const selectAllGameGenres = (arrOfGenres) => {
+    if (!arrOfGenres || arrOfGenres.length === 0) return "Unknown";
     return arrOfGenres
-        .map((item) => genreMap[item] || "Unknown")
+        .map((item) => {
+            // If it's a string number like "31", convert to number and use map
+            if (typeof item === 'string' && !isNaN(item)) {
+                return genreMap[parseInt(item)] || item;
+            }
+            // If it's already a number, use map
+            if (typeof item === 'number') {
+                return genreMap[item] || "Unknown";
+            }
+            // If it's a string (genre name from IGDB), use it directly
+            return item;
+        })
         .sort()
         .join(", ");
 };
@@ -88,10 +112,22 @@ const platformMap = {
 };
   
 export const selectAllGamePlatforms = (numbersArray) => {
+    if (!numbersArray || numbersArray.length === 0) return "Unknown";
     return numbersArray
-        .map((item) => platformMap[item] || "Unknown")
+        .map((item) => {
+            // If it's a string number like "167", convert to number and use map
+            if (typeof item === 'string' && !isNaN(item)) {
+                return platformMap[parseInt(item)] || item;
+            }
+            // If it's already a number, use map
+            if (typeof item === 'number') {
+                return platformMap[item] || "Unknown";
+            }
+            // If it's a string (platform name from IGDB), use it directly
+            return item;
+        })
         .sort()
-        .join(",");
+        .join(", ");
 };
 
 export const gamesReducer = gamesSlice.reducer;
