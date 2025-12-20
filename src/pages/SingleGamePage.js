@@ -4,7 +4,6 @@ import React from "react";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "../components/ScreenShotSlider";
 import VideoGallery from "../components/VideoGallery";
-import { convertToDate } from "../utils/convertToDate";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
 import {
@@ -67,7 +66,11 @@ const SingleGamePage = () => {
             <h1 className="overflow-wrap">{game.name}</h1>
             <h6>
               <b>Released: </b>
-              {convertToDate(game.release)}
+              {game.release_date
+                ? new Date(game.release_date * 1000).toLocaleDateString()
+                : game.release
+                ? new Date(game.release * 1000).toLocaleDateString()
+                : 'Unknown'}
             </h6>
             <h6>
               <b>Genre: </b>

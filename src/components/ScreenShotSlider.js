@@ -16,7 +16,7 @@ import "../css/slickstyle.css";
 import "../css/maxHeight.css";
 import "../css/styles.css";
 import { useSelector } from "react-redux";
-import { selectAllGames } from "../features/games/gamesSlice";
+import { selectGamesById } from "../features/games/gamesSlice";
 
 const ScreenShotSlider = () => {
   // Slick Slider Settings ----> Begin
@@ -56,7 +56,8 @@ const ScreenShotSlider = () => {
   };
   // Slick Slider Settings ----> End
   const { activeGame } = useParams();
-  const game = useSelector(selectAllGames)[activeGame];
+  const selectGameById = useSelector(selectGamesById);
+  const game = selectGameById(activeGame);
   const screenshotUrls = game.screenshots;
 
   return (
