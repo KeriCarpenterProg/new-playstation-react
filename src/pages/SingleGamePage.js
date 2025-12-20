@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import React from "react";
 import "../css/singlegamepage.css";
 import ScreenShotSlider from "../components/ScreenShotSlider";
+import VideoGallery from "../components/VideoGallery";
 import { convertToDate } from "../utils/convertToDate";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
@@ -68,6 +69,11 @@ const SingleGamePage = () => {
         </Row>
         <Row className="row-content">
           <ScreenShotSlider />
+        </Row>
+        <Row className="row-content">
+          <Col>
+            <VideoGallery videos={game.videos} youtube_id={game.youtube_id} />
+          </Col>
         </Row>
         <Row>
           <h1>Comments List</h1>

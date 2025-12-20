@@ -190,7 +190,7 @@ class IGDBService {
       genre: igdbGame.genres?.map(g => g.name) || [],
       platforms: igdbGame.platforms?.map(p => p.name) || [],
       screenshots: igdbGame.screenshots?.map(s => fixImageUrl(s.url)) || [],
-      youtube_id: igdbGame.videos?.[0]?.video_id || null,
+      youtube_id: igdbGame.videos?.map(v => v.video_id) || [],
       featured: false,
       elevation: 0
     };
