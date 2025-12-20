@@ -3,7 +3,6 @@ import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { convertToDate } from "../utils/convertToDate";
 import { selectAllGames } from "../features/games/gamesSlice";
 import { useSelector } from "react-redux";
 
@@ -26,7 +25,13 @@ const ColumnOfGames = () => {
           <Col sm="5">
             <Link to={`/games/${game.id}`}>
               <div className="overflow-wrap">{game.name}</div>
-              <div>{convertToDate(game.release)}</div>
+              <div>
+                {game.release_date
+                  ? new Date(game.release_date * 1000).toLocaleDateString()
+                  : game.release
+                  ? new Date(game.release * 1000).toLocaleDateString()
+                  : 'Unknown'}
+              </div>
             </Link>
           </Col>
         </Row>
