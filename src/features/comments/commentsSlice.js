@@ -63,7 +63,5 @@ export const selectCommentsByGameId = (gameId) => (state) => {
   );
 };
 
-// export const selectCommentsByCampsiteId = (campsiteId) => (state) => {
-//   console.log(state.comments.commentsArray);
-//   return "Hello Mom!";
-// };
+export const selectCommentsLoading = (state) => state.comments.isLoading;
+export const selectCommentsError = (state) => state.comments.errMsg;
