@@ -16,6 +16,11 @@ class IGDBService {
       return this.accessToken;
     }
 
+    // Check if credentials are set
+    if (!this.clientId || !this.clientSecret) {
+      throw new Error('IGDB_CLIENT_ID and IGDB_CLIENT_SECRET must be set in .env file');
+    }
+
     try {
       const response = await fetch(
         `https://id.twitch.tv/oauth2/token?client_id=${this.clientId}&client_secret=${this.clientSecret}&grant_type=client_credentials`,
@@ -23,7 +28,9 @@ class IGDBService {
       );
 
       if (!response.ok) {
-        throw new Error(`Failed to get access token: ${response.statusText}`);
+        const errorText = await response.text();
+        console.error('Twitch OAuth error response:', errorText);
+        throw new Error(`Failed to get access token: ${response.status} ${response.statusText} - ${errorText}`);
       }
 
       const data = await response.json();
@@ -84,7 +91,7 @@ class IGDBService {
       query = `search "${searchTerm.trim()}";\n`;
     }
     
-    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating;\n`;
+    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating, total_rating_count;\n`;
 
     // Year filter - search for games released after a certain year
     if (filters.yearFrom) {
@@ -111,6 +118,12 @@ class IGDBService {
       // Use aggregated_rating if available, otherwise fall back to rating
       // aggregated_rating is typically more reliable (0-100 scale)
       conditions.push(`aggregated_rating >= ${filters.minRating}`);
+    }
+
+    // Rating count filter - minimum number of ratings (popularity indicator)
+    if (filters.minRatingCount != null) {
+      // Games with more ratings are typically more popular/bigger titles
+      conditions.push(`total_rating_count >= ${filters.minRatingCount}`);
     }
 
     // Add where clause if we have conditions
