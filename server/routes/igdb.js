@@ -105,18 +105,35 @@ router.post('/import/:id', async (req, res) => {
 
     // Insert into local database
     const result = await pool.query(
-      `INSERT INTO games (name, cover, release_date, description, genre, platforms, screenshots, youtube_id, featured, elevation, game_id)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      `INSERT INTO games (name, cover, release_date, description, storyline, genre, platforms, screenshots, artworks, youtube_id, category, game_modes, player_perspectives, rating, aggregated_rating, rating_count, total_rating_count, hypes, follows, url, themes, keywords, involved_companies, franchises, age_ratings, featured, elevation, game_id)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28)
        RETURNING *`,
       [
         gameData.name,
         gameData.cover,
         gameData.release_date,
         gameData.description,
+        gameData.storyline,
         gameData.genre,
         gameData.platforms,
         gameData.screenshots,
+        gameData.artworks,
         gameData.youtube_id,
+        gameData.category,
+        gameData.game_modes,
+        gameData.player_perspectives,
+        gameData.rating,
+        gameData.aggregated_rating,
+        gameData.rating_count,
+        gameData.total_rating_count,
+        gameData.hypes,
+        gameData.follows,
+        gameData.url,
+        gameData.themes,
+        gameData.keywords,
+        JSON.stringify(gameData.involved_companies),
+        gameData.franchises,
+        JSON.stringify(gameData.age_ratings),
         gameData.featured,
         gameData.elevation,
         gameData.game_id
@@ -170,18 +187,35 @@ router.post('/import-batch', async (req, res) => {
 
         // Insert
         const result = await pool.query(
-          `INSERT INTO games (name, cover, release_date, description, genre, platforms, screenshots, youtube_id, featured, elevation, game_id)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+          `INSERT INTO games (name, cover, release_date, description, storyline, genre, platforms, screenshots, artworks, youtube_id, category, game_modes, player_perspectives, rating, aggregated_rating, rating_count, total_rating_count, hypes, follows, url, themes, keywords, involved_companies, franchises, age_ratings, featured, elevation, game_id)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28)
            RETURNING *`,
           [
             gameData.name,
             gameData.cover,
             gameData.release_date,
             gameData.description,
+            gameData.storyline,
             gameData.genre,
             gameData.platforms,
             gameData.screenshots,
+            gameData.artworks,
             gameData.youtube_id,
+            gameData.category,
+            gameData.game_modes,
+            gameData.player_perspectives,
+            gameData.rating,
+            gameData.aggregated_rating,
+            gameData.rating_count,
+            gameData.total_rating_count,
+            gameData.hypes,
+            gameData.follows,
+            gameData.url,
+            gameData.themes,
+            gameData.keywords,
+            JSON.stringify(gameData.involved_companies),
+            gameData.franchises,
+            JSON.stringify(gameData.age_ratings),
             gameData.featured,
             gameData.elevation,
             gameData.game_id
