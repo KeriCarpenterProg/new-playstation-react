@@ -1,0 +1,31 @@
+-- Add new IGDB fields to games table
+
+-- Story and description
+ALTER TABLE games ADD COLUMN IF NOT EXISTS storyline TEXT;
+
+-- Media
+ALTER TABLE games ADD COLUMN IF NOT EXISTS artworks TEXT[];
+
+-- Game attributes
+ALTER TABLE games ADD COLUMN IF NOT EXISTS game_modes TEXT[];
+ALTER TABLE games ADD COLUMN IF NOT EXISTS player_perspectives TEXT[];
+ALTER TABLE games ADD COLUMN IF NOT EXISTS category INTEGER DEFAULT 0;
+
+-- Ratings and popularity
+ALTER TABLE games ADD COLUMN IF NOT EXISTS rating NUMERIC;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS aggregated_rating NUMERIC;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS rating_count INTEGER DEFAULT 0;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS total_rating_count INTEGER DEFAULT 0;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS hypes INTEGER DEFAULT 0;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS follows INTEGER DEFAULT 0;
+
+-- Metadata
+ALTER TABLE games ADD COLUMN IF NOT EXISTS url VARCHAR(500);
+ALTER TABLE games ADD COLUMN IF NOT EXISTS themes TEXT[];
+ALTER TABLE games ADD COLUMN IF NOT EXISTS keywords TEXT[];
+ALTER TABLE games ADD COLUMN IF NOT EXISTS franchises TEXT[];
+
+-- Complex objects (stored as JSONB)
+ALTER TABLE games ADD COLUMN IF NOT EXISTS involved_companies JSONB;
+ALTER TABLE games ADD COLUMN IF NOT EXISTS age_ratings JSONB;
+

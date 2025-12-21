@@ -91,7 +91,7 @@ class IGDBService {
       query = `search "${searchTerm.trim()}";\n`;
     }
     
-    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating, total_rating_count;\n`;
+    query += `fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating, total_rating_count, category, artworks.url, game_modes.name, player_perspectives.name, rating_count, hypes, follows, storyline, url, themes.name, keywords.name, involved_companies.company.name, involved_companies.developer, involved_companies.publisher, franchises.name, age_ratings.rating, age_ratings.category;\n`;
 
     // Year filter - search for games released after a certain year
     if (filters.yearFrom) {
@@ -152,7 +152,7 @@ class IGDBService {
   // Get detailed game information by IGDB game ID
   async getGameById(igdbGameId) {
     const query = `
-      fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating;
+      fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, rating, aggregated_rating, category, artworks.url, game_modes.name, player_perspectives.name, rating_count, hypes, follows, storyline, url, themes.name, keywords.name, involved_companies.company.name, involved_companies.developer, involved_companies.publisher, franchises.name, age_ratings.rating, age_ratings.category;
       where id = ${igdbGameId};
     `;
 
@@ -164,7 +164,7 @@ class IGDBService {
   async getGamesByIds(igdbGameIds) {
     const idsString = igdbGameIds.join(',');
     const query = `
-      fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id;
+      fields name, cover.url, first_release_date, summary, genres.name, platforms.name, screenshots.url, videos.video_id, category, artworks.url, game_modes.name, player_perspectives.name, rating_count, hypes, follows, storyline, url, themes.name, keywords.name, involved_companies.company.name, involved_companies.developer, involved_companies.publisher, franchises.name, age_ratings.rating, age_ratings.category;
       where id = (${idsString});
       limit ${igdbGameIds.length};
     `;
@@ -187,10 +187,34 @@ class IGDBService {
       cover: fixImageUrl(igdbGame.cover?.url),
       release_date: igdbGame.first_release_date || null,
       description: igdbGame.summary || '',
+      storyline: igdbGame.storyline || '',
       genre: igdbGame.genres?.map(g => g.name) || [],
       platforms: igdbGame.platforms?.map(p => p.name) || [],
       screenshots: igdbGame.screenshots?.map(s => fixImageUrl(s.url)) || [],
+      artworks: igdbGame.artworks?.map(a => fixImageUrl(a.url)) || [],
       youtube_id: igdbGame.videos?.map(v => v.video_id) || [],
+      category: igdbGame.category || 0,
+      game_modes: igdbGame.game_modes?.map(m => m.name) || [],
+      player_perspectives: igdbGame.player_perspectives?.map(p => p.name) || [],
+      rating: igdbGame.rating || null,
+      aggregated_rating: igdbGame.aggregated_rating || null,
+      rating_count: igdbGame.rating_count || 0,
+      total_rating_count: igdbGame.total_rating_count || 0,
+      hypes: igdbGame.hypes || 0,
+      follows: igdbGame.follows || 0,
+      url: igdbGame.url || '',
+      themes: igdbGame.themes?.map(t => t.name) || [],
+      keywords: igdbGame.keywords?.map(k => k.name) || [],
+      involved_companies: igdbGame.involved_companies?.map(ic => ({
+        name: ic.company?.name || '',
+        developer: ic.developer || false,
+        publisher: ic.publisher || false
+      })) || [],
+      franchises: igdbGame.franchises?.map(f => f.name) || [],
+      age_ratings: igdbGame.age_ratings?.map(ar => ({
+        rating: ar.rating,
+        category: ar.category
+      })) || [],
       featured: false,
       elevation: 0
     };

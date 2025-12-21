@@ -9,6 +9,7 @@ const DatabasePage = () => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedGame, setExpandedGame] = useState(null);
 
   useEffect(() => {
     fetchDatabaseData();
@@ -153,45 +154,84 @@ const DatabasePage = () => {
                       <th>Platforms</th>
                       <th>Genres</th>
                       <th>Featured</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {games.map((game) => (
-                      <tr key={game.id}>
-                        <td>{game.id}</td>
-                        <td>
-                          <strong>{game.name}</strong>
-                          {game.game_id && (
-                            <div>
-                              <small className='text-muted'>IGDB ID: {game.game_id}</small>
-                            </div>
-                          )}
-                        </td>
-                        <td>
-                          {game.release_date
-                            ? new Date(game.release_date * 1000).toLocaleDateString()
-                            : game.release
-                            ? new Date(game.release * 1000).toLocaleDateString()
-                            : 'Unknown'}
-                        </td>
-                        <td>
-                          {Array.isArray(game.platforms)
-                            ? game.platforms.join(', ')
-                            : game.platforms || 'N/A'}
-                        </td>
-                        <td>
-                          {Array.isArray(game.genre)
-                            ? game.genre.join(', ')
-                            : game.genre || 'N/A'}
-                        </td>
-                        <td>
-                          {game.featured ? (
-                            <Badge color='warning'>Featured</Badge>
-                          ) : (
-                            <span className='text-muted'>-</span>
-                          )}
-                        </td>
-                      </tr>
+                      <>
+                        <tr key={game.id}>
+                          <td>{game.id}</td>
+                          <td>
+                            <strong>{game.name}</strong>
+                            {game.game_id && (
+                              <div>
+                                <small className='text-muted'>IGDB ID: {game.game_id}</small>
+                              </div>
+                            )}
+                          </td>
+                          <td>
+                            {game.release_date
+                              ? new Date(game.release_date * 1000).toLocaleDateString()
+                              : game.release
+                              ? new Date(game.release * 1000).toLocaleDateString()
+                              : 'Unknown'}
+                          </td>
+                          <td>
+                            {Array.isArray(game.platforms)
+                              ? game.platforms.join(', ')
+                              : game.platforms || 'N/A'}
+                          </td>
+                          <td>
+                            {Array.isArray(game.genre)
+                              ? game.genre.join(', ')
+                              : game.genre || 'N/A'}
+                          </td>
+                          <td>
+                            {game.featured ? (
+                              <Badge color='warning'>Featured</Badge>
+                            ) : (
+                              <span className='text-muted'>-</span>
+                            )}
+                          </td>
+                          <td>
+                            <Button 
+                              size='sm' 
+                              color='info' 
+                              onClick={() => setExpandedGame(expandedGame === game.id ? null : game.id)}
+                            >
+                              {expandedGame === game.id ? 'Hide' : 'Details'}
+                            </Button>
+                          </td>
+                        </tr>
+                        {expandedGame === game.id && (
+                          <tr key={`${game.id}-details`}>
+                            <td colSpan='7' style={{ backgroundColor: '#f8f9fa' }}>
+                              <div style={{ padding: '15px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                  <h5 style={{ margin: 0 }}>Full Game Data</h5>
+                                  <Button 
+                                    size='sm' 
+                                    color='secondary' 
+                                    onClick={() => setExpandedGame(null)}
+                                  >
+                                    Close
+                                  </Button>
+                                </div>
+                                <pre style={{ 
+                                  backgroundColor: '#fff', 
+                                  padding: '15px', 
+                                  borderRadius: '5px',
+                                  maxHeight: '500px',
+                                  overflow: 'auto'
+                                }}>
+                                  {JSON.stringify(game, null, 2)}
+                                </pre>
+                              </div>
+                            </td>
+                          </tr>
+                        )}
+                      </>
                     ))}
                   </tbody>
                 </Table>
