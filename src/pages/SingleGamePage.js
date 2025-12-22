@@ -57,12 +57,12 @@ const SingleGamePage = () => {
           backgroundImage: `url(${game.screenshots[3]})`,
         }}
       ></div>
-      <Container className="move-up">
+      <Container className="move-up" >
         <Row>
           <Col md="4">
             <img alt={game.name} className="w-100" src={game.cover} />
           </Col>
-          <Col sm="8" className="transparent-box">
+          <Col sm="8" className="transparent-box" style={{ padding: '20px' }}>
             <h1 className="overflow-wrap">{game.name}</h1>
             <h6>
               <b>Released: </b>
@@ -81,7 +81,17 @@ const SingleGamePage = () => {
               {selectAllGamePlatforms(game.platforms)}
             </h6>
             <hr />
-            <p>{game.summary}</p>
+            <div className="mt-4">
+  <p style={{ 
+    fontSize: '1.1rem', 
+    lineHeight: '1.8',
+    textAlign: 'left',
+    marginBottom: 0
+  }}>
+    {game.description || game.summary}
+  </p>
+</div>
+            
           </Col>
         </Row>
         {/* Only show videos if they exist */}
