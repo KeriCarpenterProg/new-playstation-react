@@ -2,7 +2,8 @@ import { Col, Row, Container } from "reactstrap";
 import { useParams } from "react-router-dom";
 import React from "react";
 import "../css/singlegamepage.css";
-import ScreenShotSlider from "../components/ScreenShotSlider";
+import ScreenshotGallery from "../components/ScreenshotGallery";
+import ArtworkGallery from "../components/ArtworkGallery";
 import VideoGallery from "../components/VideoGallery";
 import CommentsList from "../features/comments/CommentsList";
 import { useSelector } from "react-redux";
@@ -102,9 +103,8 @@ const SingleGamePage = () => {
             </Col>
           </Row>
         )}
-        <Row className="row-content">
-          <ScreenShotSlider />
-        </Row>
+        <ScreenshotGallery />
+        <ArtworkGallery />
         <Row>
           <h1>Comments List</h1>
           <CommentsList gameId={activeGame} />
