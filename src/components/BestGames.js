@@ -6,22 +6,24 @@ import ColumnOfGames from "./ColumnOfGames";
 
 const BestGames = () => {
   return (
-    <Container>
+    <Container className="mt-5">
       <Row>
-        <Col>
-          <h3 className="my-4 pb-2 px-1">Best Games</h3>
-
-          <hr></hr>
+        <Col md={4} className="px-3">
+          <h5 className="mb-3 text-uppercase" style={{ fontSize: '14px', fontWeight: '600', letterSpacing: '0.5px' }}>
+            Best Games
+          </h5>
           <ColumnOfGames />
         </Col>
-        <Col>
-          <h3 className="my-4 pb-2 px-1">Top Rated</h3>
-          <hr></hr>
+        <Col md={4} className="px-3">
+          <h5 className="mb-3 text-uppercase" style={{ fontSize: '14px', fontWeight: '600', letterSpacing: '0.5px' }}>
+            Top Rated
+          </h5>
           <ColumnOfGames />
         </Col>
-        <Col>
-          <h3 className="my-4 pb-2 px-1">Recently Played Games</h3>
-          <hr></hr>
+        <Col md={4} className="px-3">
+          <h5 className="mb-3 text-uppercase" style={{ fontSize: '14px', fontWeight: '600', letterSpacing: '0.5px' }}>
+            Recently Played
+          </h5>
           <ColumnOfGames />
         </Col>
       </Row>

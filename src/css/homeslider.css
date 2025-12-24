@@ -5,6 +5,7 @@
 
 .card {
   width: fit-content;
+  max-width: 280px;
 }
 
 .fragment {

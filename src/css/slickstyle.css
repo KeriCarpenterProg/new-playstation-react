@@ -1,8 +1,6 @@
 .card > img {
-  width: 250px;
-  height: 350px;
+  height: auto;
   object-fit: cover;
-  background: black;
 }
 
 .card {
