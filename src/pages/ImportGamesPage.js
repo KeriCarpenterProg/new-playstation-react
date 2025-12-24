@@ -169,31 +169,30 @@ const ImportGamesPage = () => {
     }
   };
 
-  const handleQuickImport = async () => {
+  const handleQuickSearch = async () => {
     if (!quickImportId.trim()) return;
     
-    setImporting(prev => ({ ...prev, [quickImportId]: true }));
+    setLoading(true);
     setMessage(null);
 
     try {
-      const response = await fetch(`${baseUrl}/igdb/import/${quickImportId.trim()}`, {
-        method: 'POST'
-      });
-
-      if (response.status === 409) {
-        setMessage({ type: 'warning', text: 'This game is already in your database!' });
-      } else if (!response.ok) {
-        throw new Error('Failed to import game');
-      } else {
-        const data = await response.json();
-        setMessage({ type: 'success', text: `Successfully imported ${data.name}!` });
-        setQuickImportId('');
+      // Search for the specific game by ID
+      const response = await fetch(`${baseUrl}/igdb/game/${quickImportId.trim()}`);
+      
+      if (!response.ok) {
+        throw new Error('Game not found');
       }
+      
+      const game = await response.json();
+      // Display as a single result
+      setSearchResults([game]);
+      setQuickImportId('');
     } catch (error) {
-      console.error('Error importing game:', error);
-      setMessage({ type: 'danger', text: 'Failed to import game. Please try again.' });
+      console.error('Error fetching game:', error);
+      setMessage({ type: 'danger', text: 'Game not found. Please check the ID and try again.' });
+      setSearchResults([]);
     } finally {
-      setImporting(prev => ({ ...prev, [quickImportId]: false }));
+      setLoading(false);
     }
   };
 
@@ -211,9 +210,9 @@ const ImportGamesPage = () => {
         <Col md={6}>
           <Card className='bg-light h-100'>
             <CardBody>
-              <CardTitle tag='h5'>Quick Import by Game ID</CardTitle>
+              <CardTitle tag='h5'>Search by IGDB Game ID</CardTitle>
               <CardText className='text-muted small'>
-                Already have a game ID? Import it directly without searching.
+                Already have an IGDB game ID?
               </CardText>
               <div className='d-flex gap-2'>
                 <Input
@@ -221,21 +220,21 @@ const ImportGamesPage = () => {
                   placeholder='Enter IGDB Game ID (e.g., 19560)'
                   value={quickImportId}
                   onChange={(e) => setQuickImportId(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleQuickImport()}
+                  onKeyPress={(e) => e.key === 'Enter' && handleQuickSearch()}
                   style={{ flex: 1 }}
                 />
                 <Button
-                  color='success'
-                  onClick={handleQuickImport}
-                  disabled={!quickImportId.trim() || importing[quickImportId]}
+                  color='primary'
+                  onClick={handleQuickSearch}
+                  disabled={!quickImportId.trim() || loading}
                 >
-                  {importing[quickImportId] ? (
+                  {loading ? (
                     <>
                       <i className="fa fa-spinner fa-pulse mr-2" />
-                      Importing...
+                      Searching...
                     </>
                   ) : (
-                    'Import'
+                    'Search'
                   )}
                 </Button>
               </div>
