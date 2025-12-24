@@ -42,6 +42,7 @@ const ImportGamesPage = () => {
   const [loading, setLoading] = useState(false);
   const [importing, setImporting] = useState({});
   const [message, setMessage] = useState(null);
+  const [quickImportId, setQuickImportId] = useState('');
 
   // Auto-dismiss success messages after 5 seconds
   useEffect(() => {
@@ -55,7 +56,7 @@ const ImportGamesPage = () => {
 
   // Filter states
   const [yearFrom, setYearFrom] = useState('');
-  const [selectedPlatforms, setSelectedPlatforms] = useState([167]); // Default to PS5
+  const [selectedPlatforms, setSelectedPlatforms] = useState([48, 167]); // Default to PS4 and PS5
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [minRating, setMinRating] = useState('');
   const [minRatingCount, setMinRatingCount] = useState('');
@@ -168,6 +169,34 @@ const ImportGamesPage = () => {
     }
   };
 
+  const handleQuickImport = async () => {
+    if (!quickImportId.trim()) return;
+    
+    setImporting(prev => ({ ...prev, [quickImportId]: true }));
+    setMessage(null);
+
+    try {
+      const response = await fetch(`${baseUrl}/igdb/import/${quickImportId.trim()}`, {
+        method: 'POST'
+      });
+
+      if (response.status === 409) {
+        setMessage({ type: 'warning', text: 'This game is already in your database!' });
+      } else if (!response.ok) {
+        throw new Error('Failed to import game');
+      } else {
+        const data = await response.json();
+        setMessage({ type: 'success', text: `Successfully imported ${data.name}!` });
+        setQuickImportId('');
+      }
+    } catch (error) {
+      console.error('Error importing game:', error);
+      setMessage({ type: 'danger', text: 'Failed to import game. Please try again.' });
+    } finally {
+      setImporting(prev => ({ ...prev, [quickImportId]: false }));
+    }
+  };
+
   return (
     <Container className='mt-4'>
       <Row>
@@ -177,14 +206,75 @@ const ImportGamesPage = () => {
         </Col>
       </Row>
 
+      {/* Quick Import by Game ID and Platform Filter */}
       <Row className='mt-3'>
+        <Col md={6}>
+          <Card className='bg-light h-100'>
+            <CardBody>
+              <CardTitle tag='h5'>Quick Import by Game ID</CardTitle>
+              <CardText className='text-muted small'>
+                Already have a game ID? Import it directly without searching.
+              </CardText>
+              <div className='d-flex gap-2'>
+                <Input
+                  type='text'
+                  placeholder='Enter IGDB Game ID (e.g., 19560)'
+                  value={quickImportId}
+                  onChange={(e) => setQuickImportId(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleQuickImport()}
+                  style={{ flex: 1 }}
+                />
+                <Button
+                  color='success'
+                  onClick={handleQuickImport}
+                  disabled={!quickImportId.trim() || importing[quickImportId]}
+                >
+                  {importing[quickImportId] ? (
+                    <>
+                      <i className="fa fa-spinner fa-pulse mr-2" />
+                      Importing...
+                    </>
+                  ) : (
+                    'Import'
+                  )}
+                </Button>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col md={6}>
+          <Card className='bg-light h-100'>
+            <CardBody>
+              <CardTitle tag='h5'>Platforms</CardTitle>
+              <CardText className='text-muted small'>
+                Select platforms to filter search results
+              </CardText>
+              <div className='d-flex flex-wrap gap-2'>
+                {PLATFORMS.map(platform => (
+                  <Button
+                    key={platform.id}
+                    color={selectedPlatforms.includes(platform.id) ? 'primary' : 'outline-secondary'}
+                    size='sm'
+                    onClick={() => handlePlatformToggle(platform.id)}
+                  >
+                    {platform.name}
+                  </Button>
+                ))}
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className='mt-4'>
         <Col md={12}>
+          <h5 className='mb-3'>Or Search by Name</h5>
           <FormGroup>
             <Label for='importSearch'>Search:</Label>
             <Input
               id='importSearch'
               type='text'
-              placeholder='Search for a game to import...'
+              placeholder='Search for a game by name...'
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={handleKeyPress}
@@ -194,7 +284,7 @@ const ImportGamesPage = () => {
       </Row>
 
       <Row className='mt-3'>
-        <Col md={3}>
+        <Col md={4}>
           <FormGroup>
             <Label for='yearFilter'>Release Year (from):</Label>
             <Input
@@ -214,7 +304,7 @@ const ImportGamesPage = () => {
             </Input>
           </FormGroup>
         </Col>
-        <Col md={3}>
+        <Col md={4}>
           <FormGroup>
             <Label for='ratingFilter'>Minimum Rating:</Label>
             <Input
@@ -232,7 +322,7 @@ const ImportGamesPage = () => {
             </Input>
           </FormGroup>
         </Col>
-        <Col md={3}>
+        <Col md={4}>
           <FormGroup>
             <Label for='ratingCountFilter'>Popularity (min # ratings):</Label>
             <Input
@@ -249,21 +339,6 @@ const ImportGamesPage = () => {
               <option value='100'>Some Reviews (100+)</option>
             </Input>
           </FormGroup>
-        </Col>
-        <Col md={3}>
-          <Label>Platforms:</Label>
-          <div className='d-flex flex-wrap gap-2'>
-            {PLATFORMS.map(platform => (
-              <Button
-                key={platform.id}
-                color={selectedPlatforms.includes(platform.id) ? 'primary' : 'outline-secondary'}
-                size='sm'
-                onClick={() => handlePlatformToggle(platform.id)}
-              >
-                {platform.name}
-              </Button>
-            ))}
-          </div>
         </Col>
       </Row>
 
