@@ -148,18 +148,32 @@ const DatabasePage = () => {
                 <Table responsive striped hover>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Name</th>
+                      <th style={{ width: '60px' }}>ID</th>
+                      <th style={{ width: '400px' }}>Name</th>
                       <th>Release Date</th>
-                      <th>Platforms</th>
-                      <th>Genres</th>
-                      <th>Featured</th>
-                      <th>Actions</th>
+                      <th style={{ width: '250px' }}>Franchise</th>
+                      <th style={{ width: '80px' }}>Videos</th>
+                      <th style={{ width: '110px' }}>Screenshots</th>
+                      <th style={{ width: '90px' }}>Artworks</th>
+                      <th style={{ width: '90px' }}>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {games.map((game) => (
+                    {games.map((game, index) => (
                       <>
+                        {/* Repeat header every 10 rows */}
+                        {index > 0 && index % 10 === 0 && (
+                          <tr key={`header-${index}`} style={{ backgroundColor: '#f8f9fa' }}>
+                            <th style={{ width: '60px' }}>ID</th>
+                            <th style={{ width: '400px' }}>Name</th>
+                            <th>Release Date</th>
+                            <th style={{ width: '250px' }}>Franchise</th>
+                            <th style={{ width: '80px' }}>Videos</th>
+                            <th style={{ width: '110px' }}>Screenshots</th>
+                            <th style={{ width: '90px' }}>Artworks</th>
+                            <th style={{ width: '90px' }}>Actions</th>
+                          </tr>
+                        )}
                         <tr key={game.id}>
                           <td>{game.id}</td>
                           <td>
@@ -178,20 +192,29 @@ const DatabasePage = () => {
                               : 'Unknown'}
                           </td>
                           <td>
-                            {Array.isArray(game.platforms)
-                              ? game.platforms.join(', ')
-                              : game.platforms || 'N/A'}
+                            {Array.isArray(game.franchises) && game.franchises.length > 0
+                              ? game.franchises.join(', ')
+                              : <span className='text-muted'>-</span>}
                           </td>
-                          <td>
-                            {Array.isArray(game.genre)
-                              ? game.genre.join(', ')
-                              : game.genre || 'N/A'}
+                          <td className='text-center'>
+                            {Array.isArray(game.youtube_id) && game.youtube_id.length > 0 && (
+                              <Badge color='primary'>
+                                {game.youtube_id.length}
+                              </Badge>
+                            )}
                           </td>
-                          <td>
-                            {game.featured ? (
-                              <Badge color='warning'>Featured</Badge>
-                            ) : (
-                              <span className='text-muted'>-</span>
+                          <td className='text-center'>
+                            {Array.isArray(game.screenshots) && game.screenshots.length > 0 && (
+                              <Badge color='info'>
+                                {game.screenshots.length}
+                              </Badge>
+                            )}
+                          </td>
+                          <td className='text-center'>
+                            {Array.isArray(game.artworks) && game.artworks.length > 0 && (
+                              <Badge color='success'>
+                                {game.artworks.length}
+                              </Badge>
                             )}
                           </td>
                           <td>
@@ -206,7 +229,7 @@ const DatabasePage = () => {
                         </tr>
                         {expandedGame === game.id && (
                           <tr key={`${game.id}-details`}>
-                            <td colSpan='7' style={{ backgroundColor: '#f8f9fa' }}>
+                            <td colSpan='8' style={{ backgroundColor: '#f8f9fa' }}>
                               <div style={{ padding: '15px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                                   <h5 style={{ margin: 0 }}>Full Game Data</h5>

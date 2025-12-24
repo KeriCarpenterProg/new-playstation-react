@@ -81,9 +81,14 @@ const PopularGamesSlider = () => {
                         className="cardImage"
                         alt={game.name}
                         src={game.cover}
+                        style={{
+                          width: "100%",
+                          height: "400px",
+                          objectFit: "contain",
+                          backgroundColor: "white"
+                        }}
                         top
                       />
-
                       <CardBody style={{ height: "6rem" }}>
                         <CardTitle
                           tag="h5"
