@@ -10,6 +10,7 @@ const DatabasePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedGame, setExpandedGame] = useState(null);
+  const [deleting, setDeleting] = useState(null);
 
   useEffect(() => {
     fetchDatabaseData();
@@ -46,6 +47,33 @@ const DatabasePage = () => {
   const toggleTab = (tab) => {
     if (activeTab !== tab) {
       setActiveTab(tab);
+    }
+  };
+
+  const handleDeleteGame = async (gameId, gameName) => {
+    if (!window.confirm(`Are you sure you want to delete "${gameName}"? This cannot be undone.`)) {
+      return;
+    }
+
+    setDeleting(gameId);
+
+    try {
+      const response = await fetch(`${baseUrl}/games/${gameId}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete game');
+      }
+
+      // Remove game from local state
+      setGames(games.filter(game => game.id !== gameId));
+      alert(`Successfully deleted "${gameName}"`);
+    } catch (err) {
+      console.error('Error deleting game:', err);
+      alert(`Failed to delete game: ${err.message}`);
+    } finally {
+      setDeleting(null);
     }
   };
 
@@ -218,13 +246,29 @@ const DatabasePage = () => {
                             )}
                           </td>
                           <td>
-                            <Button 
-                              size='sm' 
-                              color='info' 
-                              onClick={() => setExpandedGame(expandedGame === game.id ? null : game.id)}
-                            >
-                              {expandedGame === game.id ? 'Hide' : 'Details'}
-                            </Button>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <Button 
+                                size='sm' 
+                                color='info' 
+                                onClick={() => setExpandedGame(expandedGame === game.id ? null : game.id)}
+                              >
+                                {expandedGame === game.id ? 'Hide' : 'Details'}
+                              </Button>
+                              <Button 
+                                size='sm' 
+                                color='danger' 
+                                onClick={() => handleDeleteGame(game.id, game.name)}
+                                disabled={deleting === game.id}
+                              >
+                                {deleting === game.id ? (
+                                  <>
+                                    <i className="fa fa-spinner fa-pulse" />
+                                  </>
+                                ) : (
+                                  'Delete'
+                                )}
+                              </Button>
+                            </div>
                           </td>
                         </tr>
                         {expandedGame === game.id && (
