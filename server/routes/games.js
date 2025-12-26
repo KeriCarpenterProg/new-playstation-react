@@ -45,6 +45,26 @@ router.post('/', async (req, res) => {
     console.error('Error creating game: ',err.message);
     res.status(500).send('Server Error');   
   }
-});      
+});
+
+// DELETE a game by ID
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('DELETE FROM games WHERE id = $1 RETURNING *', [id]);
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    
+    res.status(200).json({ 
+      message: 'Game deleted successfully',
+      game: result.rows[0]
+    });
+  } catch (err) {
+    console.error('Error deleting game:', err.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
 
 module.exports = router;
