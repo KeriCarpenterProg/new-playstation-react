@@ -81,7 +81,7 @@ const DatabasePage = () => {
     return (
       <Container className='mt-4'>
         <Row>
-          <Loading message="Loading database contents..." />
+          <Loading message="Loading database contents..." showExtendedMessage={true} />
         </Row>
       </Container>
     );
