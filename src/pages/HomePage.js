@@ -15,7 +15,7 @@ const HomePage = () => {
   if (loading) {
     return (
       <Row>
-          <Loading />
+          <Loading message="Loading PlayStation Games..." showExtendedMessage={true} />
       </Row>
     );
   }
