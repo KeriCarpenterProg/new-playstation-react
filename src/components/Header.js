@@ -51,6 +51,11 @@ const Header = () => {
                 <i className="fa fa-database fa-md" /> Database
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" to="/chat">
+                <i className="fa fa-comments fa-md" /> AI Chat
+              </NavLink>
+            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Playstation Games
