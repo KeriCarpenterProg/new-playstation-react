@@ -11,6 +11,7 @@ import ImportGamesPage from "./pages/ImportGamesPage";
 import DatabasePage from "./pages/DatabasePage";
 import { fetchGames } from "./features/games/gamesSlice";
 import { fetchComments } from "./features/comments/commentsSlice";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/import" element={<ImportGamesPage />} />
+        <Route path="/chat" element={<ChatPage />} />
         <Route path="/database" element={<DatabasePage />} />
         <Route path="/games/:activeGame" element={<SingleGamePage />}></Route>
       </Routes>
