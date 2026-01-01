@@ -13,11 +13,16 @@ import {
 import './ChatPage.css';
 
 const ChatPage = () => {
-    // State will go here
+    // Check if API URL is localhost (development) or not (production)
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+    const isLocalDevelopment = apiUrl.includes('localhost');
+    
     const [messages, setMessages] = useState([
         {
             role:  'assistant',
-            content: '👋 Hi! I\'m a ChatGPT like assistant focused on PlayStation Games \n.  Ask me anything about PlayStation games!',
+            content: isLocalDevelopment 
+                ? '👋 Hi! I\'m a ChatGPT like assistant focused on PlayStation Games that I have in my database.\n.'
+                : '👋 Hi! I\'m the PlayStation AI Assistant.\n\n⚠️ **Demo Mode**: This feature requires a local Ollama instance running Llama 3. The chat functionality is currently disabled in production but fully functional in local development.\n\nThis demonstrates: \n• AI/ML integration with React\n• RAG (Retrieval Augmented Generation)\n• Real-time database queries\n• Conversational UI/UX\n\nTo see it in action, check out the GitHub repo or run locally!',
             timestamp: new Date()
         }
     ]);
@@ -39,7 +44,7 @@ const scrollToBottom = () => {
   }, [messages]);   
 
 const handleSendMessage = async () => {
-    if (!inputMessage.trim() || isLoading) return;
+    if (!inputMessage.trim() || isLoading || !isLocalDevelopment) return;
 
     const userMessage = {
         role: 'user',
@@ -59,7 +64,7 @@ const handleSendMessage = async () => {
             content: msg.content
         }));
 
-        const response = await fetch('http://localhost:3001/chat', {
+        const response = await fetch(`${apiUrl}/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -143,15 +148,15 @@ const handleKeyDown = (e) => {
             value={inputMessage}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about PlayStation games..."
+            placeholder={isLocalDevelopment ? "Ask about PlayStation games..." : "Chat disabled in production (requires local Ollama)"}
             className="chat-input"
             rows="2"
-            disabled={isLoading}
+            disabled={isLoading || !isLocalDevelopment}
           />
           <Button
             color="primary"
             onClick={handleSendMessage}
-            disabled={!inputMessage.trim() || isLoading}
+            disabled={!inputMessage.trim() || isLoading || !isLocalDevelopment}
             className="send-button"
           >
             Send
