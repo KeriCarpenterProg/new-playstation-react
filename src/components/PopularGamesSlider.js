@@ -67,7 +67,7 @@ const PopularGamesSlider = () => {
     <div>
       <Container>
         <Row>
-          <h3 className="my-4 pb-2 px-1">Popular Games Right Now</h3>
+          <h3 className="my-4 pb-2 px-1">Popular PS5 Games</h3>
           <hr></hr>
         </Row>
         <Row>
