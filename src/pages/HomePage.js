@@ -3,9 +3,9 @@ import PopularGamesSlider from "../components/PopularGamesSlider";
 import RecentlyReviewed from "../components/RecentlyReviewed";
 import BestGames from "../components/BestGames";
 import { isLoading, hasErrMsg } from "../features/games/gamesSlice";
-import Error from "../components/Error";
 import Loading from "../components/Loading";
-import { Row, Container, Card, CardBody } from "reactstrap";
+import { Row, Container } from "reactstrap";
+import ChatPage from "./ChatPage";
 
 const HomePage = () => {
 
@@ -15,7 +15,7 @@ const HomePage = () => {
   if (loading) {
     return (
       <Row>
-          <Loading message="Loading PlayStation Games..." showExtendedMessage={true} />
+          <Loading message="WAIT!!! Cold Start Loading takes about 20 seconds..." showExtendedMessage={true} />
       </Row>
     );
   }
@@ -47,6 +47,16 @@ const HomePage = () => {
           </Row>
         </Container>
       </div>
+      <div>
+        <Container>
+          <Row>
+          <h3 className="my-4 pb-2 px-1">PlayStation AI Assistant</h3>
+          <hr></hr>
+          <ChatPage />
+          </Row>
+        </Container>
+      </div>
+
       <PopularGamesSlider />
       <div>
         <Container>
@@ -75,6 +85,7 @@ const HomePage = () => {
           </Row>
         </Container>
       </div>
+
       <RecentlyReviewed />       
       <BestGames />
     </>
