@@ -37,28 +37,13 @@ const Header = () => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="nav-link" to="/about">
-                <i className="fa fa-info fa-md" /> About
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="nav-link" to="/import">
-                <i className="fa fa-download fa-md" /> Import Games
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink className="nav-link" to="/database">
-                <i className="fa fa-database fa-md" /> Database
-              </NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink className="nav-link" to="/chat">
-                <i className="fa fa-comments fa-md" /> AI Chat
+                <i className="fa fa-comments fa-md" /> ChatPS5
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Playstation Games
+                <i className="fa fa-gamepad fa-md" /> Playstation Games
               </DropdownToggle>
               <DropdownMenu end>
                 {games.map((i, index) => (
@@ -72,6 +57,23 @@ const Header = () => {
                 ))}
               </DropdownMenu>
             </UncontrolledDropdown>
+            <NavItem>
+              <NavLink className="nav-link" to="/database">
+                <i className="fa fa-database fa-md" /> Database
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" to="/import">
+                <i className="fa fa-download fa-md" /> Import Games
+              </NavLink>
+            </NavItem>
+
+            <NavItem>
+              <NavLink className="nav-link" to="/about">
+                <i className="fa fa-info fa-md" /> About
+              </NavLink>
+            </NavItem>
+
           </Nav>
         </Collapse>
       </Navbar>
