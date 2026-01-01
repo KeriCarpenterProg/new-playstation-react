@@ -17,7 +17,7 @@ const ChatPage = () => {
     const [messages, setMessages] = useState([
         {
             role:  'assistant',
-            content: '👋 Hi! I\'m your PlayStation gaming assistant.  Ask me anything about PlayStation games!',
+            content: '👋 Hi! I\'m a ChatGPT like assistant focused on PlayStation Games \n.  Ask me anything about PlayStation games!',
             timestamp: new Date()
         }
     ]);
@@ -32,7 +32,10 @@ const scrollToBottom = () => {
   };
   
   useEffect(() => {
+    // Only scroll if there are messages in the chat
+    if (messages.length > 1) {
     scrollToBottom();
+    }
   }, [messages]);   
 
 const handleSendMessage = async () => {
@@ -103,8 +106,10 @@ const handleKeyDown = (e) => {
     <Row className="h-100">
       <Col md="8" className="chat-main">
         <div className="chat-header">
-          <h3>🎮 PlayStation AI Assistant</h3>
-          <p className="text-muted">Powered by Llama 3</p>
+          <h2 className='text-center'>🎮 PlayStation AI Assistant</h2>
+          <p>Powered by the Llama 3 open-source model with RAG (Retrieval Augmented Generation) 
+          technology that searches the PostgreSQL game database in real-time.</p>
+          <p>The database is a PostgreSQL database backend. The data is imported from the <a href="https://www.igdb.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#a8b3ff' }}>Internet Game Database (IGDB)</a>, a comprehensive, community-driven online platform and database for video games which is owned by Twitch.</p>
         </div>
 
         <div className="chat-messages">

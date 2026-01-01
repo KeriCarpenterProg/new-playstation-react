@@ -8,14 +8,15 @@ const AboutPage = () => {
         <Col sm="12">
           <h1>Who we are</h1>
           <ul class="font-size-24 text-muted">
-            <li>Julia Yerman</li>
+            <li>Keri Carpenter - Project Manager</li>
+            <li>Julia Yerman - Developer</li>
             <li>Eleanor Kahn</li>
-            <li>Keri Carpenter</li>
+
           </ul>
           <h1>About Us</h1>
           <br />
           <p class="font-size-14 text-muted">
-            We love games, we grew up with games and now we are doing our dream:
+            We love games, we grew up with games and now we are living our dream:
             working professionally with games.
             <br />
             <br /> We do this by...
@@ -68,7 +69,7 @@ const AboutPage = () => {
         </Col>
 
         <Col>
-          <Card className="bg-light mt-3">
+          <Card className="bg-light">
             <CardBody>
               <blockquote className="blockquote">
                 <p>

@@ -28,11 +28,12 @@ function App() {
       <Routes>
         <Route path="*" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/import" element={<ImportGamesPage />} />
         <Route path="/chat" element={<ChatPage />} />
-        <Route path="/database" element={<DatabasePage />} />
         <Route path="/games/:activeGame" element={<SingleGamePage />}></Route>
+        <Route path="/import" element={<ImportGamesPage />} />
+        <Route path="/database" element={<DatabasePage />} />
+
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Footer />
     </div>
