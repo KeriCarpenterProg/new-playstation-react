@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 const gamesRoutes = require('./routes/games');
 const commentsRoutes = require('./routes/comments');
 const igdbRoutes = require('./routes/igdb');
-const chatRoutes = require('./routes/chat');
+// const chatRoutes = require('./routes/chat'); // DISABLED: Requires local Ollama
 console.log('Routes imported successfully');
 
 // Middleware
@@ -27,9 +27,9 @@ app.get('/', (req, res) => {
 // Use routes
 app.use('/games', gamesRoutes);
 app.use('/comments', commentsRoutes);
-app.use('/chat', chatRoutes);
+// app.use('/chat', chatRoutes); // DISABLED: Requires local Ollama
 app.use('/igdb', igdbRoutes);
-console.log('Routes mounted: /games, /comments, /chat, and /igdb');
+console.log('Routes mounted: /games, /comments, and /igdb');
 
 // Start server
 app.listen(PORT, () => {
