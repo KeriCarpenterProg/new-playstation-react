@@ -64,10 +64,43 @@ export const genreMap = {
     12: "Role-playing (RPG)",
     25: "Hack and slash/Beat 'em up",
 };
+
+// Some deployments may return arrays as strings (e.g. Postgres text[] formatted as "{a,b}"
+// or comma-separated strings). Normalize into an array so UI helpers don't crash.
+const normalizeToArray = (value) => {
+    if (!value) return [];
+    if (Array.isArray(value)) return value;
+    if (typeof value !== "string") return [];
+
+    const s = value.trim();
+    if (!s) return [];
+
+    // Postgres array literal: {"Action","Adventure"} or {Action,Adventure}
+    if (s.startsWith("{") && s.endsWith("}")) {
+        const inner = s.slice(1, -1).trim();
+        if (!inner) return [];
+        return inner
+            .split(",")
+            .map((part) => part.trim().replace(/^"(.*)"$/, "$1"))
+            .filter(Boolean);
+    }
+
+    // Comma-separated string
+    if (s.includes(",")) {
+        return s
+            .split(",")
+            .map((part) => part.trim())
+            .filter(Boolean);
+    }
+
+    // Single string value
+    return [s];
+};
   
 export const selectFirstGameGenre = (arrOfGenres) => {
-    if (!arrOfGenres || arrOfGenres.length === 0) return "Unknown";
-    const sortedGenres = arrOfGenres
+    const normalized = normalizeToArray(arrOfGenres);
+    if (normalized.length === 0) return "Unknown";
+    const sortedGenres = normalized
         .map((item) => {
             // If it's a string number like "31", convert to number and use map
             if (typeof item === 'string' && !isNaN(item)) {
@@ -85,8 +118,9 @@ export const selectFirstGameGenre = (arrOfGenres) => {
 };
   
 export const selectAllGameGenres = (arrOfGenres) => {
-    if (!arrOfGenres || arrOfGenres.length === 0) return "Unknown";
-    return arrOfGenres
+    const normalized = normalizeToArray(arrOfGenres);
+    if (normalized.length === 0) return "Unknown";
+    return normalized
         .map((item) => {
             // If it's a string number like "31", convert to number and use map
             if (typeof item === 'string' && !isNaN(item)) {
@@ -112,8 +146,9 @@ const platformMap = {
 };
   
 export const selectAllGamePlatforms = (numbersArray) => {
-    if (!numbersArray || numbersArray.length === 0) return "Unknown";
-    return numbersArray
+    const normalized = normalizeToArray(numbersArray);
+    if (normalized.length === 0) return "Unknown";
+    return normalized
         .map((item) => {
             // If it's a string number like "167", convert to number and use map
             if (typeof item === 'string' && !isNaN(item)) {
