@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const igdbService = require('../services/igdbService');
 const pool = require('../config/database');
+const { uploadGameImageToS3 } = require('../utils/s3Upload.js');
 
 // Search for games on IGDB with optional filters
 router.get('/search', async (req, res) => {
@@ -90,6 +91,23 @@ router.post('/import/:id', async (req, res) => {
     // Transform data to match local schema
     const gameData = igdbService.transformGameData(igdbGame);
 
+    // Upload images to S3
+    console.log('Uploading images to S3');
+    if (gameData.cover) {
+      gameData.cover = await uploadGameImageToS3(gameData.cover, gameData.game_id, 'cover');
+    }
+    if (gameData.screenshots && gameData.screenshots.length > 0) {
+      gameData.screenshots = await Promise.all(gameData.screenshots.map((url, index) => uploadGameImageToS3(url, gameData.game_id, `screenshot-${index}`)));
+    }
+    if (gameData.artworks && gameData.artworks.length > 0) {
+      gameData.artworks = await Promise.all(
+        gameData.artworks.map((url, index) => 
+          uploadGameImageToS3(url, gameData.game_id, `artwork-${index}`)
+        )
+      );
+    }
+
+    console.log('✅ Images uploaded to S3');
     // Check if game already exists in local database
     const existingGame = await pool.query(
       'SELECT * FROM games WHERE game_id = $1',
@@ -173,6 +191,26 @@ router.post('/import-batch', async (req, res) => {
         }
 
         const gameData = igdbService.transformGameData(igdbGame);
+
+        // Upload images to S3
+console.log(`Uploading images for ${gameData.name}...`);
+if (gameData.cover) {
+  gameData.cover = await uploadGameImageToS3(gameData.cover, gameData.game_id, 'cover');
+}
+if (gameData.screenshots && gameData.screenshots.length > 0) {
+  gameData.screenshots = await Promise.all(
+    gameData.screenshots.map((url, index) => 
+      uploadGameImageToS3(url, gameData.game_id, `screenshot-${index}`)
+    )
+  );
+}
+if (gameData.artworks && gameData.artworks.length > 0) {
+  gameData.artworks = await Promise.all(
+    gameData.artworks.map((url, index) => 
+      uploadGameImageToS3(url, gameData.game_id, `artwork-${index}`)
+    )
+  );
+}
 
         // Check if exists
         const existingGame = await pool.query(
