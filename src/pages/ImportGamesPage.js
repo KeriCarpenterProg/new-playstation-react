@@ -424,6 +424,11 @@ const ImportGamesPage = () => {
               <CardBody>
                 <CardTitle tag='h5'>{game?.name || 'Unknown Game'}</CardTitle>
                 <CardText>
+                  <small className='text-muted d-block mb-2'>
+                    <strong>IGDB ID:</strong> {game?.game_id}
+                  </small>
+                </CardText>
+                <CardText>
                   {game?.platforms && Array.isArray(game.platforms) && game.platforms.length > 0 && (
                     <small className='text-muted'>
                       {game.platforms.join(', ')}
