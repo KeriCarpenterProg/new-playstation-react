@@ -3,10 +3,25 @@ const router = express.Router();
 const igdbService = require('../services/igdbService');
 const pool = require('../config/database');
 const { uploadGameImageToS3 } = require('../utils/s3Upload.js');
+const redisClient = require('../utils/redisClient');
+
 
 // Search for games on IGDB with optional filters
 router.get('/search', async (req, res) => {
+
   try {
+    const cacheKey = `igdb:search:${JSON.stringify(req.query)}`;
+    try {
+      const cachedData = await redisClient.get(cacheKey);
+        if (cachedData) {
+          console.log('✅ Cache hit for search query:', cacheKey);
+          return res.json(JSON.parse(cachedData));
+        }
+      console.log('❌ Cache miss for search query:', cacheKey);
+    } catch (error) {
+      console.error('Error checking cache:', error);
+    }
+  
     const { query, limit, yearFrom, platforms, genres, minRating, minRatingCount } = req.query;
     console.log('=== IGDB Search Request Received ===');
     console.log('Query:', query || '(no query - filter only)');
@@ -51,6 +66,12 @@ router.get('/search', async (req, res) => {
     // Transform the data to match our frontend needs
     const transformedGames = games.map(game => igdbService.transformGameData(game));
 
+    try {
+      await redisClient.setEx(cacheKey, 3600, JSON.stringify(transformedGames));
+      console.log('💾 Cached search results', cacheKey);
+    } catch (error) {
+      console.error('Redis set error: ', error);
+    }
     res.json(transformedGames);
   } catch (error) {
     console.error('Error searching IGDB:', error);
@@ -62,6 +83,18 @@ router.get('/search', async (req, res) => {
 router.get('/game/:id', async (req, res) => {
   try {
     const { id } = req.params;
+
+    const gameCacheKey = `igdb:game:${id}`;
+    try {
+      const cachedGame = await redisClient.get(gameCacheKey);
+      if (cachedGame) {
+        console.log('✅ Cache hit for game:', id);
+        return res.json(JSON.parse(cachedGame));
+      }
+      console.log('❌ Cache miss for game:', id);
+    } catch (error) {
+      console.error('Redis error:', error);
+    }
     const game = await igdbService.getGameById(parseInt(id));
 
     if (!game) {
@@ -69,6 +102,14 @@ router.get('/game/:id', async (req, res) => {
     }
 
     const transformedGame = igdbService.transformGameData(game);
+
+    // Cache for 24 hours
+    try {
+      await redisClient.setEx(gameCacheKey, 86400, JSON.stringify(transformedGame));
+      console.log('💾 Cached game:', id);
+    } catch (error) {
+      console.error('Redis set error: ', error);
+    }
     res.json(transformedGame);
   } catch (error) {
     console.error('Error fetching game from IGDB:', error);
