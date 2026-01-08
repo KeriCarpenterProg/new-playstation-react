@@ -67,7 +67,11 @@ const Header = () => {
                 <i className="fa fa-download fa-md" /> Import Games
               </NavLink>
             </NavItem>
-
+            <NavItem>
+              <NavLink className="nav-link" to="/redis-demo">
+                <i className="fa fa-rocket fa-md" /> Redis Demo
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink className="nav-link" to="/about">
                 <i className="fa fa-info fa-md" /> About
