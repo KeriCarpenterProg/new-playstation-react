@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ImportGamesPage from "./pages/ImportGamesPage";
 import DatabasePage from "./pages/DatabasePage";
+import RedisDemo from "./pages/RedisDemo";
 import { fetchGames } from "./features/games/gamesSlice";
 import { fetchComments } from "./features/comments/commentsSlice";
 import ChatPage from "./pages/ChatPage";
@@ -31,7 +32,7 @@ function App() {
         <Route path="/games/:activeGame" element={<SingleGamePage />}></Route>
         <Route path="/import" element={<ImportGamesPage />} />
         <Route path="/database" element={<DatabasePage />} />
-
+        <Route path="/redis-demo" element={<RedisDemo />} />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Footer />
