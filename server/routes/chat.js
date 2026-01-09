@@ -6,6 +6,8 @@ const { Ollama } = require('ollama');
 const pool = require('../config/database');
 
 const ollama = new Ollama({ host: 'http://localhost:11434' });
+const Groq = require('groq-sdk');
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 router.post('/', async (req, res) => {
     const { message, conversationHistory = [] } = req.body;
@@ -19,8 +21,26 @@ router.post('/', async (req, res) => {
         const relevantGames = await searchRelevantGames(message);
         const systemPrompt = buildSystemPrompt(relevantGames);
 
+        // 2. If production, generate response using Groq
+        let response;
+
+        if (process.env.NODE_ENV === 'production') {
+          response = await groq.chat.completions.create({
+            "model": "llama-3.3-70b-versatile",
+            "temperature": 1,
+            "max_completion_tokens": 1024,
+            "top_p": 1,
+            "stream": false,
+            "stop": null,
+            messages: [
+                { role: 'system', content: systemPrompt },
+                ...conversationHistory, 
+                { role: 'user', content: message }
+            ],
+          });
+        } else {
         // 2. Generate response using Ollama
-        const response = await ollama.chat({
+        response = await ollama.chat({
             model: 'llama3',
             messages: [
                 { role: 'system', content: systemPrompt },
@@ -29,9 +49,17 @@ router.post('/', async (req, res) => {
             ],
             stream: false
         });
+      }
+      const responseContent = process.env.NODE_ENV === 'production' 
+        ? response.choices[0].message.content  // Groq response
+        : response.message.content; // Ollama response  
+
+       if (!responseContent) {
+        return res.status(500).json({ error: 'Failed to generate response' });
+       }
 
         res.json({ 
-            response: response.message.content, 
+            response: responseContent, 
             gameContext: relevantGames 
         });
 
