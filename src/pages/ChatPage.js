@@ -15,17 +15,11 @@ import './ChatPage.css';
 const ChatPage = () => {
     // Check if API URL is localhost (development) or not (production)
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-    const isLocalDevelopment = false
-    // const isLocalDevelopment = apiUrl.includes('localhost');  
-    // I commented this out because I'm using Groq in prod.
-    // But I may need again if Groq doesn't work.
 
     const [messages, setMessages] = useState([
         {
             role:  'assistant',
-            content: isLocalDevelopment 
-                ? '👋 Hi! I\'m a ChatGPT like assistant focused on PlayStation Games that I have in my database.\n.'
-                : '👋 Hi! I\'m the PlayStation AI Assistant.\n\n⚠️ **Demo Mode**: This feature requires a local Ollama instance running Llama 3. The chat functionality is currently disabled in production but fully functional in local development.\n\nThis demonstrates: \n• AI/ML integration with React\n• RAG (Retrieval Augmented Generation)\n• Real-time database queries\n• Conversational UI/UX\n\nTo see it in action, check out the GitHub repo or run locally!',
+            content: '👋 Hi! I\'m the PlayStation AI Assistant powered by Llama 3 via Groq API.\n\nI can help you discover and learn about PlayStation games in the database. My responses are enhanced with RAG (Retrieval Augmented Generation) - I search the PostgreSQL database in real-time and provide accurate information about games.\n\nAsk me anything about PlayStation games!',
             timestamp: new Date()
         }
     ]);
@@ -47,7 +41,7 @@ const scrollToBottom = () => {
   }, [messages]);   
 
 const handleSendMessage = async () => {
-    if (!inputMessage.trim() || isLoading || !isLocalDevelopment) return;
+    if (!inputMessage.trim() || isLoading) return;
 
     const userMessage = {
         role: 'user',
@@ -151,15 +145,15 @@ const handleKeyDown = (e) => {
             value={inputMessage}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder={isLocalDevelopment ? "Ask about PlayStation games..." : "Chat disabled in production (requires local Ollama)"}
+            placeholder="Ask about PlayStation games..."
             className="chat-input"
             rows="2"
-            disabled={isLoading || !isLocalDevelopment}
+            disabled={isLoading}
           />
           <Button
             color="primary"
             onClick={handleSendMessage}
-            disabled={!inputMessage.trim() || isLoading || !isLocalDevelopment}
+            disabled={!inputMessage.trim() || isLoading}
             className="send-button"
           >
             Send
