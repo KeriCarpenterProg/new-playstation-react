@@ -29,21 +29,29 @@ const HomePage = () => {
       <div>
         <Container>
           <Row>
-          <h3 className="my-4 pb-2 px-1">Full-Stack AI-Powered Gaming Platform by Keri Carpenter</h3>
+          <h3 className="my-4 pb-2 px-1">Full-Stack AI Site Programmed by Keri Carpenter in 2026</h3>
           <hr></hr>
             <p>
-            A production-ready full-stack application showcasing modern cloud architecture and AI integration. 
-            Features <strong>real-time AI chat</strong> powered by <strong>Groq API (Llama 3.3-70B)</strong> with 
-            <strong> RAG (Retrieval Augmented Generation)</strong> querying a PostgreSQL database, 
-            <strong> AWS S3</strong> image storage, <strong>Redis caching</strong> for API optimization, 
-            and integration with <strong>IGDB</strong> (Twitch's gaming database API).
-          </p>
-          </Row>
-          <Row>
-          <p className="mb-0">
-        <strong>Tech Stack:</strong> React • Redux Toolkit • Node.js • Express • PostgreSQL (JSONB) • 
-        Groq API (Llama 3.3) • AWS S3 • Redis • RESTful APIs • Vercel • Railway
-        </p>
+            A production-deployed full-stack application showcasing cloud technologies, Amazon Web Services, Redis Caching and ChatGPT-like AI chat integration.</p?
+            <ul>
+              <li>
+              <strong>AI chat</strong> powered by <strong>the Llama 3.3-70B model via Groq API (Groq API key required)</strong> with 
+              </li>
+            <li>
+            <strong> RAG (Retrieval Augmented Generation)</strong>
+            </li>
+            <li>My own PostgreSQL database. </li>
+            <li>Amazon Web Services S3 Bucket for scalable image hosting</li>
+            <li>Redis caching for API optimization</li>
+            <li>Integration with IGDB (Twitch's gaming database API)</li>
+            <li>Groq API for AI chat</li>
+            <li>Node.js, Express.js, RESTful APIs</li>
+            <li>React 18, Redux Toolkit, React Router, Reactstrap/Bootstrap 5</li>
+            <li>PostgreSQL with JSONB, complex queries, array operations</li>
+            <li>Git, GitHub with PR workflow and CI/CD</li>
+            <li>Vercel (frontend)</li>
+            <li>Railway (backend + PostgreSQL + Redis)</li>
+          </ul>
           </Row>
         </Container>
       </div>
