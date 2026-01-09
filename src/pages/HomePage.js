@@ -39,19 +39,15 @@ const HomePage = () => {
               <strong>AI chat</strong> powered by <strong>the Llama 3.3-70B model via Groq API (Groq API key required)</strong> with 
               </li>
             <li>
-            <strong> RAG (Retrieval Augmented Generation)</strong>
+            <strong> RAG (Retrieval Augmented Generation) which queries my own PostgreSQL database in real-time</strong>
             </li>
-            <li>My own PostgreSQL database. </li>
-            <li>Amazon Web Services S3 Bucket for scalable image hosting</li>
-            <li>Redis caching for API optimization</li>
-            <li>Integration with IGDB (Twitch's gaming database API)</li>
-            <li>Groq API for AI chat</li>
-            <li>Node.js, Express.js, RESTful APIs</li>
-            <li>React 18, Redux Toolkit, React Router, Reactstrap/Bootstrap 5</li>
-            <li>PostgreSQL with JSONB, complex queries, array operations</li>
-            <li>Git, GitHub with PR workflow and CI/CD</li>
-            <li>Vercel (frontend)</li>
-            <li>Railway (backend + PostgreSQL + Redis)</li>
+            <li><strong>Vercel</strong> (frontend) and <strong>Railway</strong> (backend + PostgreSQL + Redis)</li>
+            <li><strong>Amazon Web Services S3 Bucket</strong> for scalable image hosting</li>
+            <li><strong>Redis caching</strong> for API optimization</li>
+            <li><strong>My own PostgreSQL database backend</strong> with JSONB, complex queries, array operations</li>
+            <li>Integration with <a href="https://www.igdb.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#a8b3ff' }}>Internet Game Database (IGDB)</a> (owned by Twitch)</li>
+            <li>Node.js, Express.js, RESTful APIs, React 18, Redux Toolkit, React Router, Reactstrap/Bootstrap 5,Git, GitHub with PR workflow and CI/CD</li>
+
           </ul>
           </Row>
         </Container>
@@ -59,7 +55,7 @@ const HomePage = () => {
       <div>
         <Container>
           <Row>
-          <h3 className="my-4 pb-2 px-1">PlayStation AI Assistant</h3>
+          <h3 className="my-4 pb-2 px-1">ChatGPT-like AI Chatbot powered by the Llama 3.3-70B model via Groq API</h3>
           <hr></hr>
           <ChatPage />
           </Row>
