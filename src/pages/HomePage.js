@@ -29,20 +29,20 @@ const HomePage = () => {
       <div>
         <Container>
           <Row>
-          <h3 className="my-4 pb-2 px-1">Full-Stack AI Chatbot Site Programmed by Keri Carpenter 2026</h3>
+          <h3 className="my-4 pb-2 px-1">Full-Stack AI-Powered Gaming Platform by Keri Carpenter</h3>
           <hr></hr>
             <p>
-            This website deployed by Keri Carpenter demonstrates modern full-stack development with <strong>React</strong>, 
-            <strong>Node.js/Express</strong>, and <strong>PostgreSQL</strong>. Features include 
-            real-time API integration with IGDB (Twitch's gaming database), advanced database 
-            queries with JSONB support, and a custom AI chatbot powered by <strong>Llama 3</strong> 
-            with <strong>RAG (Retrieval Augmented Generation)</strong>.           
+            A production-ready full-stack application showcasing modern cloud architecture and AI integration. 
+            Features <strong>real-time AI chat</strong> powered by <strong>Groq API (Llama 3.3-70B)</strong> with 
+            <strong> RAG (Retrieval Augmented Generation)</strong> querying a PostgreSQL database, 
+            <strong> AWS S3</strong> image storage, <strong>Redis caching</strong> for API optimization, 
+            and integration with <strong>IGDB</strong> (Twitch's gaming database API).
           </p>
           </Row>
           <Row>
           <p className="mb-0">
-        <strong>Tech Stack:</strong> React • Redux Toolkit • Node.js • Express • PostgreSQL • 
-        Ollama/Llama 3 • RESTful APIs • Deployed on Render.com
+        <strong>Tech Stack:</strong> React • Redux Toolkit • Node.js • Express • PostgreSQL (JSONB) • 
+        Groq API (Llama 3.3) • AWS S3 • Redis • RESTful APIs • Vercel • Railway
         </p>
           </Row>
         </Container>
@@ -64,23 +64,27 @@ const HomePage = () => {
           <h3 className="my-4 pb-2 px-1">Technologies & Architecture</h3>
           <hr></hr>
             <ul className="list-unstyled">
-              <li><strong>Frontend:</strong> React 18, Redux Toolkit, React Router, Reactstrap/Bootstrap</li>
-              <li><strong>Backend:</strong> Node.js, Express.js, RESTful API design</li>
-              <li><strong>Database:</strong> PostgreSQL with JSONB, complex queries, full-text search</li>
-              <li><strong>AI/ML:</strong> Ollama, Llama 3, RAG (Retrieval Augmented Generation)</li>
-              <li><strong>External APIs:</strong> IGDB (Internet Game Database) integration</li>
-              <li><strong>Deployment:</strong> Full-stack deployment on Render.com</li>
-              <li><strong>Version Control:</strong> Git, GitHub with PR workflow</li>
+              <li><strong>Frontend:</strong> React 18, Redux Toolkit, React Router, Reactstrap/Bootstrap 5</li>
+              <li><strong>Backend:</strong> Node.js, Express.js, RESTful API architecture</li>
+              <li><strong>Database:</strong> PostgreSQL with JSONB, complex queries, array operations</li>
+              <li><strong>AI/ML:</strong> Groq API (Llama 3.3-70B), RAG (Retrieval Augmented Generation)</li>
+              <li><strong>Cloud Storage:</strong> AWS S3 for scalable image hosting, IAM security</li>
+              <li><strong>Caching:</strong> Redis for API optimization and performance</li>
+              <li><strong>External APIs:</strong> IGDB (Twitch Gaming Database), Groq AI API</li>
+              <li><strong>Deployment:</strong> Vercel (frontend), Railway (backend + PostgreSQL + Redis)</li>
+              <li><strong>Version Control:</strong> Git, GitHub with PR workflow and CI/CD</li>
             </ul>
 
             <h3 className="my-4 pb-2 px-1">Key Features</h3>
             <hr></hr>
             <ul className="list-unstyled">
-              <li>AI-powered chatbot with database-augmented responses (RAG)</li>
-              <li>Real-time game data import from IGDB API</li>
-              <li>Advanced PostgreSQL queries with array and JSONB data types</li>
-              <li>Responsive UI with modern design patterns</li>
-              <li>Full CRUD operations with error handling</li>
+              <li>🤖 AI chatbot with RAG - queries PostgreSQL in real-time for accurate game info</li>
+              <li>☁️ AWS S3 integration - automated image upload pipeline with IAM permissions</li>
+              <li>⚡ Redis caching - optimized API calls with TTL-based invalidation</li>
+              <li>🎮 Real-time IGDB integration - import games with metadata, images, videos</li>
+              <li>🗄️ Advanced PostgreSQL - JSONB data types, array operations, full-text search</li>
+              <li>🎨 Responsive UI - modern design with loading states and error handling</li>
+              <li>🚀 Production deployment - environment-based config, auto-scaling infrastructure</li>
             </ul>
           </Row>
         </Container>
