@@ -134,8 +134,13 @@ function buildSystemPrompt(gameContext) {
       if (game.description) {
         prompt += `   Description: ${game.description.substring(0, 200)}...\n`;
       }
-      if (game.genre && game.genre.length > 0) {
-        prompt += `   Genres: ${game.genre.join(', ')}\n`;
+      if (game.genre) {
+        // Normalize genre - handle both array and string formats
+        const genres = Array.isArray(game.genre) ? game.genre : 
+                      (typeof game.genre === 'string' ? [game.genre] : []);
+        if (genres.length > 0) {
+          prompt += `   Genres: ${genres.join(', ')}\n`;
+        }
       }
       if (game.rating) {
         prompt += `   Rating: ${Math.round(game.rating)}/100\n`;
