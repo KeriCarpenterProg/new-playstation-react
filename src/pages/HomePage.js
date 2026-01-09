@@ -32,7 +32,8 @@ const HomePage = () => {
           <h3 className="my-4 pb-2 px-1">Full-Stack AI Site Programmed by Keri Carpenter in 2026</h3>
           <hr></hr>
             <p>
-            A production-deployed full-stack application showcasing cloud technologies, Amazon Web Services, Redis Caching and ChatGPT-like AI chat integration.</p?
+            A production-deployed full-stack application showcasing cloud technologies, Amazon Web Services, Redis Caching and ChatGPT-like AI chat integration.
+            </p>
             <ul>
               <li>
               <strong>AI chat</strong> powered by <strong>the Llama 3.3-70B model via Groq API (Groq API key required)</strong> with 
