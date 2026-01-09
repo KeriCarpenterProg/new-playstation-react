@@ -15,8 +15,11 @@ import './ChatPage.css';
 const ChatPage = () => {
     // Check if API URL is localhost (development) or not (production)
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-    const isLocalDevelopment = apiUrl.includes('localhost');
-    
+    const isLocalDevelopment = false
+    // const isLocalDevelopment = apiUrl.includes('localhost');  
+    // I commented this out because I'm using Groq in prod.
+    // But I may need again if Groq doesn't work.
+
     const [messages, setMessages] = useState([
         {
             role:  'assistant',
