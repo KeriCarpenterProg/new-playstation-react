@@ -108,10 +108,7 @@ const handleKeyDown = (e) => {
     <Row className="h-100">
       <Col md="8" className="chat-main">
         <div className="chat-header">
-          <h2 className='text-center'>🎮 PlayStation AI Assistant</h2>
-          <p>Powered by the Llama 3 open-source model with RAG (Retrieval Augmented Generation) 
-          technology that searches the PostgreSQL game database in real-time.</p>
-          <p>The database is a PostgreSQL database backend. The data is imported from the <a href="https://www.igdb.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#a8b3ff' }}>Internet Game Database (IGDB)</a>, a comprehensive, community-driven online platform and database for video games which is owned by Twitch.</p>
+          <h2 className='text-center'>🎮 ChatGPT-like AI Chatbot</h2>
         </div>
 
         <div className="chat-messages">
