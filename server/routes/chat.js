@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         // 2. If production, generate response using Groq
         let response;
 
-        if (process.env.NODE_ENV === 'production') {
+        if (true) {
           response = await groq.chat.completions.create({
             "model": "llama-3.3-70b-versatile",
             "temperature": 1,

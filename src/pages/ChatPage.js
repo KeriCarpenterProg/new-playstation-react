@@ -19,7 +19,7 @@ const ChatPage = () => {
     const [messages, setMessages] = useState([
         {
             role:  'assistant',
-            content: '👋 Hi! I\'m the PlayStation AI Assistant powered by Llama 3 via Groq API.\n\nI can help you discover and learn about PlayStation games in the database. My responses are enhanced with RAG (Retrieval Augmented Generation) - I search the PostgreSQL database in real-time and provide accurate information about games.\n\nAsk me anything about PlayStation games!',
+            content: '👋 Hi! I\'m a ChatGPT-like AI Chatbot powered by Llama 3 via Groq API.',
             timestamp: new Date()
         }
     ]);
