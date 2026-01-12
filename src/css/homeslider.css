@@ -3,11 +3,6 @@
   height: auto;
 }
 
-.card {
-  width: fit-content;
-  max-width: 280px;
-}
-
 .fragment {
   margin: 0 auto;
 }
