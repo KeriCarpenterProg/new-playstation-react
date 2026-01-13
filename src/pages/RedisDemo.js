@@ -65,19 +65,15 @@ const RedisDemo = () => {
   };
 
   return (
-    // <Container fluid className='mt-4'>
-    <>
+  <Container>
       <Row>
-        <Col md={12}>
           <h1>🚀 Redis Cache Performance Demo</h1>
           <p className='text-muted'>
             See how Redis caching speeds up IGDB API calls in real-time
           </p>
-        </Col>
       </Row>
 
       <Row className='mt-4'>
-        <Col md={12}>
           <Card className='bg-light'>
             <CardBody>
               <CardTitle tag='h5'>How It Works</CardTitle>
@@ -112,7 +108,6 @@ const RedisDemo = () => {
               )}
             </CardBody>
           </Card>
-        </Col>
       </Row>
 
       {results.length > 0 && (
@@ -125,7 +120,6 @@ const RedisDemo = () => {
 
       {results.map((result, index) => (
         <Row key={index} className='mt-3'>
-          <Col md={12}>
             <Card>
               <CardBody>
                 <CardTitle tag='h5'>{result.name}</CardTitle>
@@ -167,7 +161,6 @@ const RedisDemo = () => {
                 </Alert>
               </CardBody>
             </Card>
-          </Col>
         </Row>
       ))}
 
@@ -208,7 +201,7 @@ const RedisDemo = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </Container>
   );
 };
 
