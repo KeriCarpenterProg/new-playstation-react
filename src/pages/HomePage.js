@@ -29,15 +29,19 @@ const HomePage = () => {
       <div>
         <Container>
           <Row>
-          <h3 className="my-4 pb-2 px-1">Keri Carpenter's 2026 Site <br /> Full-Stack + Artificial Intelligence Site</h3>
-          <hr></hr>
-            <p><strong>Programmed by Keri Carpenter in 2026</strong></p>
+            <h2 className="my-4 pb-2 px-1 text-center fw-bold">
+              Keri Carpenter's 2026 Site
+              <small className="d-block mt-2 text-muted fs-5 fw-normal">
+                Full-Stack + Artificial Intelligence Site
+              </small>
+            </h2>
+            <hr />
             <p>
             A production-deployed full-stack application showcasing cloud technologies, Amazon Web Services, Redis Caching and ChatGPT-like AI chat integration.
             </p>
             <ul>
               <li>
-              <strong>AI chat</strong> powered by <strong>the Llama 3.3-70B model via Groq API (Groq API key required)</strong> with 
+              <strong>AI chat</strong> powered by <strong>the Llama 3.3 model via Groq API (using a Groq API key)</strong> with 
               </li>
             <li>
             <strong> RAG (Retrieval Augmented Generation) which queries my own PostgreSQL database in real-time</strong>
@@ -56,8 +60,6 @@ const HomePage = () => {
       <div>
         <Container>
           <Row>
-          <h3 className="my-4 pb-2 px-1">ChatGPT-like AI Chatbot powered by the Llama 3.3-70B model via Groq API</h3>
-          <hr></hr>
           <ChatPage />
           </Row>
         </Container>
