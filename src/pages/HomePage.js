@@ -29,8 +29,9 @@ const HomePage = () => {
       <div>
         <Container>
           <Row>
-          <h3 className="my-4 pb-2 px-1">Full-Stack AI Site Programmed by Keri Carpenter in 2026</h3>
+          <h3 className="my-4 pb-2 px-1">Keri Carpenter's 2026 Site <br /> Full-Stack + Artificial Intelligence Site</h3>
           <hr></hr>
+            <p><strong>Programmed by Keri Carpenter in 2026</strong></p>
             <p>
             A production-deployed full-stack application showcasing cloud technologies, Amazon Web Services, Redis Caching and ChatGPT-like AI chat integration.
             </p>
