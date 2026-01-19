@@ -30,4 +30,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Python / ML artifacts
+ml/venv/
+ml/__pycache__/
+ml/**/__pycache__/
+ml/**/*.pyc
+
+# Model artifacts
+ml/models/*.pkl
+
+# Generated data files
+ml/data/*.csv
+ml/data/*.json
 

@@ -13,6 +13,7 @@ const gamesRoutes = require('./routes/games');
 const commentsRoutes = require('./routes/comments');
 const igdbRoutes = require('./routes/igdb');
 const chatRoutes = require('./routes/chat');
+const mlRoutes = require('./routes/ml');
 console.log('Routes imported successfully');
 
 // Middleware
@@ -29,7 +30,8 @@ app.use('/games', gamesRoutes);
 app.use('/comments', commentsRoutes);
 app.use('/chat', chatRoutes);
 app.use('/igdb', igdbRoutes);
-console.log('Routes mounted: /games, /comments, /chat, and /igdb');
+app.use('/ml', mlRoutes);
+console.log('Routes mounted: /games, /comments, /chat, /igdb, /ml');
 
 // Start server
 app.listen(PORT, () => {
