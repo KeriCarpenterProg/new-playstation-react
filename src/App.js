@@ -12,6 +12,9 @@ import RedisDemo from "./pages/RedisDemo";
 import { fetchGames } from "./features/games/gamesSlice";
 import { fetchComments } from "./features/comments/commentsSlice";
 import ChatPage from "./pages/ChatPage";
+import AuthPage from "./pages/AuthPage";
+import ProfilePage from "./pages/ProfilePage";
+import ProfilePicturePage from "./pages/ProfilePicturePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +37,9 @@ function App() {
         <Route path="/database" element={<DatabasePage />} />
         <Route path="/redis-demo" element={<RedisDemo />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<AuthPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile-picture" element={<ProfilePicturePage />} />
       </Routes>
       <Footer />
     </div>
