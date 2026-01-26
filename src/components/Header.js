@@ -10,8 +10,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "../css/header.css";
 import { useSelector } from "react-redux";
@@ -21,8 +21,24 @@ const Header = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const toggle = () => setMenuOpen(!menuOpen);
+  const location = useLocation();
+  const [authName, setAuthName] = useState('');
+  const [authPicture, setAuthPicture] = useState('');
+
+  useEffect(() => {
+    setAuthName(localStorage.getItem('authUserName'));
+    setAuthPicture(localStorage.getItem('authUserPicture'));
+  }, [location]);
+
 
   const games = useSelector(selectAllGames);
+
+  const handleLogout = () => {
+    localStorage.removeItem('authUserName');
+    localStorage.removeItem('authUserPicture');
+    localStorage.removeItem('authToken');
+    window.location.href = '/login';
+  };
 
   return (
     <div>
@@ -36,6 +52,7 @@ const Header = () => {
                 <i className="fa fa-home fa-md" /> Home
               </NavLink>
             </NavItem>
+
             <NavItem>
               <NavLink className="nav-link" to="/chat">
                 <i className="fa fa-comments fa-md" /> ChatPS5
@@ -78,6 +95,51 @@ const Header = () => {
               </NavLink>
             </NavItem>
 
+          </Nav>
+          <Nav className="ms-auto">
+            {authName ? (
+              <>
+                {authPicture ? (
+                  <NavItem className="nav-link">
+                    <img
+                      src={authPicture}
+                      alt="Profile"
+                      style={{
+                        width: '28px',
+                        height: '28px',
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                        marginRight: '8px'
+                      }}
+                    />
+                  </NavItem>
+                ) : null}
+                <NavItem className="nav-link text-light">
+                  Hi, {authName}
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/profile">
+                    Profile
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" to="/profile-picture">
+                    Profile Picture
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <button className="nav-link btn btn-link" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </NavItem>
+              </>
+            ) : (
+              <NavItem>
+                <NavLink className="nav-link" to="/login">
+                  <i className="fa fa-user fa-md" /> Login
+                </NavLink>
+              </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Navbar>

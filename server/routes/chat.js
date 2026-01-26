@@ -50,13 +50,12 @@ router.post('/', async (req, res) => {
             stream: false
         });
       }
-      const responseContent = process.env.NODE_ENV === 'production' 
-        ? response.choices[0].message.content  // Groq response
-        : response.message.content; // Ollama response  
+      const responseContent = response?.choices?.[0]?.message?.content || response?.message?.content;
 
-       if (!responseContent) {
+      if (!responseContent) {
+        console.error('Groq response missing content:', response);
         return res.status(500).json({ error: 'Failed to generate response' });
-       }
+      }
 
         res.json({ 
             response: responseContent, 
