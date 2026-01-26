@@ -8,6 +8,14 @@ const ProfilePicturePage = () => {
   const [status, setStatus] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const navigate = useNavigate();
+  const cardStyle = {
+    maxWidth: 560,
+    margin: '2rem auto',
+    padding: '1.5rem',
+    borderRadius: '12px',
+    background: '#fff',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -53,8 +61,8 @@ const ProfilePicturePage = () => {
   };
 
   return (
-    <div style={{ maxWidth: 520, margin: '2rem auto' }}>
-      <h2>Profile Picture</h2>
+    <div style={cardStyle}>
+      <h2 style={{ marginBottom: '1rem' }}>Profile Picture</h2>
       <FormGroup>
         <Label htmlFor='pictureUrl'>Picture URL</Label>
         <Input
