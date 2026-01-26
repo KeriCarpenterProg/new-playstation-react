@@ -8,6 +8,14 @@ const ProfilePage = () => {
   const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const cardStyle = {
+    maxWidth: 560,
+    margin: '2rem auto',
+    padding: '1.5rem',
+    borderRadius: '12px',
+    background: '#fff',
+    boxShadow: '0 8px 24px rgba(0,0,0,0.08)'
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -37,8 +45,8 @@ const ProfilePage = () => {
   }, [navigate]);
 
   return (
-    <div style={{ maxWidth: 520, margin: '2rem auto' }}>
-      <h2>Profile</h2>
+    <div style={cardStyle}>
+      <h2 style={{ marginBottom: '1rem' }}>Profile</h2>
       {user ? (
         <>
           <p><strong>Name:</strong> {user.first_name || ''} {user.last_name || ''}</p>
@@ -47,7 +55,7 @@ const ProfilePage = () => {
             <img
               src={user.picture_url}
               alt="Profile"
-              style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem' }}
+              style={{ width: 96, height: 96, borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem' }}
             />
           )}
         </>
