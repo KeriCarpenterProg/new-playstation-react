@@ -5,9 +5,6 @@ import {
     Col,
     Input,
     Button,
-    Card,
-    CardBody,
-    Badge,
     Spinner
 } from 'reactstrap';
 import './ChatPage.css';
@@ -25,7 +22,6 @@ const ChatPage = () => {
     ]);
     const [inputMessage, setInputMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [gameContext, setGameContext] = useState([]);
     const messagesEndRef = useRef(null);
 
  // Auto-scroll to bottom when new messages arrive
@@ -84,7 +80,6 @@ const handleSendMessage = async () => {
         };
 
         setMessages(prev => [...prev, assistantMessage]);
-        setGameContext(data.gameContext);
     } catch (error) {
         console.error('Error sending message:', error);
     } finally {
