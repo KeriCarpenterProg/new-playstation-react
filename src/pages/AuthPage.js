@@ -10,7 +10,6 @@ const AuthPage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [status, setStatus] = useState('');
-  const [isAuthed, setIsAuthed] = useState(!!localStorage.getItem('authToken'));
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -39,7 +38,6 @@ const AuthPage = () => {
       localStorage.setItem('authUserName', displayName);
       localStorage.setItem('authUserPicture', data.user.picture_url || '');
       setStatus(`Success! Logged in as ${displayName}`);
-      setIsAuthed(true);
       navigate('/');
     } catch (err) {
       setStatus(err.message);

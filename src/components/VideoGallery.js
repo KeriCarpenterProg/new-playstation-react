@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Row, Col, Card, CardBody, Nav, NavItem, NavLink } from 'reactstrap';
+import { Row, Col, Nav, NavItem, NavLink } from 'reactstrap';
 
 const VideoGallery = ({ videos, youtube_id }) => {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
