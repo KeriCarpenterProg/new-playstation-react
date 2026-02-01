@@ -1,14 +1,13 @@
-## Available Scripts
+To start the project:
+1. CD server
+    > npm start
+2. root directory > npm start
 
-In the project directory, you can run:
+You should see the homepage.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## CloudFront CDN (S3 Images)
+Images are served through CloudFront when `CLOUDFRONT_URL` is set in `server/.env`.
+This applies to both game images and user profile pictures; new uploads will use the CloudFront URL.
 
 ### `npm run build`
 
@@ -20,9 +19,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## How to deploy this site to the cloud
-
-Instructions on how to deploy a personal site on Google Cloud https://learn.nucamp.co/mod/book/view.php?id=6191&chapterid=6461
 
 Go to console.cloud.google.com Login in with kericarpenter@gmail.com account (or your own Google account) Choose Activate Cloud Shell
 
@@ -38,11 +34,11 @@ Unzip the file unzip build.zip -d new-playstation-react
 
 Cd new-playstation-react (or whatever the name of the project is)
 
-> Firebase deploy
+A 2023 Version of this is on Firebase.
 
 URL it is deployed to is: https://new-playstation-react.web.app
 
-Here is a larger set of instructions I wrote later that is more comprehensive. written in March 2023.
+2023 Instructions:
 
 Log in to https://console.cloud.google.com/
 Create a new project.
@@ -64,4 +60,4 @@ that should deploy your website
 one of the last lines should show you the address of your deployed website.
 URL will probably be http://<project name>.web.app
 
-This all should work. Keri Carpenter 2025.
+This all should work. Keri Carpenter validated in 2025.
