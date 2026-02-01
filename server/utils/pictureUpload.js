@@ -35,7 +35,8 @@ async function uploadToS3(imageBuffer, filename, contentType='image/jpeg') {
     await s3Client.send(command);
 
     // Return the public URL
-    return `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
+    const baseUrl = process.env.CLOUDFRONT_URL || `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com`;    
+    return `${baseUrl}/${filename}`;
 }
 
 
