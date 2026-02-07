@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# for now don't commit mcp railway logs
+mcp-railway-logs/
+
 # dependencies
 /node_modules
 server/node_modules/
